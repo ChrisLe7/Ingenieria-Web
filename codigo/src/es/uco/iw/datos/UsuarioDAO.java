@@ -164,7 +164,7 @@ public class UsuarioDAO extends DAO {
             String statement = sqlProp.getProperty("Update_Password");
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
-            stmt.setString(2, usuario.getEmail());
+            stmt.setString(2, usuario.getDni());
             stmt.setString(1, usuario.getPassword());
             status = stmt.executeUpdate();
             

@@ -29,7 +29,7 @@ public class CuentaBancariaDAO extends DAO {
      * @param idCuentaBancaria Id de la cuenta bancaria a buscar
      * @return Cuenta bancaria cuya id coincide con la dada
      */
-    public CuentaBancariaDTO QueryById(String idCuentaBancaria) {
+    public CuentaBancariaDTO QueryByIdCuentaBancaria(String idCuentaBancaria) {
         CuentaBancariaDTO cuentaBancaria = null;
 
         try {

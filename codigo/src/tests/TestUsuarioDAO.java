@@ -19,10 +19,15 @@ public class TestUsuarioDAO {
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("3");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
 		usuarioTest.setPassword("123");
 		
-		assert usuarioDAO.Insert(usuarioTest) > 0 : "No se ha introducido el usuario";
+		// Si hay algun fallo, borra el usuario prueba en caso de haberla
+		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
+			usuarioDAO.Delete(usuarioTest.getDni());
+		}
+		
+		assert (usuarioDAO.Insert(usuarioTest) > 0) : "No se ha introducido el usuario";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) != null : "No se ha encontrado al usuario";
 		
@@ -45,6 +50,8 @@ public class TestUsuarioDAO {
 		assert usuarioDAO.Delete(usuarioTest.getDni()) > 0 : "Error en el borrado";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) == null : "Se ha encontrado un usuario borrado";
+		
+		System.out.println("Exito");
 		
 	}
 	
