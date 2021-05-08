@@ -222,6 +222,7 @@ public class CuentaBancariaDAO extends DAO {
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
     public int Delete(String idCuentaBancaria) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
 
         try {
@@ -229,7 +230,14 @@ public class CuentaBancariaDAO extends DAO {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
-            status = stmt.executeUpdate();
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Usuario");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, idCuentaBancaria);
+            results.add(stmt.executeUpdate());
+            
+            status = CheckResults(results);
             
             if (stmt != null) {
                 stmt.close();
