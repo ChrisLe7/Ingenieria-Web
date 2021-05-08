@@ -19,8 +19,7 @@ public class TestUsuarioDAO {
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
-		usuarioTest.setPassword("123");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "123");
 		
 		// Si hay algun fallo, borra el usuario prueba en caso de haberla
 		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
