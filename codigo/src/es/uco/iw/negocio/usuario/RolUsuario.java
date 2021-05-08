@@ -1,6 +1,6 @@
 package es.uco.iw.negocio.usuario;
 
-public enum Rol {
+public enum RolUsuario {
 
 	Administrador,
 	Cliente

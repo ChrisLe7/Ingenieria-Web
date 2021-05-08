@@ -48,7 +48,7 @@ public class TestTarjetaDAO {
 		
 		assert (usuarioDAO.Insert(usuarioTest) > 0) : "No se ha introducido el usuario";
 		
-		assert cuentaBancariaDAO.Insert(cuentaBancariaTest) > 0 : "No se ha introducido la cuenta bancaria";
+		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, usuarioTest) > 0 : "No se ha introducido la cuenta bancaria";
 		
 		assert tarjetaDAO.Insert(tarjetaTest) > 0 : "No se ha introducido la tarjeta";
 		

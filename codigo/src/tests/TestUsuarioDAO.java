@@ -26,7 +26,7 @@ public class TestUsuarioDAO {
 			usuarioDAO.Delete(usuarioTest.getDni());
 		}
 		
-		assert (usuarioDAO.Insert(usuarioTest) > 0) : "No se ha introducido el usuario";
+		assert usuarioDAO.Insert(usuarioTest) > 0 : "No se ha introducido el usuario";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) != null : "No se ha encontrado al usuario";
 		

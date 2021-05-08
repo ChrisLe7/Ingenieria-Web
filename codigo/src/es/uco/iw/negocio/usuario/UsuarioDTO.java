@@ -14,7 +14,7 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 	private String direccion;
 	private int telefono;
-	private Rol rol;
+	private RolUsuario rol;
 	private ArrayList<String> cuentasBancarias;
 	private ArrayList<String> tarjetas;
 
@@ -24,7 +24,7 @@ public class UsuarioDTO implements Serializable {
 	 * @param dni Dni del nuevo usuario
 	 */
 	public UsuarioDTO(String dni) {
-		this(dni, "", "", "", "", 0, Rol.Cliente, new ArrayList<String>(), new ArrayList<String>());
+		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<String>(), new ArrayList<String>());
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class UsuarioDTO implements Serializable {
 	 * @param password Password del nuevo usuario
 	 */
 	public UsuarioDTO(String dni, String password) {
-		this(dni, "", "", "", "", 0, Rol.Cliente, new ArrayList<String>(), new ArrayList<String>());
+		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<String>(), new ArrayList<String>());
 		this.password = password;
 	}
 
@@ -51,7 +51,7 @@ public class UsuarioDTO implements Serializable {
 	 * @param cuentasBancarias Lista de cuentas bancarias del nuevo usuario
 	 * @param tarjetas Lista de tarjetas bancarias del nuevo usuario
 	 */
-	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, Rol rol, ArrayList<String> cuentasBancarias, ArrayList<String> tarjetas) {
+	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, RolUsuario rol, ArrayList<String> cuentasBancarias, ArrayList<String> tarjetas) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -190,7 +190,7 @@ public class UsuarioDTO implements Serializable {
 	 * 
 	 * @return Rol del usuario
 	 */
-	public Rol getRol() {
+	public RolUsuario getRol() {
 		return rol;
 	}
 
@@ -198,7 +198,7 @@ public class UsuarioDTO implements Serializable {
 	 * Asigna rol a un usuario
 	 * @param rol Rol a asignar al usuario
 	 */
-	public void setRol(Rol rol) {
+	public void setRol(RolUsuario rol) {
 		this.rol = rol;
 	}
 
