@@ -1,0 +1,230 @@
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #00000023612011;
+  font-size: 1.2rem; /*tamaño de las letras*/
+  line-height: 1.2em; /* interlineado */
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 3em;
+  text-align:center;
+}
+
+/* parrafos */
+p {
+  margin-bottom: 1.6em; 
+}
+
+.hidden {
+  display:none;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header {
+  background: #333;
+  color: white;
+  padding: 2rem 0;
+
+  /* hacer el menu fijo */
+  position: fixed;
+  left: 0;
+  top: 0;
+  /* ocuapamos todo el ancho */
+  right: 0;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.logo-nav-container {
+  display: flex;
+  justify-content: space-between;
+  /* lo alineamos al centro */
+  align-items: center;
+
+  flex-wrap: wrap;
+}
+
+.main h1.formulario_titulo {
+	text-align: center;
+}
+
+
+/* logo */
+.logo {
+  letter-spacing: 0.2em;
+  font-size: 1.3em;
+}
+
+a.logo {
+  display: block;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s linear;
+  border-radius: 5px;
+}
+
+a.logo:hover{
+	background: #f08f7b;
+}
+
+
+/* todos los "ul" que esten dentro de "navigation" */
+.navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation ul li {
+  /* uno al lado del otro */
+  display: inline-block;
+}
+
+/* los enlaces dentro del menu */
+.navigation ul li a {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  transition: all 0.2s linear;
+  border-radius: 5px;
+}
+
+.navigation ul li a:hover {
+  background: #f08f7b;
+}
+
+.article {
+	padding-top: 6rem;
+}
+
+.main {
+  padding-top: 8rem;
+}
+
+.formulario {
+  padding: 3em;
+  max-width: 26em;
+  background-color: #dec094;
+  margin: 0 auto;
+  border : 0.5em inset #876229;
+  border-radius: 1em;
+}
+
+.formulario h1 {
+	font-size: 2rem;
+  	line-height: 0.5em;
+}
+.formulario input {
+  margin-bottom: 15px;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  padding: 0.5em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+  border: none; 
+  color: #525c66; 
+  font-size: 1em;
+  resize: none;
+}
+
+.formulario .button {
+	display: block;
+	background-color: #0095eb;
+	padding: 0.625em 2.8em 0.625em 2.8em;
+	border: 0;
+	font-size: 1em; 
+	color: 	white;
+  font-family: "Roboto", sans-serif;
+}
+
+.legend {
+	text-align:center;
+	font-size: 2rem;
+	padding: 0.5em;
+}
+
+.inputCheckbox {
+	display:none;
+}
+
+.inputCheckbox:checked + .labelCheckbox {
+	color: #724423;
+	font-weight: bold;
+}
+
+.labelCheckbox {
+	padding-left:1.3em;
+	position:relative;
+}
+
+.inputCheckbox {
+	border: solid .2px black;
+	color: #cd170e;
+	font-weight: bold;
+	widht: 0.8em;
+	height: 0.8em;
+	position: absolute;
+	left: 0em;	
+}
+
+table.myadverts {
+	padding: 0em;
+	  max-width: 26em;
+	  margin: 0 auto;
+	  border : 0.5em inset #876229;
+	  border-radius: 1em;
+	
+}
+th {
+  letter-spacing: 2px;
+  text-align: center;
+  background: #804000;
+}
+
+td {
+  letter-spacing: 1px;
+  text-align: justify;
+  padding : 0.5em;
+	
+}
+
+tr.anuncio:nth-child(odd) td {
+	background: #876229;
+}
+
+tr.anuncio:nth-child(even) td {
+	background: #dec094;
+}
+
+tr.anuncio td.opcion  {
+	background: none;
+	text-align: center;
+}
+
+main.main div.info-anuncio ul.anuncio {
+	  padding: 1.5em;
+	  max-width: 26em;
+	  background-color: #dec094;
+	  margin: 0 auto;
+	  border : 0.5em inset #876229;
+	  border-radius: 1em;
+	  list-style: none;
+	  
+}
+
+main.main div.info-anuncio ul.anuncio li{
+	text-align : justify;
+}
+
+main.main div.info-anuncio ul.anuncio li.titulo {
+	margin : 0;
+	text-align : center;
+	padding: 0.5em;
+}

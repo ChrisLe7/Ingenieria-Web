@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+
+ <!-- Vinculaciones de los Servlet -->
+ 
+ <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>es.uco.iw.servlet.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>Perfil</servlet-name>
+    <servlet-class>es.uco.iw.servlet.PerfilUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Perfil</servlet-name>
+    <url-pattern>/Perfil</url-pattern>
+
+    
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Transferencias</servlet-name>
+    <servlet-class>es.uco.iw.servlet.TransferenciaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Transferencias</servlet-name>
+    <url-pattern>/MisTransferencias</url-pattern>
+    <url-pattern>/GestionarTransferencias</url-pattern>    
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Cuentas</servlet-name>
+    <servlet-class>es.uco.iw.servlet.CuentaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cuentas</servlet-name>
+    <url-pattern>/MisCuentas</url-pattern>
+    <url-pattern>/GestionarCuentas</url-pattern>    
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Tarjetas</servlet-name>
+    <servlet-class>es.uco.iw.servlet.TarjetaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Tarjetas</servlet-name>
+    <url-pattern>/MisTarjetas</url-pattern>
+    <url-pattern>/GestionarTarjetas</url-pattern>    
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>es.uco.iw.servlet.HomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+
+ 
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>i82luesc</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>i82luesc</param-value>
+  </context-param>
+  <context-param>
+    <param-name>server</param-name>
+    <param-value>oraclepr.uco.es</param-value>
+  </context-param>
+  <context-param>
+    <param-name>port</param-name>
+    <param-value>3306</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbURL</param-name>
+    <param-value>jdbc:mysql://</param-value>
+  </context-param>
+  <context-param>
+    <param-name>sql</param-name>
+    <param-value>/WEB-INF/sql.properties</param-value>
+  </context-param>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <error-page>
+    <location>/include/error.jsp</location>
+  </error-page>
+</web-app>

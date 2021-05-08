@@ -1,0 +1,90 @@
+@charset "ISO-8859-1"; 
+
+.overlay {
+	background: rgba (0,0,0,.3);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left : 0;
+	right : 0;
+	display : flex;
+	align-items : center;
+	justify-content:center;
+	visibility: hidden; 
+}
+
+.overlay.active {
+	visibility: visible;
+}
+.popup {
+	background: #dec094;
+	box-shadow : 0px 0px 5px 0px rgba (0,0,0,.3);
+	border-radius:3px;
+	font-family: Georgia;
+	text-align: center;
+
+}
+
+.popup .button-close-popup {
+	font-size : 1em;
+	line-height: 1em;
+	display: block;
+	text-align : right;
+	color: black;
+	/*transition: .3s ease all;*/
+	
+}
+
+
+.popup .button-close-popup:hover { 
+	color: #876229;
+	
+}
+
+.popup .formulario inputs {
+	width : 100%;
+	margin-bottom : 1.25em;
+	height : 3.25em;
+	line-height : 3.25em;
+	font-size: 0.5em;
+	text-align : center;
+	border : 1px solid #876229;
+}
+
+
+.popup .formulario .button-submit {
+	padding : 0 1.25em;
+	height : 2.5em;
+	line-height; 2.5em;
+	border : none;
+	color: 	white;
+	background-color: #0095eb;
+	border-radius:3px;
+	font-size: 1em;
+	cursor: pointer;
+	transition : 0.3 ease all;
+}
+
+.popup .formulario .inputCheckbox {
+	display:none;
+}
+
+.popup .formulario .inputCheckbox:checked + .labelCheckbox {
+	color: #724423;
+	font-weight: bold;
+}
+
+.popup .formulario .labelCheckbox {
+	padding-left:1.3em;
+	position:relative;
+}
+
+.popup .formulario .inputCheckbox {
+	border: solid .2px black;
+	color: #cd170e;
+	font-weight: bold;
+	widht: 0.8em;
+	height: 0.8em;
+	position: absolute;
+	left: 0em;	
+}

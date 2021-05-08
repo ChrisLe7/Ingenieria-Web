@@ -1,0 +1,14 @@
+.advert-body {
+	width: 99%;
+	height: 10em;
+	resize: none;
+}
+
+.selected {
+	display: inline;
+	
+}
+
+.deselected {
+	display: none;
+}
