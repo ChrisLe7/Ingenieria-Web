@@ -27,8 +27,7 @@ public class TestTarjetaDAO {
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		TarjetaDAO tarjetaDAO = new TarjetaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
-		usuarioTest.setPassword("123");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "123");
 		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false);
 		TarjetaDTO tarjetaTest = new TarjetaDTO("TarjetaTest", 123, TipoTarjeta.Credito, "UsuarioTest", "CuentaBancariaTest");
 		
@@ -49,7 +48,7 @@ public class TestTarjetaDAO {
 		
 		assert (usuarioDAO.Insert(usuarioTest) > 0) : "No se ha introducido el usuario";
 		
-		assert cuentaBancariaDAO.Insert(cuentaBancariaTest) > 0 : "No se ha introducido la cuenta bancaria";
+		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, usuarioTest) > 0 : "No se ha introducido la cuenta bancaria";
 		
 		assert tarjetaDAO.Insert(tarjetaTest) > 0 : "No se ha introducido la tarjeta";
 		

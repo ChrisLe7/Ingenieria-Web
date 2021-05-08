@@ -60,10 +60,11 @@ public class LoginController extends HttpServlet {
 			String UserPassword = request.getParameter("Password");
 
 			if (UserDNI != null) {
-				UsuarioDTO userDTO = userDAO.QueryByPassword(UserDNI);
+				UsuarioDTO userDTO = userDAO.QueryByDni(UserDNI);
 				
 				if (UserPassword.equals(userDTO.getPassword())) {
 					cliente.setDNI(UserDNI);
+					cliente.setRol(userDTO.getRol());
 					session.setAttribute("clienteBean", cliente);
 					nextPage = "/Home";
 					disparador = request.getRequestDispatcher(nextPage);

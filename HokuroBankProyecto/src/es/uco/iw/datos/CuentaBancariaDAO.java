@@ -8,6 +8,8 @@ import java.util.Properties;
 
 import  es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import  es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
+import es.uco.iw.negocio.usuario.RolPropietario;
+import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 public class CuentaBancariaDAO extends DAO {
 
@@ -120,11 +122,13 @@ public class CuentaBancariaDAO extends DAO {
      * Inserta una cuenta bancaria en la base de datos
      * 
      * @param cuentaBancaria Cuenta bancaria a introducir en la base de datos
+     * @param usuario Usuario dueño de la cuenta bancaria
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
-    public int Insert(CuentaBancariaDTO cuentaBancaria) {
-        int status = 0;
-
+    public int Insert(CuentaBancariaDTO cuentaBancaria, UsuarioDTO usuario) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
+    	int status = 0;
+    	
         try {
             String statement = sqlProp.getProperty("Insert_Cuenta_Bancaria");
             Connection con = getConnection();
@@ -133,7 +137,16 @@ public class CuentaBancariaDAO extends DAO {
             stmt.setFloat(2, cuentaBancaria.getSaldo());
             stmt.setString(3, cuentaBancaria.getTipoCuentaBancaria().toString());
             stmt.setBoolean(4, cuentaBancaria.getEstadoBizum());
-            status = stmt.executeUpdate();
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Insert_Cuenta_Bancaria_Usuario");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, usuario.getDni());
+            stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
+            stmt.setString(3, RolPropietario.Titular.toString());
+            results.add(stmt.executeUpdate());
+            
+            status = CheckResults(results);
             
             if (stmt != null) {
                 stmt.close();
@@ -209,6 +222,7 @@ public class CuentaBancariaDAO extends DAO {
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
     public int Delete(String idCuentaBancaria) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
 
         try {
@@ -216,7 +230,14 @@ public class CuentaBancariaDAO extends DAO {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
-            status = stmt.executeUpdate();
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Usuario");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, idCuentaBancaria);
+            results.add(stmt.executeUpdate());
+            
+            status = CheckResults(results);
             
             if (stmt != null) {
                 stmt.close();

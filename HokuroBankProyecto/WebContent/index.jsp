@@ -32,6 +32,9 @@
 						<li><a href = "MisTransferencias">Realizar Transferencia</a></li>
 						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
 						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
+						<% if (cliente.getRol().equals(RolUsuario.Administrador)) { %>
+						<li><a href = "Registrar Usuario">Agregar Cuenta</a></li>
+						<% } %>
 						</ul>
 											
 					</nav>

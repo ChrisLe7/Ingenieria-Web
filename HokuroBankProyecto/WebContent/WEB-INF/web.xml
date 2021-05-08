@@ -21,6 +21,13 @@
     <servlet-name>Perfil</servlet-name>
     <url-pattern>/Perfil</url-pattern>
 
+  <servlet>
+    <servlet-name>RegistrarUsuario</servlet-name>
+    <servlet-class>es.uco.iw.servlet.RegistrarUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarUsuario</servlet-name>
+    <url-pattern>/RegistrarUsuario</url-pattern>
     
   </servlet-mapping>
   <servlet>
