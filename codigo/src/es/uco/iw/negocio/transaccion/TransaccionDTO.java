@@ -161,4 +161,16 @@ public class TransaccionDTO implements Serializable {
 		this.idCuentaDestino = idCuentaDestino;
 	}
 
+	@Override
+	/**
+	 * Devuelve el contenido del objeto como cadena
+	 * 
+	 * @return Cadena con el contenido
+	 */
+	public String toString() {
+		return "TransaccionDTO [idTransaccion=" + idTransaccion + ", cantidad=" + cantidad + ", tipoOperacion="
+				+ tipoOperacion + ", fecha=" + fecha + ", comentario=" + comentario + ", idCuentaOrigen="
+				+ idCuentaOrigen + ", idCuentaDestino=" + idCuentaDestino + "]";
+	}
+
 }

@@ -307,5 +307,17 @@ public class UsuarioDTO implements Serializable {
 	public boolean borrarTarjeta(String tarjeta) {
 		return tarjetas.remove(tarjeta);
 	}
+
+	@Override
+	/**
+	 * Devuelve el contenido del objeto como cadena
+	 * 
+	 * @return Cadena con el contenido
+	 */
+	public String toString() {
+		return "UsuarioDTO [dni=" + dni + ", password=" + password + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", email=" + email + ", direccion=" + direccion + ", telefono=" + telefono + ", rol=" + rol
+				+ ", cuentasBancarias=" + cuentasBancarias + ", tarjetas=" + tarjetas + "]";
+	}
 	
 }

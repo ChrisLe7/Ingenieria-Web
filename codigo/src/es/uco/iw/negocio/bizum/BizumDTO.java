@@ -163,5 +163,16 @@ public class BizumDTO implements Serializable {
 		this.telefonoDestino = telefonoDestino;
 	}
 
+	@Override
+	/**
+	 * Devuelve el contenido del objeto como cadena
+	 * 
+	 * @return Cadena con el contenido
+	 */
+	public String toString() {
+		return "BizumDTO [idTransaccion=" + idTransaccion + ", cantidad=" + cantidad + ", tipoOperacion="
+				+ tipoOperacion + ", fecha=" + fecha + ", comentario=" + comentario + ", telefonoOrigen="
+				+ telefonoOrigen + ", telefonoDestino=" + telefonoDestino + "]";
+	}
 
 }

@@ -97,4 +97,15 @@ public class CuentaBancariaDTO implements Serializable {
 		this.estadoBizum = estadoBizum;
 	}
 
+	@Override
+	/**
+	 * Devuelve el contenido del objeto como cadena
+	 * 
+	 * @return Cadena con el contenido
+	 */
+	public String toString() {
+		return "CuentaBancariaDTO [idCuentaBancaria=" + idCuentaBancaria + ", saldo=" + saldo + ", tipoCuenta="
+				+ tipoCuenta + ", estadoBizum=" + estadoBizum + "]";
+	}
+
 }
