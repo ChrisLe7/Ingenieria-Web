@@ -7,7 +7,9 @@ import java.util.Properties;
 
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.negocio.usuario.RolUsuario;
+import es.uco.iw.negocio.usuario.RolPropietario;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
@@ -29,7 +31,7 @@ public class TestUsuarioDAO_Parte2 {
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		TarjetaDAO tarjetaDAO = new TarjetaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, RolUsuario.Cliente, new ArrayList<String>(), new ArrayList<String>());
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 		usuarioTest.setPassword("password");
 		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false);
 		TarjetaDTO tarjetaTest = new TarjetaDTO("TarjetaTest", 123, TipoTarjeta.Credito, "UsuarioTest", "CuentaBancariaTest");
@@ -76,6 +78,10 @@ public class TestUsuarioDAO_Parte2 {
 		queryRes = usuarioDAO.QueryByDni(usuarioTest.getDni());
 		
 		assert queryRes.getCuentasBancarias().size() == 1 : "Error en las cuentas bancarias del usuario";
+		
+		assert queryRes.getCuentasBancarias().get(0).getIdCuentaBancaria().equals(cuentaBancariaTest.getIdCuentaBancaria()) : "Error en la id de la cuenta bancaria";
+		
+		assert queryRes.getCuentasBancarias().get(0).getRol().equals(RolPropietario.Titular) : "Error rol de propiedad de cuenta bancaria";
 		
 		assert queryRes.getTarjetas().size() == 1 : "Error en las tarjetas del usuario";
 		

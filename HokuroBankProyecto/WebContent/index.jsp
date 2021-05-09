@@ -14,7 +14,7 @@
 	<% 
 	
 		
-		Boolean logged = clienteBean != null && !clienteBean.getDNI().equals("");;
+		Boolean logged = clienteBean != null && !clienteBean.getDni().equals("");;
 		String nextPage = "Login";
 		String mensajeNextPage = "";
 		if (logged)  {

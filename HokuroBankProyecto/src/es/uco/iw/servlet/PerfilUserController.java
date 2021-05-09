@@ -6,13 +6,14 @@ import java.io.InputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.UsuarioDAO;
+import es.uco.iw.display.ClienteBean;
+import es.uco.iw.display.UsuarioInfoBean;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
@@ -51,7 +52,7 @@ public class PerfilUserController extends HttpServlet {
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
-		Boolean login = cliente != null && !cliente.getDNI().equals("");
+		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador;
 		String nextPage ="/mvc/view/modificarUsuarioView"; 
 		if (login) {
@@ -64,7 +65,7 @@ public class PerfilUserController extends HttpServlet {
 				String UserPassword = request.getParameter("password");
 				
 				
-				userDTO = userDAO.QueryByDni(cliente.getDNI());
+				userDTO = userDAO.QueryByDni(cliente.getDni());
 				
 				userDTO.setDireccion(UserDireccion);
 				userDTO.setPassword(UserPassword);
@@ -79,7 +80,7 @@ public class PerfilUserController extends HttpServlet {
 			}else {
 				//Tenemos que direccionar al formulario pero antes deberemos de coger la información del usuario
 				
-				userDTO = userDAO.QueryByDni(cliente.getDNI());
+				userDTO = userDAO.QueryByDni(cliente.getDni());
 				UsuarioInfoBean clienteInfo = new UsuarioInfoBean ();
 				clienteInfo.setUsuario(userDTO);
 
