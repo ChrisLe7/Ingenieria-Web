@@ -98,7 +98,7 @@ public class UsuarioDAO extends DAO {
             ResultSet set = stmt.executeQuery();
 
             if (set.next()) {
-            	usuario = new UsuarioDTO(set.getString(1), set.getString(2));
+            	usuario = new UsuarioDTO(set.getString(1), set.getString(2), RolUsuario.valueOf(set.getString(3)));
             }
 
             if (stmt != null) {

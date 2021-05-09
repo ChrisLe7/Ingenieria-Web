@@ -1,9 +1,11 @@
-package es.uco.iw.negocio.transaccion;
+package es.uco.iw.negocio.bizum;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class TransaccionDTO implements Serializable {
+import es.uco.iw.negocio.transaccion.TipoOperacion;
+
+public class BizumDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String idTransaccion;
@@ -11,28 +13,28 @@ public class TransaccionDTO implements Serializable {
 	private TipoOperacion tipoOperacion;
 	private Date fecha;
 	private String comentario;
-	private String idCuentaOrigen;
-	private String idCuentaDestino;
+	private int telefonoOrigen;
+	private int telefonoDestino;
 
 	/**
 	 * Constructor completo de una cuenta bancaria 
 	 * 
-	 * @param idTransaccion ID de la transaccion
-	 * @param cantidad Cantidad de la transaccion
-	 * @param tipoOperacion Tipo de la operacion de la transaccion
-	 * @param fecha Fecha de la transaccion
-	 * @param comentario Comentario de la transaccion
-	 * @param idCuentaOrigen Id de la cuenta de origen de la transaccion
-	 * @param idCuentaDestino Id de la cuenta de destino de la transaccion
+	 * @param idTransaccion ID del bizum
+	 * @param cantidad Cantidad del bizum
+	 * @param tipoOperacion Tipo de la operacion del bizum
+	 * @param fecha Fecha del bizum
+	 * @param comentario Comentario del bizum
+	 * @param telefonoOrigen Id del telefono de origen del bizum
+	 * @param telefonoDestino Id del telefono de destino del bizum
 	 */
-	public TransaccionDTO(String idTransaccion, float cantidad, TipoOperacion tipoOperacion, Date fecha, String comentario, String idCuentaOrigen, String idCuentaDestino) {
+	public BizumDTO(String idTransaccion, float cantidad, TipoOperacion tipoOperacion, Date fecha, String comentario, int telefonoOrigen, int telefonoDestino) {
 		this.idTransaccion = idTransaccion;
 		this.cantidad = cantidad;
 		this.tipoOperacion = tipoOperacion;
 		this.fecha = fecha;
 		this.comentario = comentario;
-		this.idCuentaOrigen = idCuentaOrigen;
-		this.idCuentaDestino= idCuentaDestino;
+		this.telefonoOrigen = telefonoOrigen;
+		this.telefonoDestino= telefonoDestino;
 	}
 
 	/**
@@ -126,39 +128,39 @@ public class TransaccionDTO implements Serializable {
 	}
 
 	/**
-	 * Devuelve el id de la cuenta origen de la transaccion
+	 * Devuelve el telefono de origen origen de la transaccion
 	 * 
-	 * @return Id de la cuenta origen de la transaccion
+	 * @return Telefono de origen origen de la transaccion
 	 */
-	public String getIdCuentaOrigen() {
-		return idCuentaOrigen;
+	public int getTelefonoOrigen() {
+		return telefonoOrigen;
 	}
 
 	/**
-	 * Asigna un id de la cuenta origen a la transaccion
+	 * Asigna un telefono de origen a la transaccion
 	 * 
-	 * @param idCuentaOrigen Id de la cuenta origen a asignar a la la transaccion
+	 * @param telefonoOrigen Telefono de origen a asignar a la la transaccion
 	 */
-	public void setIdCuentaOrigen(String idCuentaOrigen) {
-		this.idCuentaOrigen = idCuentaOrigen;
+	public void setTelefonoOrigen(int telefonoOrigen) {
+		this.telefonoOrigen = telefonoOrigen;
 	}
 
 	/**
-	 * Devuelve el id de la cuenta destino de la transaccion
+	 * Devuelve el telefono de destino de la transaccion
 	 * 
-	 * @return Id de la cuenta destino de la transaccion
+	 * @return Telefono de destino de la transaccion
 	 */
-	public String getIdCuentaDestino() {
-		return idCuentaDestino;
+	public int getTelefonoDestino() {
+		return telefonoDestino;
 	}
 
 	/**
-	 * Asigna un id de la cuenta destino a la transaccion
+	 * Asigna un telefono de destino a la transaccion
 	 * 
-	 * @param idCuentaDestino Id de la cuenta destino a asignar a la la transaccion
+	 * @param telefonoDestino Telefono de destino a asignar a la la transaccion
 	 */
-	public void setIdCuentaDestino(String idCuentaDestino) {
-		this.idCuentaDestino = idCuentaDestino;
+	public void setTelefonoDestino(int telefonoDestino) {
+		this.telefonoDestino = telefonoDestino;
 	}
 
 	@Override
@@ -168,9 +170,9 @@ public class TransaccionDTO implements Serializable {
 	 * @return Cadena con el contenido
 	 */
 	public String toString() {
-		return "TransaccionDTO [idTransaccion=" + idTransaccion + ", cantidad=" + cantidad + ", tipoOperacion="
-				+ tipoOperacion + ", fecha=" + fecha + ", comentario=" + comentario + ", idCuentaOrigen="
-				+ idCuentaOrigen + ", idCuentaDestino=" + idCuentaDestino + "]";
+		return "BizumDTO [idTransaccion=" + idTransaccion + ", cantidad=" + cantidad + ", tipoOperacion="
+				+ tipoOperacion + ", fecha=" + fecha + ", comentario=" + comentario + ", telefonoOrigen="
+				+ telefonoOrigen + ", telefonoDestino=" + telefonoDestino + "]";
 	}
 
 }

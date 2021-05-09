@@ -12,9 +12,10 @@
 <body>
 	
 	<% 
-	
+		System.out.println(clienteBean);
+		System.out.println(clienteBean.getDni());
 		
-		Boolean logged = clienteBean != null && !clienteBean.getDni().equals("");;
+		boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 		String nextPage = "Login";
 		String mensajeNextPage = "";
 		if (logged)  {
@@ -23,19 +24,19 @@
 			/*Opciones del menú*/
 			
 			%>
-			<header class ="Cabecera">
+			<header class ="header">
 			
-				<div class = "HomeMenu">
+				<div class = "container logo-nav-container">
 					<a href = "Home" class = "logo"> HokuroBank</a>
 					
-					<nav class = "MenuNavegacion">
-						<ul class = "opciones">
+					<nav class = "navigation">
+						<ul class = "option">
 						<li><a href = "Logout">Desconectar</a></li>
 						<li><a href = "Perfil">Ver Perfil</a></li>
 						<li><a href = "MisTransferencias">Realizar Transferencia</a></li>
 						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
 						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
-						<% if (clienteBean.getRol().equals(RolUsuario.Administrador)) { %>
+						<% if ( (clienteBean != null) && (clienteBean.getRol().equals(RolUsuario.Administrador))) { %>
 						<li><a href = "Registrar Usuario">Agregar Cuenta</a></li>
 						<% } %>
 						</ul>

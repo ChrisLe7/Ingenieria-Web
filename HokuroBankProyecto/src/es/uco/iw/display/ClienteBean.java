@@ -5,13 +5,12 @@ import java.io.Serializable;
 import es.uco.iw.negocio.usuario.RolUsuario;
 
 public class ClienteBean implements Serializable {
+	
+	
     private static final long serialVersionUID = 1L;
 	
-    private String dni;
-	private RolUsuario rol;
-	
-	ClienteBean () {}
-	
+    private String dni = "";
+	private RolUsuario rol = RolUsuario.Cliente;
 	
 	public String getDni() {
 		return dni;

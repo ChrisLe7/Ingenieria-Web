@@ -21,7 +21,7 @@ public class TestTransaccionDAO {
 		FileReader fileReader = new FileReader("sql.properties");
 		properties.load(fileReader);
 	
-		System.out.println("Test transaccionDAO");
+		System.out.println("Test TransaccionDAO");
 		
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		TransaccionDAO transaccionDAO = new TransaccionDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);

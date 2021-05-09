@@ -72,16 +72,27 @@
  
   <context-param>
     <param-name>username</param-name>
-    <param-value>i82luesc</param-value>
+    <param-value>HokuroAdmin</param-value>
   </context-param>
   <context-param>
     <param-name>password</param-name>
-    <param-value>i82luesc</param-value>
+    <param-value>AdL734Mkj692RJd126#</param-value>
   </context-param>
   <context-param>
-    <param-name>server</param-name>
-    <param-value>oraclepr.uco.es</param-value>
+    <param-name>bdName</param-name>
+    <param-value>IW</param-value>
   </context-param>
+  
+<!--    <context-param>
+    <param-name>server</param-name>
+    <param-value>hokurobank.ddns.net</param-value>
+  </context-param>
+  -->
+  <context-param>
+    <param-name>server</param-name>
+    <param-value>192.168.0.14</param-value>
+  </context-param>
+  
   <context-param>
     <param-name>port</param-name>
     <param-value>3306</param-value>

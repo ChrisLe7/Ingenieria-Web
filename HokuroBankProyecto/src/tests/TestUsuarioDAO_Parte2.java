@@ -67,6 +67,8 @@ public class TestUsuarioDAO_Parte2 {
 		
 		assert queryRes.getTelefono() == usuarioTest.getTelefono() : "Error telefono";
 		
+		assert queryRes.getRol().equals(usuarioTest.getRol()) : "Error rol";
+		
 		assert queryRes.getCuentasBancarias().size() == 0 : "Error en las cuentas bancarias del usuario";
 		
 		assert queryRes.getTarjetas().size() == 0 : "Error en las tarjetas del usuario";
