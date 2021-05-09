@@ -37,6 +37,18 @@ public class UsuarioDTO implements Serializable {
 		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 		this.password = password;
 	}
+	
+	/**
+	 * Constructor con dni, password y rol de un usuario
+	 * 
+	 * @param dni Dni del nuevo usuario
+	 * @param password Password del nuevo usuario
+	 * @param rol Rol del nuevo usuario
+	 */
+	public UsuarioDTO(String dni, String password, RolUsuario rol) {
+		this(dni, "", "", "", "", 0, rol, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
+		this.password = password;
+	}
 
 	/**
 	 * Constructor completo de un usuario 
@@ -230,7 +242,7 @@ public class UsuarioDTO implements Serializable {
 	}
 
 	/**
-	 * AÃ±ade una cuenta bancaria a la lista de cuentas bancarias de un usuario
+	 * Introduce una cuenta bancaria a la lista de cuentas bancarias de un usuario
 	 * 
 	 * @param cuentasBancaria Cuenta bancaria a introducir a la lista
 	 * @return true si se introduce y false en caso contrario
@@ -277,7 +289,7 @@ public class UsuarioDTO implements Serializable {
 	}
 
 	/**
-	 * AÃ±ade una tarjeta bancaria a la lista de tarjetas bancarias de un usuario
+	 * Introduce una tarjeta bancaria a la lista de tarjetas bancarias de un usuario
 	 * 
 	 * @param tarjeta Tarjeta bancaria a introducir a la lista
 	 * @return true si se introduce y false en caso contrario
