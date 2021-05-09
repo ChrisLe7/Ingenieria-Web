@@ -56,7 +56,7 @@ public class PerfilUserController extends HttpServlet {
 		String nextPage ="/mvc/view/modificarUsuarioView"; 
 		if (login) {
 			String UserCorreo = request.getParameter("correo");
-			
+			UsuarioDTO userDTO = null;
 			if (UserCorreo != null) {
 				//Significa que tenemos cambios y venimos del formulario
 				String UserTelefono = request.getParameter("telefono");
@@ -64,7 +64,7 @@ public class PerfilUserController extends HttpServlet {
 				String UserPassword = request.getParameter("password");
 				
 				
-				UsuarioDTO userDTO = userDAO.QueryByDni(cliente.getDNI());
+				userDTO = userDAO.QueryByDni(cliente.getDNI());
 				
 				userDTO.setDireccion(UserDireccion);
 				userDTO.setPassword(UserPassword);
@@ -77,7 +77,15 @@ public class PerfilUserController extends HttpServlet {
 				
 				
 			}else {
-				//Tenemos que direccionar al formulario
+				//Tenemos que direccionar al formulario pero antes deberemos de coger la información del usuario
+				
+				userDTO = userDAO.QueryByDni(cliente.getDNI());
+				UsuarioInfoBean clienteInfo = new UsuarioInfoBean ();
+				clienteInfo.setUsuario(userDTO);
+
+				session.setAttribute("infoClienteBean", clienteInfo);
+
+				nextPage ="/mvc/view/modificarUsuarioView";
 				disparador = request.getRequestDispatcher(nextPage);
 				String mensajeNextPage = "";
 				request.setAttribute("mensaje", mensajeNextPage);
