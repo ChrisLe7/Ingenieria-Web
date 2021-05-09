@@ -88,19 +88,19 @@ public class CuentaBancariaDAO extends DAO {
     }
 
     /**
-     * Busca las cuentas bancarias cuya id del cliente coincide con la dada
+     * Busca los propietarios de la cuenta dada
      * 
-     * @param idCliente Id del cliente de las cuentas bancarias a buscar
-     * @return Cuentas bancarias cuya id del cliente coincide con la dada
+     * @param idCuentaBancaria Id de la cuenta bancaria cuyos propietarios se van a buscar
+     * @return Propietarios de la cuenta bancaria cuya id de cuenta bancaria coincide con la dada
      */
-    public ArrayList<String> QueryByIdCliente(String idCliente) {
+    public ArrayList<String> QueryByIdCliente(String idCuentaBancaria) {
         ArrayList<String> cuentasBancarias = new ArrayList<String>();
 
         try {
             Connection con = getConnection();
             String statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Usuario");
             PreparedStatement stmt = con.prepareStatement(statement);
-            stmt.setString(1, idCliente);
+            stmt.setString(1, idCuentaBancaria);
             ResultSet set = stmt.executeQuery();
             
             while (set.next()) {

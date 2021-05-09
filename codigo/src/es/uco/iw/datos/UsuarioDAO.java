@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Properties;
 
+import es.uco.iw.negocio.usuario.PropiedadCuenta;
+import es.uco.iw.negocio.usuario.RolPropietario;
 import es.uco.iw.negocio.usuario.RolUsuario;
 import  es.uco.iw.negocio.usuario.UsuarioDTO;
 
@@ -42,7 +44,7 @@ public class UsuarioDAO extends DAO {
             
             if (set.next()) {
             	RolUsuario rol = RolUsuario.valueOf(set.getString(6));
-            	ArrayList<String> cuentasBancarias = new ArrayList<String>();
+            	ArrayList<PropiedadCuenta> cuentasBancarias = new ArrayList<PropiedadCuenta>();
             	ArrayList<String> tarjetas = new ArrayList<String>();
             	
             	if (rol.equals(RolUsuario.Cliente)) {
@@ -51,8 +53,8 @@ public class UsuarioDAO extends DAO {
             		stmtCuentaBancaria.setString(1, dni);            		
                     ResultSet setCuentabancaria = stmtCuentaBancaria.executeQuery();
                     
-                    if (setCuentabancaria.next()) {
-                    	Collections.addAll(cuentasBancarias, setCuentabancaria.getString(1).split(","));
+                    while (setCuentabancaria.next()) {
+                    	cuentasBancarias.add(new PropiedadCuenta(setCuentabancaria.getString(1), RolPropietario.valueOf(setCuentabancaria.getString(2))));
                     }
                     
                     statement = sqlProp.getProperty("Select_Usuario_Tarjeta");
