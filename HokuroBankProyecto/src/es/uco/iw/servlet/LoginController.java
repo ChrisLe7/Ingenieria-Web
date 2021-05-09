@@ -6,13 +6,13 @@ import java.io.InputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.UsuarioDAO;
+import es.uco.iw.display.ClienteBean;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
-		Boolean login = cliente != null && !cliente.getDNI().equals("");
+		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador;
 		String nextPage ="/mvc/view/loginView"; 
 		if (!login) {
@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
 				UsuarioDTO userDTO = userDAO.QueryByDni(UserDNI);
 				
 				if (UserPassword.equals(userDTO.getPassword())) {
-					cliente.setDNI(UserDNI);
+					cliente.setDni(UserDNI);
 					cliente.setRol(userDTO.getRol());
 					session.setAttribute("clienteBean", cliente);
 					nextPage = "/Home";
