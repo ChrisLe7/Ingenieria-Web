@@ -7,6 +7,7 @@ import java.util.Properties;
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
+import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 public class TestCuentaBancariaDAO {
 
@@ -27,7 +28,7 @@ public class TestCuentaBancariaDAO {
 			cuentaBancariaDAO.Delete(cuentaBancariaTest.getIdCuentaBancaria());
 		}
 		
-		assert cuentaBancariaDAO.Insert(cuentaBancariaTest) > 0 : "No se ha introducido la cuenta bancaria";
+		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest", "password")) > 0 : "No se ha introducido la cuenta bancaria";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()) != null : "No se ha encontrado la cuenta bancaria";
 		

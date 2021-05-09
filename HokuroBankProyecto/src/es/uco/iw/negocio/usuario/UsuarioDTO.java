@@ -14,6 +14,7 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 	private String direccion;
 	private int telefono;
+	private RolUsuario rol;
 	private ArrayList<String> cuentasBancarias;
 	private ArrayList<String> tarjetas;
 
@@ -23,7 +24,18 @@ public class UsuarioDTO implements Serializable {
 	 * @param dni Dni del nuevo usuario
 	 */
 	public UsuarioDTO(String dni) {
-		this(dni, "", "", "", "", 0, new ArrayList<String>(), new ArrayList<String>());
+		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<String>(), new ArrayList<String>());
+	}
+	
+	/**
+	 * Constructor con dni y password de un usuario
+	 * 
+	 * @param dni Dni del nuevo usuario
+	 * @param password Password del nuevo usuario
+	 */
+	public UsuarioDTO(String dni, String password) {
+		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<String>(), new ArrayList<String>());
+		this.password = password;
 	}
 
 	/**
@@ -35,16 +47,18 @@ public class UsuarioDTO implements Serializable {
 	 * @param email Email del nuevo usuario
 	 * @param direccion Direccion del nuevo usuario
 	 * @param telefono Telefono del nuevo usuario
+	 * @param rol Rol del nuevo usuario
 	 * @param cuentasBancarias Lista de cuentas bancarias del nuevo usuario
 	 * @param tarjetas Lista de tarjetas bancarias del nuevo usuario
 	 */
-	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, ArrayList<String> cuentasBancarias, ArrayList<String> tarjetas) {
+	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, RolUsuario rol, ArrayList<String> cuentasBancarias, ArrayList<String> tarjetas) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.rol = rol;
 		this.cuentasBancarias = cuentasBancarias;
 		this.tarjetas = tarjetas;
 	}
@@ -169,6 +183,23 @@ public class UsuarioDTO implements Serializable {
 	 */
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
+	}
+	
+	/**
+	 * Devuelve el rol de un usuario
+	 * 
+	 * @return Rol del usuario
+	 */
+	public RolUsuario getRol() {
+		return rol;
+	}
+
+	/**
+	 * Asigna rol a un usuario
+	 * @param rol Rol a asignar al usuario
+	 */
+	public void setRol(RolUsuario rol) {
+		this.rol = rol;
 	}
 
 	/**

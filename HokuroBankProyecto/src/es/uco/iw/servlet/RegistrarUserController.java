@@ -2,7 +2,6 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,20 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.UsuarioDAO;
-import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
+import es.uco.iw.negocio.usuario.RolPropietario;
+import es.uco.iw.negocio.usuario.RolUsuario;
+import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
- * Servlet implementation class CuentaController
+ * Servlet implementation class RegistrarUserController
  */
-public class CuentaController extends HttpServlet {
+
+public class RegistrarUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CuentaController() {
+    public RegistrarUserController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,6 +38,7 @@ public class CuentaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		HttpSession session = request.getSession();
 		String port = request.getServletContext().getInitParameter("port");
 		String username_bd = request.getServletContext().getInitParameter("username");
@@ -52,50 +54,50 @@ public class CuentaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
-		
+		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDNI().equals("");
 		RequestDispatcher disparador;
-		String nextPage ="/mvc/view/MisCuentasView"; 
-		
-		if (login) {
-			//Deberemos de coger la información de las cuentas del cliente para enviarsela a la vista
-			String userDNI = cliente.getDNI();
+		String nextPage ="/mvc/view/RegistrarUsuarioView"; 
+		if (login && cliente != null && cliente.getRol().equals(RolUsuario.Administrador)) {
+			String UserDNI = request.getParameter("DNI");
 			
-			String idCuenta = request.getParameter("idCuenta");
-
-			if (idCuenta != null){
-				//No se que opciones pondremos por lo que lo dejo vacio por ahora
+			if (UserDNI != null) {
+				String UserNombre = request.getParameter("nombre");
+				String UserApellidos = request.getParameter("apellidos");
+				String UserEmail = request.getParameter("email");
+				String UserDireccion = request.getParameter("direccion");
+				String UserTelefono  = request.getParameter("telefono"); 
+				String UserRol = request.getParameter("rol");
+				String UserPassword = request.getParameter("password");
+				
+				UsuarioDTO userDTO = new UsuarioDTO (UserDNI, UserPassword);
+				userDTO.setEmail(UserEmail);
+				userDTO.setNombre(UserNombre);
+				userDTO.setApellidos(UserApellidos);
+				userDTO.setRol(RolUsuario.valueOf(UserRol));
+				userDTO.setTelefono(Integer.valueOf(UserTelefono));
+				userDTO.setDireccion(UserDireccion);
+				
+				userDAO.Insert(userDTO);
+				
+				nextPage = "/Home";
+				disparador = request.getRequestDispatcher(nextPage);
+				
 			}
 			else {
-
-				ArrayList<String> idCuentasCliente = cuentaUserDAO.QueryByIdCliente(userDNI);
-
-
-				ArrayList<CuentaBancariaDTO> cuentasCliente = new ArrayList <CuentaBancariaDTO> ();
-				for (int i = 0; i< idCuentasCliente.size(); i++) {
-					cuentasCliente.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentasCliente.get(i)));
+				// Se debe de ir a la vista
+				if (cliente != null && cliente.getRol().equals(RolUsuario.Administrador)) {
+					nextPage = "/mvc/view/RegistrarUsuarioView"; 
+					disparador = request.getRequestDispatcher(nextPage);
 				}
-
-				InfoCuentasBancariasBean cuentas = new InfoCuentasBancariasBean();
-
-				cuentas.setCuentas(cuentasCliente);
 				
-				session.setAttribute("infoCuentas", cuentas);
-				
-				nextPage = "MisCuentasView";
-				
-				disparador = request.getRequestDispatcher(nextPage);
-				}
+			}
 			
 		}
 		else {
-				nextPage = "/Home";
-				disparador = request.getRequestDispatcher(nextPage);
-				String mensajeNextPage = "No se encuentra logueado";
-				request.setAttribute("mensaje", mensajeNextPage);
-				
-
+			disparador = request.getRequestDispatcher("/Home");
+			String mensajeNextPage = "No es administrador, falta de permisos";
+			request.setAttribute("mensaje", mensajeNextPage);
 		}
 		
 		disparador.forward(request, response);

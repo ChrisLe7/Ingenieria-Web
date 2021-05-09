@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Properties;
 
+import es.uco.iw.negocio.usuario.RolUsuario;
 import  es.uco.iw.negocio.usuario.UsuarioDTO;
 
 public class UsuarioDAO extends DAO {
@@ -29,7 +31,7 @@ public class UsuarioDAO extends DAO {
      * @return Usuario cuyo email coincide con el dado
      */
     public UsuarioDTO QueryByDni(String dni) {
-        UsuarioDTO contact = null;
+        UsuarioDTO usuario = null;
 
         try {
             Connection con = getConnection();
@@ -39,9 +41,31 @@ public class UsuarioDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             if (set.next()) {
-                // La direccion no esta en la base de datos
-                // Las tarjetas y cuentas bancarias estan por ver como guardarlas todavia
-            	contact = new UsuarioDTO(dni, set.getString(2), set.getString(3), set.getString(5), "", set.getInt(6), new ArrayList<String>(), new ArrayList<String>());               
+            	RolUsuario rol = RolUsuario.valueOf(set.getString(6));
+            	ArrayList<String> cuentasBancarias = new ArrayList<String>();
+            	ArrayList<String> tarjetas = new ArrayList<String>();
+            	
+            	if (rol.equals(RolUsuario.Cliente)) {
+            		statement = sqlProp.getProperty("Select_Usuario_Cuenta_Bancaria");
+            		PreparedStatement stmtCuentaBancaria = con.prepareStatement(statement);
+            		stmtCuentaBancaria.setString(1, dni);            		
+                    ResultSet setCuentabancaria = stmtCuentaBancaria.executeQuery();
+                    
+                    if (setCuentabancaria.next()) {
+                    	Collections.addAll(cuentasBancarias, setCuentabancaria.getString(1).split(","));
+                    }
+                    
+                    statement = sqlProp.getProperty("Select_Usuario_Tarjeta");
+                    PreparedStatement stmtTarjeta = con.prepareStatement(statement);
+                    stmtTarjeta.setString(1, dni);
+                    ResultSet setTarjeta = stmtTarjeta.executeQuery();
+                    
+                    if (setTarjeta.next()) {
+                    	Collections.addAll(tarjetas, setTarjeta.getString(1).split(","));
+                    }
+            	}
+            	
+            	usuario = new UsuarioDTO(dni, set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getInt(5), rol, cuentasBancarias, tarjetas);               
             }
 
             if (stmt != null) {
@@ -52,7 +76,7 @@ public class UsuarioDAO extends DAO {
             System.out.println(e);
         }
         
-        return contact;
+        return usuario;
     }
 
     /**
@@ -62,7 +86,7 @@ public class UsuarioDAO extends DAO {
      * @return Usuario cuyo email coincide con el dado
      */
     public UsuarioDTO QueryByPassword(String dni) {
-        UsuarioDTO contact = null;
+        UsuarioDTO usuario = null;
 
         try {
             Connection con = getConnection();
@@ -72,8 +96,7 @@ public class UsuarioDAO extends DAO {
             ResultSet set = stmt.executeQuery();
 
             if (set.next()) {
-            	contact = new UsuarioDTO(set.getString(1));
-                contact.setPassword(set.getString(2));
+            	usuario = new UsuarioDTO(set.getString(1), set.getString(2));
             }
 
             if (stmt != null) {
@@ -84,7 +107,7 @@ public class UsuarioDAO extends DAO {
             System.out.println(e);
         }
         
-        return contact;
+        return usuario;
     }
 
     /**
@@ -106,7 +129,9 @@ public class UsuarioDAO extends DAO {
             stmt.setString(3, usuario.getApellidos());
             stmt.setString(4, usuario.getPassword());
             stmt.setString(5, usuario.getEmail());
-            stmt.setInt(6, usuario.getTelefono());
+            stmt.setString(6, usuario.getDireccion());
+            stmt.setInt(7, usuario.getTelefono());
+            stmt.setString(8, usuario.getRol().toString());
             status = stmt.executeUpdate();
             
             if (stmt != null) {
@@ -133,11 +158,12 @@ public class UsuarioDAO extends DAO {
             String statement = sqlProp.getProperty("Update_Usuario");
         	Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
-            stmt.setString(5, usuario.getDni());
+            stmt.setString(6, usuario.getDni());
             stmt.setString(1, usuario.getNombre());
             stmt.setString(2, usuario.getApellidos());
             stmt.setString(3, usuario.getEmail());
-            stmt.setInt(4, usuario.getTelefono());
+            stmt.setString(4, usuario.getDireccion());
+            stmt.setInt(5, usuario.getTelefono());
             status = stmt.executeUpdate();
             
             if (stmt != null) {

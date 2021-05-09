@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
+<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,9 @@
 <body>
 	
 	<% 
-		Boolean logged = true;
+	
+		
+		Boolean logged = clienteBean != null && !clienteBean.getDNI().equals("");;
 		String nextPage = "Login";
 		String mensajeNextPage = "";
 		if (logged)  {
@@ -32,6 +35,9 @@
 						<li><a href = "MisTransferencias">Realizar Transferencia</a></li>
 						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
 						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
+						<% if (clienteBean.getRol().equals(RolUsuario.Administrador)) { %>
+						<li><a href = "Registrar Usuario">Agregar Cuenta</a></li>
+						<% } %>
 						</ul>
 											
 					</nav>
@@ -45,7 +51,7 @@
 		}
 		else {
 			//No se encuentra logueado deberá de irse al controlador de login.
-			nextPage = "Login";
+			nextPage = "/Login";
 			mensajeNextPage = "Debera de Iniciar Sesion para acceder al Sistema";
 		%>
 		<jsp:forward page="<%=nextPage%>">

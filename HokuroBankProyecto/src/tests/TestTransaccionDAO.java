@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import es.uco.iw.datos.TransaccionDAO;
 import es.uco.iw.negocio.transaccion.TransaccionDTO;
+import es.uco.iw.negocio.usuario.UsuarioDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
@@ -38,7 +39,7 @@ public class TestTransaccionDAO {
 			transaccionDAO.Delete(transaccionTest.getIdTransaccion());
 		}
 		
-		cuentaBancariaDAO.Insert(cuentaBancariaTest);
+		cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest", "password"));
 		
 		assert transaccionDAO.Insert(transaccionTest) > 0 : "No se ha introducido la transaccion";
 		
