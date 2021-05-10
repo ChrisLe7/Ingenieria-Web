@@ -1,113 +1,80 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-   
-<%@ page import ="java.util.ArrayList,es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
+<jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
-
-<jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>  
+<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Mis Cuentas</title>
 </head>
 <body>
-	<% //Comprobar que se encuentra logueado.
-		String nextPage = "";
-		String mensajeNextPage ="";
-		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
-		if (login){
-			%>
-			<table class="myadverts">
-			<tr>
-				<th>ID Cuenta</th>
-				<th>Propietario</th>
-				<th>Copropietario</th>
-				<th>Saldo</th>
-			</tr>
-			<% 
-			if (infoCuentas != null) {
-				ArrayList<CuentaBancariaDTO> misCuentas = infoCuentas.getCuentas();
-				
-				if (misCuentas != null && misCuentas.isEmpty()) {
-					//Poseemos Tarjetas
-					for (int  i = 0; i < misCuentas.size(); i++) {
-						%>
-						<tr class="tarjeta">
-								<td><%= misCuentas.get(i).getIdCuentaBancaria()%></td>
-								<td><%= misCuentas.get(i).getIdTitular()%></td>
-								
-								<td><%= misCuentas.get(i).getIdCotitular()%></td>
-								<td><%= misCuentas.get(i).getSaldo()%></td>
-								<td class="BotonCancelar">
-									<form method=post action="CancelarTarjeta">
-										<input type=text name="id-cuenta" class="hidden" value=<%=misCuentas.get(i).getIdCuentaBancaria()%>>
-										<input type=submit value=Cancelar> 
-									</form>
-								</td>
-								<% 
-								if (misCuentas.get(i).getEstadoBizum() == true) {
-								%>	<td class="BotonCancelarBizum">
-									<form method=post action="GestionarBizum">
-										<input type=text name="id-cuenta" class="hidden" value=<%=misCuentas.get(i).getIdCuentaBancaria()%>>
-										<input type=submit value=Cancelar> 
-									</form>
-								</td>
-								<% } else{
-									
-									
-								%>
-								<td class="BotonHabilitarBizum">
-									<form method=post action="GestionarBizum">
-										<input type=text name="id-cuenta" class="hidden" value=<%=misCuentas.get(i).getIdCuentaBancaria()%>>
-										<input type=submit value=Habilitar> 
-									</form>
-								</td>
-								
-								
-								 <%	
-								}
-								
-								%>
-						</tr>
-						<% 
-							
-					}
-				}
-				else {
-					//No posee Tarjetas -> No se que mostrar
-					%> 
-					<tr>
-						<td class="ContratarCuenta">
-									<form method=post action="ContratarCuenta">
-										<input type=text name="cuenta" class="hidden" value="">
-										<input type=submit value="Contratar Cuenta Nueva"> 
-									</form>
-								</td>
-					</tr>
-					<% 
-				}
-			}
-			%>
-			</table>
+
+<%  
+boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
+String nextPage = "";
+String mensajeNextPage = "";
+if (clienteBean == null || clienteBean.getDni().equals(""))  {
+	nextPage = "index.jsp";
+	mensajeNextPage = "Usted no está logueado";
+}else if(infoCuentas.getCuentas().isEmpty()){
 	
-			<%
-		}else {
-			//No esta logueado Direccionador al Login
-			nextPage = "Login";
-			mensajeNextPage = "No esta logueado, falta de permisos";
-			%>
-			<jsp:forward page="<%=nextPage%>">
-				<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-			</jsp:forward>
-			<%
-		}
-	
-	
-	%>
-	
+%> 
+
+<p>
+AUN NO TIENES CUENTAS BANCARIAS ¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
+</p>
+
+<!--  <p>
+Crea una Cuenta Bancaria <a href="">AQUÍ</a>
+</p>-->
+
+<% }else{ 
+ArrayList<CuentaBancariaDTO> ListaCuentas = new ArrayList<CuentaBancariaDTO>();
+ListaCuentas = infoCuentas.getCuentas();
+
+for(CuentaBancariaDTO cuenta : ListaCuentas){
+%>
+
+<div class="CuentasBancarias">
+
+	<h1> Cuenta  <%=cuenta.getIdCuentaBancaria()%></h1>
+	Saldo: <%=cuenta.getSaldo()%><br/>
+	Tipo: <%=cuenta.getTipoCuentaBancaria().toString()%><br/>
+	Estado del Bizum: <%if(cuenta.estadoBizum()){ 
+	%> Activo <br/>
+	 
+	 <form method="post" action="ModificarCuenta">
+		<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+		<input type="submit" value="Deshabilitar Bizum">
+	</form>	
+	 	
+
+	 	
+	<%
+	}else{ 
+		
+	%> No Activo <%} %><br/>
+
+	<form method="post" action="ModificarCuenta">
+		<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+		<input type="submit" value="Habilitar Bizum">
+	</form>	
 
 
+<%}
+	if(clienteBean.getRol().equals(RolUsuario.Administrador)){
+%>
+	 <form method="post" action="ModificarCuenta">	
+	 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+		<input type="submit" value="Modificar Saldo">
+	</form>	
+
+</div>
+<% 
+	}
+}%>
 </body>
 </html>
