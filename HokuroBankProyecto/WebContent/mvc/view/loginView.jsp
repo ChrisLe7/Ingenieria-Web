@@ -3,7 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/hashPassword.js" defer></script>
     <title>Login</title>
 </head>
 <body>
@@ -14,13 +15,12 @@
         <h1 class="formulario_titulo">Introduzca sus Datos para Registrarse.</h1> 
 
 
-        <form method="post" action="Login" class="formulario" >
+        <form method="post" action="Login" id="formularioUsuario" class="formulario" >
             <h1>Formulario Registro</h1>
             <input type="text" name="DNI" placeholder="Dni" required><br/>
-            <input type="password" name="Password" placeholder="Password" required><br/>
-            <input class="button" type="submit" value="Iniciar Sesión">
-
-            </form>
+            <input type="password" id="password" name="Password" placeholder="Password" required><br/>
+            <input class="button" type="submit" id="submitBtn" value="Iniciar Sesión">
+        </form>
 
 
     </main>

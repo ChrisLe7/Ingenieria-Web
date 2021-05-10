@@ -13,6 +13,7 @@
 <meta charset="ISO-8859-1">
 
 <!-- scripts y css -->
+<script src="js/hashPassword.js" defer></script>
 <title>Registrarse</title>
 
 </head>
@@ -71,7 +72,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		
 		<input type="password" name="password" ><br/>
 	
-		<input type="submit" value="Registrarse">
+		<input type="submit" id="submitBtn" value="Registrarse">
 		
 	</form>
 

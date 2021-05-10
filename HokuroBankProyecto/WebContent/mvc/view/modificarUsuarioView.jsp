@@ -11,7 +11,7 @@
 <!-- scripts y css -->
 <title>Perfil</title>
 	<script src="js/modificarPerfilBtn.js" defer></script> 
-
+	<script src="js/hashPassword.js" defer></script>
 </head>
 
 <body>
@@ -77,7 +77,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		 
 		
 		
-		<input type="submit" value="Enviar Modificación">
+		<input type="submit" id="submitBtn" value="Enviar Modificación">
 	
 	</form>
 	
