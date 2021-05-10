@@ -34,7 +34,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	}
 %> 
 <!-- Los divs pueden cambiarse de clases a identificadores -->
-<div class="observarP" style=display:none>
+<div id="observarP" >
 
 	<form method="post" action="Perfil">
 	
@@ -53,12 +53,12 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	</form>
 	
 	<!--  Si se clicka, este div debe de hacerse invisible y el de abajo debe dejarse visible -->
-	<button onclick="">Habilitar Modificaciones</button>
+	<button id="observarPButton" onclick="">Habilitar Modificaciones</button>
 
 </div>
 
 <!-- El style se puede poner en el css -->
-<div class="modificarP" >
+<div id="modificarP">
 
 	<form method="post" action="Perfil">
 	
@@ -83,7 +83,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	</form>
 	
 	<!--  Si se clicka, este div debe de hacerse invisible y el de arriba debe dejarse visible -->
-	<button onclick="">Deshabilitar Modificaciones</button>
+	<button id="modificarPButton" onclick="">Deshabilitar Modificaciones</button>
 
 </div>
 
