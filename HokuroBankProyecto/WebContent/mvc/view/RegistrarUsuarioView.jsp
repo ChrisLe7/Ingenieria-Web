@@ -42,7 +42,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	
 		<label for="DNI">DNI: </label> <br/>
 		
-		<input type="text" name="DNI" > <br/>
+		<input type="text" name="DNI" pattern="[0-9]{8}[A-Z]"> <br/>
 	
 		<label for="Nombre">Nombre: </label> <br/>
 		
@@ -62,11 +62,13 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		
 		<label for="Telefono">Telefono: </label> <br/>
 		
-		<input type="tel" name="telefono" pattern="[0-9]{9}">
+		<input type="tel" name="telefono" pattern="[0-9]{9}"><br/>
 		
 		<label for="Rol">Rol: </label> <br/>
 		
-		<input type="text" name="rol" > <br/>
+		<label><input type="checkbox" name="rol" value"Cliente"> Cliente</label> <br/>
+		
+		<label><input type="checkbox" name="rol" value"Administrador"> Administrador</label> <br/>
 		
 		<label for="Password">Contraseña: </label> <br/>
 		
