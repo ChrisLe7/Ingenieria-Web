@@ -21,7 +21,7 @@ public class TestCuentaBancariaDAO {
 		
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false);
+		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false, "UsuarioTest");
 		
 		// Si hay algun fallo, borra la cuenta bancaria de prueba en caso de haberla
 		if (cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()) != null) {
@@ -34,6 +34,10 @@ public class TestCuentaBancariaDAO {
 		
 		// FALTA PROBAR QueryByCliente YA QUE ACTUALMENTE NO SE TIENE TODAVIA LA RELACION
 		
+		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdTitular().equals("UsuarioTest") : "Error titular de cuenta bancaria";
+		
+		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdCotitular().equals("") : "Error cotitular de cuenta bancaria";
+		
 		assert !cuentaBancariaDAO.QueryByBizum(cuentaBancariaTest.getIdCuentaBancaria()) : "Error bizum";
 		
 		cuentaBancariaTest.setEstadoBizum(true);
@@ -41,6 +45,8 @@ public class TestCuentaBancariaDAO {
 		assert cuentaBancariaDAO.UpdateBizum(cuentaBancariaTest) > 0 : "Error actualizando bizum";
 		
 		assert cuentaBancariaDAO.QueryByBizum(cuentaBancariaTest.getIdCuentaBancaria()) : "Error bizum actualizado";
+		
+		//assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getEstadoBizum() : "Error bizum actualizado";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getSaldo() == (float) 30.5 : "Error saldo";
 		

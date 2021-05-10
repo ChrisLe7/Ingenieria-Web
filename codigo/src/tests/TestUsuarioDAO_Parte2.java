@@ -33,7 +33,7 @@ public class TestUsuarioDAO_Parte2 {
 		
 		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 		usuarioTest.setPassword("password");
-		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false);
+		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false, usuarioTest.getDni());
 		TarjetaDTO tarjetaTest = new TarjetaDTO("TarjetaTest", 123, TipoTarjeta.Credito, "UsuarioTest", "CuentaBancariaTest");
 		
 		// Si hay algun fallo, borra el usuario prueba en caso de haberla
