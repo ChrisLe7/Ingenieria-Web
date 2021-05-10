@@ -41,7 +41,9 @@ public class LoginController extends HttpServlet {
 		String password_bd = request.getServletContext().getInitParameter("password");
 		String server = request.getServletContext().getInitParameter("server");
 		String dbURL = request.getServletContext().getInitParameter("dbURL");
-		dbURL= dbURL + server + ":" + port + "/" + username_bd; 
+		String bdName = request.getServletContext().getInitParameter("bdName");
+		
+		dbURL= dbURL + server + ":" + port + "/" + bdName; 
 		String sql = request.getServletContext().getInitParameter("sql");
 		
 		ServletContext application = getServletContext();
@@ -52,7 +54,7 @@ public class LoginController extends HttpServlet {
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
-		RequestDispatcher disparador;
+		RequestDispatcher disparador = null;
 		String nextPage ="/mvc/view/loginView"; 
 		if (!login) {
 			
@@ -60,22 +62,28 @@ public class LoginController extends HttpServlet {
 			String UserPassword = request.getParameter("Password");
 
 			if (UserDNI != null) {
-				UsuarioDTO userDTO = userDAO.QueryByDni(UserDNI);
+				UsuarioDTO userDTO = userDAO.QueryByPassword(UserDNI);
+				System.out.println("Comprobación contraseña");
 				
 				if (UserPassword.equals(userDTO.getPassword())) {
 					cliente.setDni(UserDNI);
+					
 					cliente.setRol(userDTO.getRol());
 					session.setAttribute("clienteBean", cliente);
 					nextPage = "/Home";
 					disparador = request.getRequestDispatcher(nextPage);
 				}
 				else {
+					System.out.println("mala contraseña");
+					nextPage = "/mvc/view/loginView";
 					disparador = request.getRequestDispatcher(nextPage);
 					String mensajeNextPage = "Error de Contraseña, Intentelo de Nuevo";
 					request.setAttribute("mensaje", mensajeNextPage);
 				}
 			}
 			else {
+				nextPage = "/mvc/view/loginView.jsp";
+				System.out.println("NO loeguado");
 				disparador = request.getRequestDispatcher(nextPage);
 				String mensajeNextPage = "No se encuentra logueado, debe de iniciar sesión";
 				request.setAttribute("mensaje", mensajeNextPage);
@@ -83,9 +91,16 @@ public class LoginController extends HttpServlet {
 		}
 		else {
 			//Se encuentra logueado deberá de acceder al Home.
-			nextPage = "/Home";
-			disparador = request.getRequestDispatcher(nextPage);
+			//nextPage = "index.jsp";
+			//disparador = request.getRequestDispatcher(nextPage);
 			
+			request.getSession().removeAttribute("clienteBean");
+			request.getSession().removeAttribute("infoTarjetas");
+			request.getSession().removeAttribute("infoCuentas");
+					
+			
+			nextPage = "/index.jsp";
+			disparador = request.getRequestDispatcher(nextPage);
 			
 		}
 		

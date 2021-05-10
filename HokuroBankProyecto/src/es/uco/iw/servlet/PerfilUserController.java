@@ -42,7 +42,9 @@ public class PerfilUserController extends HttpServlet {
 		String password_bd = request.getServletContext().getInitParameter("password");
 		String server = request.getServletContext().getInitParameter("server");
 		String dbURL = request.getServletContext().getInitParameter("dbURL");
-		dbURL= dbURL + server + ":" + port + "/" + username_bd; 
+		String bdName = request.getServletContext().getInitParameter("bdName");
+		
+		dbURL= dbURL + server + ":" + port + "/" + bdName; 
 		String sql = request.getServletContext().getInitParameter("sql");
 		
 		ServletContext application = getServletContext();
@@ -54,8 +56,9 @@ public class PerfilUserController extends HttpServlet {
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador;
-		String nextPage ="/mvc/view/modificarUsuarioView"; 
+		String nextPage ="/mvc/view/modificarUsuarioView.jsp"; 
 		if (login) {
+			System.out.println("Logeado-> Perfil");
 			String UserCorreo = request.getParameter("correo");
 			UsuarioDTO userDTO = null;
 			if (UserCorreo != null) {
@@ -73,6 +76,7 @@ public class PerfilUserController extends HttpServlet {
 				userDTO.setEmail(UserCorreo);
 
 				userDAO.Update(userDTO);
+				userDAO.UpdatePassword(userDTO);
 				nextPage = "/Home";
 				disparador = request.getRequestDispatcher(nextPage);
 				
@@ -80,13 +84,14 @@ public class PerfilUserController extends HttpServlet {
 			}else {
 				//Tenemos que direccionar al formulario pero antes deberemos de coger la información del usuario
 				
+				System.out.println("Dirigiendo al formulario");
 				userDTO = userDAO.QueryByDni(cliente.getDni());
 				UsuarioInfoBean clienteInfo = new UsuarioInfoBean ();
 				clienteInfo.setUsuario(userDTO);
-
+				
 				session.setAttribute("infoClienteBean", clienteInfo);
 
-				nextPage ="/mvc/view/modificarUsuarioView";
+				nextPage ="/mvc/view/modificarUsuarioView.jsp";
 				disparador = request.getRequestDispatcher(nextPage);
 				String mensajeNextPage = "";
 				request.setAttribute("mensaje", mensajeNextPage);

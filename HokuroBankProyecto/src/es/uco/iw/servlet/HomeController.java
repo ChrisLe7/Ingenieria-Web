@@ -7,29 +7,33 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
+import es.uco.iw.datos.TarjetaDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
+import es.uco.iw.display.InfoTarjetasBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
+import es.uco.iw.negocio.tarjeta.TarjetaDTO;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
- * Servlet implementation class CuentaController
+ * Servlet implementation class HomeController
  */
-public class CuentaController extends HttpServlet {
+public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CuentaController() {
+    public HomeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,57 +61,58 @@ public class CuentaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
+		String nextPage = "/index.jsp";
+		RequestDispatcher disparador = null;
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
+		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
 		
 		Boolean login = cliente != null && !cliente.getDni().equals("");
-		RequestDispatcher disparador = null;
-		String nextPage ="/mvc/view/MisCuentasView"; 
 		
-		if (login) {
-			//Deberemos de coger la información de las cuentas del cliente para enviarsela a la vista
-			String userDNI = cliente.getDni();
+		if (!login) {
+			nextPage = "/Login";
+			disparador = request.getRequestDispatcher(nextPage);
+			String mensajeNextPage = "No se encuentra logueado";
+			request.setAttribute("mensaje", mensajeNextPage);
+		}else {
+			UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
 			
-			String idCuenta = request.getParameter("idCuenta");
+			ArrayList<PropiedadCuenta> idCuentasCliente = clienteInfo.getCuentasBancarias();
+			
 
-			if (idCuenta != null){
-				//No se que opciones pondremos por lo que lo dejo vacio por ahora
+			ArrayList<CuentaBancariaDTO> cuentasCliente = new ArrayList <CuentaBancariaDTO> ();
+			for (int i = 0; i< idCuentasCliente.size(); i++) {
+				cuentasCliente.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentasCliente.get(i).getIdCuentaBancaria()));
 			}
-			else {
 
-				UsuarioDTO clienteInfo = userDAO.QueryByDni(userDNI);
-				
-				ArrayList<PropiedadCuenta> idCuentasCliente = clienteInfo.getCuentasBancarias();
-				
+			InfoCuentasBancariasBean cuentas = new InfoCuentasBancariasBean();
 
-				ArrayList<CuentaBancariaDTO> cuentasCliente = new ArrayList <CuentaBancariaDTO> ();
-				for (int i = 0; i< idCuentasCliente.size(); i++) {
-					cuentasCliente.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentasCliente.get(i).getIdCuentaBancaria()));
-				}
-
-				InfoCuentasBancariasBean cuentas = new InfoCuentasBancariasBean();
-
-				cuentas.setCuentas(cuentasCliente);
-				
-				session.setAttribute("infoCuentas", cuentas);
-				
-				nextPage = "MisCuentasView";
-				
-				disparador = request.getRequestDispatcher(nextPage);
-				}
+			cuentas.setCuentas(cuentasCliente);
 			
-		}
-		else {
-				nextPage = "/Home";
-				disparador = request.getRequestDispatcher(nextPage);
-				String mensajeNextPage = "No se encuentra logueado";
-				request.setAttribute("mensaje", mensajeNextPage);
-				
+			session.setAttribute("infoCuentas", cuentas);
+			
+			nextPage = "/index.jsp";
+			
+			ArrayList<String> tarjetasUsuario = clienteInfo.getTarjetas();
+			ArrayList<TarjetaDTO> infoTarjetasUsuario = new ArrayList<TarjetaDTO> ();
+			
+					
+			for (int i = 0; i< tarjetasUsuario.size();i++) {
+				infoTarjetasUsuario.add(tarjetaDAO.QueryByNumTarjeta(tarjetasUsuario.get(i)));
+			}
+			
+			InfoTarjetasBean infotarjetas = new InfoTarjetasBean();
 
+			infotarjetas.setTarjetas(infoTarjetasUsuario);
+			
+			session.setAttribute("infoTarjetas", infotarjetas);
+			
+			disparador = request.getRequestDispatcher(nextPage);
+			
+			
 		}
 		
 		disparador.forward(request, response);
-		
 	}
 
 	/**

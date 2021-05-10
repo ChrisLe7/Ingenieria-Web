@@ -44,7 +44,9 @@ public class RegistrarUserController extends HttpServlet {
 		String password_bd = request.getServletContext().getInitParameter("password");
 		String server = request.getServletContext().getInitParameter("server");
 		String dbURL = request.getServletContext().getInitParameter("dbURL");
-		dbURL= dbURL + server + ":" + port + "/" + username_bd; 
+		String bdName = request.getServletContext().getInitParameter("bdName");
+		
+		dbURL= dbURL + server + ":" + port + "/" + bdName; 
 		String sql = request.getServletContext().getInitParameter("sql");
 		
 		ServletContext application = getServletContext();

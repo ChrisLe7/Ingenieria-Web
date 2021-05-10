@@ -118,4 +118,15 @@ public class TarjetaDTO implements Serializable {
         this.idCuenta = idCuenta;
     }
 
+	@Override
+	/**
+	 * Devuelve el contenido del objeto como cadena
+	 * 
+	 * @return Cadena con el contenido
+	 */
+	public String toString() {
+		return "TarjetaDTO [numTarjeta=" + numTarjeta + ", pin=" + pin + ", tipoTarjeta=" + tipoTarjeta + ", idCliente="
+				+ idCliente + ", idCuenta=" + idCuenta + "]";
+	}
+
 }
