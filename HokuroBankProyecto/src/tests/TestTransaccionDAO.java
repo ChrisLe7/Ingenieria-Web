@@ -26,7 +26,7 @@ public class TestTransaccionDAO {
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		TransaccionDAO transaccionDAO = new TransaccionDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaOrigenTest", (float) 30.5, TipoCuentaBancaria.Corriente, false);
+		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaOrigenTest", (float) 30.5, TipoCuentaBancaria.Corriente, false, "UsuarioTest");
 		TransaccionDTO transaccionTest = new TransaccionDTO("TransaccionTest", (float) 123.2, TipoOperacion.Pagar, new Date(), "Test", "CuentaOrigenTest", "CuentaDestinoTest");
 		
 		// Si hay algun fallo, borra la cuenta bancaria de prueba en caso de haberla

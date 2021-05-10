@@ -10,18 +10,17 @@
 <meta charset="ISO-8859-1">
 <!-- scripts y css -->
 <title>Perfil</title>
+	<script src="js/modificarPerfilBtn.js" defer></script> 
 
 </head>
 
 <body>
 
 <%  
-
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 System.out.println("BEAN FALLARA");
 String nextPage = "";
 String mensajeNextPage = "";
-
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
@@ -58,7 +57,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 </div>
 
 <!-- El style se puede poner en el css -->
-<div id="modificarP">
+<div id="modificarP" style="display:none">
 
 	<form method="post" action="Perfil">
 	

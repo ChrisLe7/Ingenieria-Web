@@ -69,7 +69,7 @@ public class TarjetaController extends HttpServlet {
 			//Se encuentra logueado el usuario deberemos de coger la información de sus tarjetas para mostrarlas.
 			
 			UsuarioDTO userDTO = userDAO.QueryByDni(cliente.getDni());
-			
+			System.out.println("Compruebo que el usuario se encuentra logueado [TARJETACONTROLLER]");
 			String TarjetaCancelar = request.getParameter("tarjeta");
 
 
@@ -86,7 +86,7 @@ public class TarjetaController extends HttpServlet {
 				ArrayList<String> tarjetasUsuario = userDTO.getTarjetas();
 				ArrayList<TarjetaDTO> infoTarjetasUsuario = new ArrayList<TarjetaDTO> ();
 				
-						
+				System.out.println("Dirijo al usuario a la vista tras coger la información");
 				for (int i = 0; i< tarjetasUsuario.size();i++) {
 					infoTarjetasUsuario.add(tarjetaDAO.QueryByNumTarjeta(tarjetasUsuario.get(i)));
 				}
@@ -97,7 +97,7 @@ public class TarjetaController extends HttpServlet {
 				
 				session.setAttribute("infoTarjetas", infotarjetas);
 				
-				nextPage = "/mvc/vistas/MostrarTarjetas";
+				nextPage = "/mvc/view/misTarjetasView.jsp";
 				
 				disparador = request.getRequestDispatcher(nextPage);
 

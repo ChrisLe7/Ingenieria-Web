@@ -21,7 +21,6 @@
 
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-System.out.println("BEAN FALLARA");
 String nextPage = "";
 String mensajeNextPage = "";
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
@@ -64,9 +63,9 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		
 		<label for="Rol">Rol: </label> <br/>
 		
-		<label><input type="radio" name="rol" value="Cliente"> Cliente</label> <br/>
+		<label><input type="radio" name="rol" value = "Cliente"> Cliente</label> <br/>
 		
-		<label><input type="radio" name="rol" value="Administrador"> Administrador</label> <br/>
+		<label><input type="radio" name="rol" value = "Administrador"> Administrador</label> <br/>
 		
 		<label for="Password">Contraseña: </label> <br/>
 		

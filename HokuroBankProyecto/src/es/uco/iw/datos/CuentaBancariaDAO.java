@@ -42,7 +42,28 @@ public class CuentaBancariaDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             if (set.next()) {
-                cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4));
+            	String idTtitular = "";
+            	String idCotitular = "";
+            	
+            	statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Titular");
+            	PreparedStatement stmtTtitular = con.prepareStatement(statement);
+                stmtTtitular.setString(1, idCuentaBancaria);
+                ResultSet setTtitular = stmtTtitular.executeQuery();
+                
+                if (setTtitular.next()) {
+                	idTtitular = setTtitular.getString(1);
+                }
+                
+                statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Cotitular");
+            	PreparedStatement stmtCotitular = con.prepareStatement(statement);
+                stmtCotitular.setString(1, idCuentaBancaria);
+                ResultSet setCotitular = stmtCotitular.executeQuery();
+                
+                if (setCotitular.next()) {
+                	idCotitular = setCotitular.getString(1);
+                }
+                
+                cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTtitular, idCotitular);
             }
 
             if (stmt != null) {
@@ -64,10 +85,10 @@ public class CuentaBancariaDAO extends DAO {
      */
     public boolean QueryByBizum(String idCuentaBancaria) {
         boolean res = false;
-
+        
         try {
             Connection con = getConnection();
-            String statement = sqlProp.getProperty("Select_Bizum");
+            String statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Bizum");
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
             ResultSet set = stmt.executeQuery();
@@ -88,10 +109,10 @@ public class CuentaBancariaDAO extends DAO {
     }
 
     /**
-     * Busca los propietarios de la cuenta dada
+     * Busca los titulares de la cuenta dada
      * 
-     * @param idCuentaBancaria Id de la cuenta bancaria cuyos propietarios se van a buscar
-     * @return Propietarios de la cuenta bancaria cuya id de cuenta bancaria coincide con la dada
+     * @param idCuentaBancaria Id de la cuenta bancaria cuyos titulares se van a buscar
+     * @return Titulares de la cuenta bancaria cuya id de cuenta bancaria coincide con la dada
      */
     public ArrayList<String> QueryByIdCliente(String idCuentaBancaria) {
         ArrayList<String> cuentasBancarias = new ArrayList<String>();
@@ -169,7 +190,7 @@ public class CuentaBancariaDAO extends DAO {
         int status = 0;
 
         try {
-            String statement = sqlProp.getProperty("Update_Saldo");
+            String statement = sqlProp.getProperty("Update_Cuenta_Bancaria_Saldo");
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
@@ -197,7 +218,7 @@ public class CuentaBancariaDAO extends DAO {
         int status = 0;
 
         try {
-            String statement = sqlProp.getProperty("Update_Bizum");
+            String statement = sqlProp.getProperty("Update_Cuenta_Bancaria_Bizum");
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());

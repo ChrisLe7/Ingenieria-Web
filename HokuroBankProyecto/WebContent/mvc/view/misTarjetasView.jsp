@@ -16,24 +16,29 @@
 </head>
 <body>
 
-	<table class="myadverts">
-			<tr>
-				<th>ID Anuncio</th>
-				<th>Titulo Anuncio</th>
-				<th>Tipo Anuncio</th>
-				<th>Estado</th>
-			</tr>
+
 	<% //Comprobar que se encuentra logueado.
-		
+		System.out.println("Estoy en la vista de misTarjeta");
+		String nextPage = "";
+		String mensajeNextPage ="";
 		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
 		if (login){
+			%>
+			<table class="myadverts">
+			<tr>
+				<th>Número de Tarjeta</th>
+				<th>Tipo de Tarjeta</th>
+				<th>Propietario</th>
+				<th>Cuenta Bancaria Vinculada</th>
+			</tr>
+			<% 
 			if (infoTarjetas != null) {
-				//El usuario no tiene tarjetas mostrar algun error o alguna forma de contratarlas. Redirreccionar a crearTarjeta
-				
-			}
-			else {
+				System.out.println(infoTarjetas);
 				ArrayList<TarjetaDTO> misTarjetas = infoTarjetas.getTarjetas();
-				if (misTarjetas.isEmpty()){
+				
+				if (misTarjetas != null && misTarjetas.isEmpty()) {
+					System.out.println("Tenemos tarjetas para el usuario");
+					//Poseemos Tarjetas
 					for (int  i = 0; i < misTarjetas.size(); i++) {
 						%>
 						<tr class="tarjeta">
@@ -44,7 +49,7 @@
 								<td><%= misTarjetas.get(i).getIdCuenta()%></td>
 								<td class="BotonCancelar">
 									<form method=post action="CancelarTarjeta">
-										<input type=text name="id-advert" class="hidden" value=<%=misTarjetas.get(i).getNumTarjeta()%>>
+										<input type=text name="id-tarjeta" class="hidden" value=<%=misTarjetas.get(i).getNumTarjeta()%>>
 										<input type=submit value=Cancelar> 
 									</form>
 								</td>
@@ -53,12 +58,37 @@
 							
 					}
 				}
+				else {
+					//No posee Tarjetas -> No se que mostrar
+					%> 
+					<tr>
+						<td class="ContratarTarjeta">
+									<form method=post action="ContratarTarjeta">
+										<input type=text name="cuenta" class="hidden" value="">
+										<input type=submit value="Contratar Tarjeta Nueva"> 
+									</form>
+								</td>
+					</tr>
+					<% 
+				}
 			}
-			
+			%>
+			</table>
+	
+			<%
+		}else {
+			//No esta logueado Direccionador al Login
+			nextPage = "Login";
+			mensajeNextPage = "No esta logueado, falta de permisos";
+			%>
+			<jsp:forward page="<%=nextPage%>">
+				<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+			</jsp:forward>
+			<%
 		}
 	
 	
 	%>
-	</table>
+	
 </body>
 </html>

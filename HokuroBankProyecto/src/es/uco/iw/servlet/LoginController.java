@@ -63,7 +63,6 @@ public class LoginController extends HttpServlet {
 
 			if (UserDNI != null) {
 				UsuarioDTO userDTO = userDAO.QueryByPassword(UserDNI);
-				System.out.println("Comprobación contraseña");
 				
 				if (UserPassword.equals(userDTO.getPassword())) {
 					cliente.setDni(UserDNI);
@@ -74,7 +73,6 @@ public class LoginController extends HttpServlet {
 					disparador = request.getRequestDispatcher(nextPage);
 				}
 				else {
-					System.out.println("mala contraseña");
 					nextPage = "/mvc/view/loginView";
 					disparador = request.getRequestDispatcher(nextPage);
 					String mensajeNextPage = "Error de Contraseña, Intentelo de Nuevo";
@@ -83,7 +81,6 @@ public class LoginController extends HttpServlet {
 			}
 			else {
 				nextPage = "/mvc/view/loginView.jsp";
-				System.out.println("NO loeguado");
 				disparador = request.getRequestDispatcher(nextPage);
 				String mensajeNextPage = "No se encuentra logueado, debe de iniciar sesión";
 				request.setAttribute("mensaje", mensajeNextPage);

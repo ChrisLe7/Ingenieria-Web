@@ -8,7 +8,7 @@ public class UsuarioInfoBean implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
-    private UsuarioDTO usuario ;
+    private UsuarioDTO usuario = null;
 
 	public UsuarioDTO getUsuario() {
 		return usuario;

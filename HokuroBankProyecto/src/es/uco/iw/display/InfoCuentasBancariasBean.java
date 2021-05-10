@@ -10,7 +10,7 @@ public class InfoCuentasBancariasBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<CuentaBancariaDTO> cuentas;
+	private ArrayList<CuentaBancariaDTO> cuentas = null;
 
 	public ArrayList<CuentaBancariaDTO> getCuentas() {
 		return cuentas;

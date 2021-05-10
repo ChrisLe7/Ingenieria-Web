@@ -58,7 +58,7 @@ public class RegistrarUserController extends HttpServlet {
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
-		String nextPage ="/mvc/view/RegistrarUsuarioView"; 
+		String nextPage ="/mvc/view/RegistrarUsuarioView.jsp"; 
 		if (login && cliente != null && cliente.getRol().equals(RolUsuario.Administrador)) {
 			String UserDNI = request.getParameter("DNI");
 			
@@ -88,7 +88,7 @@ public class RegistrarUserController extends HttpServlet {
 			else {
 				// Se debe de ir a la vista
 				if (cliente != null && cliente.getRol().equals(RolUsuario.Administrador)) {
-					nextPage = "/mvc/view/RegistrarUsuarioView"; 
+					nextPage = "/mvc/view/RegistrarUsuarioView.jsp"; 
 					disparador = request.getRequestDispatcher(nextPage);
 				}
 				

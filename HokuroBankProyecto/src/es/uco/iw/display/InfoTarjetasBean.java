@@ -9,7 +9,7 @@ public class InfoTarjetasBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<TarjetaDTO> tarjetas;
+	private ArrayList<TarjetaDTO> tarjetas = null;
 
 	public ArrayList<TarjetaDTO> getTarjetas() {
 		return tarjetas;
