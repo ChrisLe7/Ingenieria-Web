@@ -16,9 +16,7 @@
 <title>Registrarse</title>
 
 </head>
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- QUIEN VAYA A PROBAR ESTO, QUE MIRE SI EN EL CONTROLADOR ESTA BEN PUESTA LA NEXT PAGE, 
-NECESITA EL .JSP -->
+
 <body>
 
 <%  
