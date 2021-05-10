@@ -29,7 +29,7 @@ String mensajeNextPage = "";
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no se encuentra logueado";
-}else if(!clienteBean.getRol().toString().equals("Administrador")){
+}else if(!clienteBean.getRol().equals(RolUsuario.Administrador)){
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no es administrador";	
 }else{	
