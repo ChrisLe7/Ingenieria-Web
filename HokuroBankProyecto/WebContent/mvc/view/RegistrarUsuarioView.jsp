@@ -26,10 +26,13 @@ boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 System.out.println("BEAN FALLARA");
 String nextPage = "";
 String mensajeNextPage = "";
-if (clienteBean != null || !clienteBean.getDni().equals(""))  {
+if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
-	mensajeNextPage = "Usted ya se encuentra logueado";
-}else{
+	mensajeNextPage = "Usted no se encuentra logueado";
+}else if(!clienteBean.getRol().equals("Administrador")){
+	nextPage = "index.jsp";
+	mensajeNextPage = "Usted no es administrador";	
+}else{	
 	
 %> 
 
