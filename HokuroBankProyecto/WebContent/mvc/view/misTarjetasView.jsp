@@ -17,7 +17,7 @@
 <title>Mis Tarjetas</title>
 </head>
 <body>
-	<!-- Incluimos la cabecera de la aplicaci�n -->
+	<!-- Incluimos la cabecera de la aplicación -->
 	
 
 <%  
@@ -42,11 +42,11 @@ if (logged == false)  {
 		%> 
 		
 		<p>
-		AUN NO TIENES TARJETAS �QUE TAL SI EMPEZAMOS POR CREAR UNA?
+		AUN NO TIENES TARJETAS ¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
 		</p>
 		
 		<!--  <p>
-		Crea una Tarjeta <a href="">AQUÍ</a>
+		Crea una Tarjeta <a href="">AQUÃ</a>
 		</p>-->
 		
 		<% }else{ 
@@ -61,7 +61,7 @@ if (logged == false)  {
 			<h1> Tarjeta  <%=tarjeta.getNumTarjeta()%></h1>
 			Pin: <%=tarjeta.getPin()%><br/>
 			Tipo: <%=tarjeta.getTipotarjeta().toString()%><br/>
-			Dueño: <%=tarjeta.getIdCliente()%><br/>
+			DueÃ±o: <%=tarjeta.getIdCliente()%><br/>
 			Cuenta Asociada: <%=tarjeta.getIdCuenta()%><br/>	
 			<br/>
 			 
@@ -70,8 +70,8 @@ if (logged == false)  {
 				<input type="submit" value="Cancelar">
 			</form>	
 			 	
-			<form method="post" action="Tarjetas">
-				<input type="text" name="gestionar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
+			<form method="post" action="ModificarTarjeta">
+				<input type="text" name="modificar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
 				<input type="submit" value="Gestionar">
 			</form>	
 		</div>	 	
