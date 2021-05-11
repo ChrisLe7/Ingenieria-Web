@@ -7,5 +7,5 @@ let password = document.getElementById("password");
 let submitBtn = document.getElementById("submitBtn");
 
 submitBtn.addEventListener("click", function () {
-	password.value = sha512(password.value);
+	password.value = CryptoJS.SHA512(password.value).toString();
 });

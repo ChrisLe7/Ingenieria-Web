@@ -11,6 +11,7 @@
 <!-- scripts y css -->
 <title>Perfil</title>
 	<script src="js/modificarPerfilBtn.js" defer></script> 
+	<script src="js/sha512.js" defer></script>
 	<script src="js/hashPassword.js" defer></script>
 </head>
 

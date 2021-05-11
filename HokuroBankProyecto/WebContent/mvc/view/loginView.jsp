@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/sha512.js" defer></script>
     <script src="js/hashPassword.js" defer></script>
     <title>Login</title>
 </head>

@@ -13,6 +13,7 @@
 <meta charset="ISO-8859-1">
 
 <!-- scripts y css -->
+<script src="js/sha512.js" defer></script>
 <script src="js/hashPassword.js" defer></script>
 <title>Registrarse</title>
 
