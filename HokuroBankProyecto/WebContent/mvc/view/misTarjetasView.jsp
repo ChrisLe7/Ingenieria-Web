@@ -8,7 +8,7 @@
 <jsp:useBean  id="infoTarjetas" scope="session" class="es.uco.iw.display.InfoTarjetasBean"></jsp:useBean>  
 
 
-<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
+<%@ page import ="es.uco.iw.negocio.tarjeta.TipoTarjeta, es.uco.iw.negocio.tarjeta.TarjetaDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
 
 <!DOCTYPE html>
 <html>
