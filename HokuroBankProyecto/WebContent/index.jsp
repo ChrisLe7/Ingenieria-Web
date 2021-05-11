@@ -36,6 +36,7 @@
 						<li><a href = "MisTransferencias">Realizar Transferencia</a></li>
 						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
 						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
+						<li><a href = "RegistrarTarjeta">Crear Tarjeta</a></li>
 						<% if ( (clienteBean != null) && (clienteBean.getRol().equals(RolUsuario.Administrador))) { %>
 						<li><a href = "RegistrarUsuario">Agregar Cuenta</a></li>
 						<% } %>
