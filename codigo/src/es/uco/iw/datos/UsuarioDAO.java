@@ -109,6 +109,37 @@ public class UsuarioDAO extends DAO {
         
         return usuario;
     }
+    
+    /**
+     * Devuelve todos los usuarios que tienen menos de dos cuentas bancarias
+     * 
+     * @return Usuarios con menos de dos cuentas bancarias
+     */
+    public ArrayList<UsuarioDTO> QueryByCuentasBancarias() {
+    	ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
+    	
+    	try {
+            Connection con = getConnection();
+            String statement = sqlProp.getProperty("Select_Usuario_Cuentas");
+            PreparedStatement stmt = con.prepareStatement(statement);
+            ResultSet set = stmt.executeQuery();
+
+            while (set.next()) {
+            	if (set.getString(2).split(",").length != 2) {
+            		usuarios.add(new UsuarioDTO(set.getString(1)));
+            	}
+            }
+
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+    	
+    	return usuarios;
+    }
 
     /**
      * Inserta un usuario en la base de datos
