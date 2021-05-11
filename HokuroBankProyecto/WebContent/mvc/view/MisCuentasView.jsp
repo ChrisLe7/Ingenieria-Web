@@ -3,7 +3,9 @@
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
 <jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 
-<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
+<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
+<%@ page import ="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,7 @@
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 String nextPage = "";
+System.out.println("Estoy en la vista");
 String mensajeNextPage = "";
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
@@ -43,37 +46,37 @@ for(CuentaBancariaDTO cuenta : ListaCuentas){
 	<h1> Cuenta  <%=cuenta.getIdCuentaBancaria()%></h1>
 	Saldo: <%=cuenta.getSaldo()%><br/>
 	Tipo: <%=cuenta.getTipoCuentaBancaria().toString()%><br/>
-	Estado del Bizum: <%if(cuenta.estadoBizum()){ 
-	%> Activo <br/>
+	Estado del Bizum: 
+	<%if(cuenta.getEstadoBizum()){ 
+		%> Activo <% } 
+	else {
+		%> No Activo <%	}%>
+		
+	<br/>
 	 
 	 <form method="post" action="ModificarCuenta">
 		<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Deshabilitar Bizum">
+		<% if (cuenta.getEstadoBizum()) {%>
+			<input type="submit" value="Deshabilitar Bizum">
+		<% } else if (!cuenta.getEstadoBizum()) {%>
+			<input type="submit" value="Habilitar Bizum">
+		<% } %>
 	</form>	
 	 	
 
 	 	
 	<%
-	}else{ 
-		
-	%> No Activo <%} %><br/>
 
-	<form method="post" action="ModificarCuenta">
-		<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Habilitar Bizum">
-	</form>	
-
-
-<%}
-	if(clienteBean.getRol().equals(RolUsuario.Administrador)){
+	
+		if(clienteBean.getRol().equals(RolUsuario.Administrador)){
 %>
-	 <form method="post" action="ModificarCuenta">	
-	 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Modificar Saldo">
-	</form>	
-
-</div>
-<% 
+		 <form method="post" action="ModificarCuenta">	
+		 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+			<input type="submit" value="Modificar Saldo">
+		 </form>	
+		
+	</div>
+<% 		}
 	}
 }%>
 </body>

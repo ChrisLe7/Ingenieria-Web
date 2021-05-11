@@ -51,6 +51,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ModificarCuentas</servlet-name>
+    <servlet-class>es.uco.iw.servlet.ModificarCuentaBancariaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModificarCuentas</servlet-name>
+    <url-pattern>/ModificarCuenta</url-pattern>   
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>Tarjetas</servlet-name>
     <servlet-class>es.uco.iw.servlet.TarjetaController</servlet-class>
   </servlet>

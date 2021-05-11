@@ -39,9 +39,7 @@ public class TarjetaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		HttpSession session = request.getSession();
 		String port = request.getServletContext().getInitParameter("port");
 		String username_bd = request.getServletContext().getInitParameter("username");

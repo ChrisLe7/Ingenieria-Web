@@ -62,7 +62,7 @@ public class CuentaController extends HttpServlet {
 		
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
-		String nextPage ="/mvc/view/misCuentasView.jsp"; 
+		String nextPage ="/mvc/view/MisCuentasView.jsp"; 
 		
 		if (login) {
 			//Deberemos de coger la información de las cuentas del cliente para enviarsela a la vista
@@ -91,8 +91,8 @@ public class CuentaController extends HttpServlet {
 				
 				session.setAttribute("infoCuentas", cuentas);
 				
-				nextPage = "/mvc/view/misCuentasView.jsp";
-				
+				nextPage = "/mvc/view/MisCuentasView.jsp";
+				System.out.println("Me dirijo a la vista");
 				disparador = request.getRequestDispatcher(nextPage);
 				}
 			

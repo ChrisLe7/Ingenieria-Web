@@ -31,4 +31,5 @@ public class InfoCuentasBancariasBean implements Serializable {
 	
 	
 	
+	
 }
