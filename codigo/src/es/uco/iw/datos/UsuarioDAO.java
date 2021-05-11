@@ -11,6 +11,7 @@ import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.RolPropietario;
 import es.uco.iw.negocio.usuario.RolUsuario;
 import  es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
 
 public class UsuarioDAO extends DAO {
 
@@ -43,31 +44,28 @@ public class UsuarioDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             if (set.next()) {
-            	RolUsuario rol = RolUsuario.valueOf(set.getString(6));
             	ArrayList<PropiedadCuenta> cuentasBancarias = new ArrayList<PropiedadCuenta>();
             	ArrayList<String> tarjetas = new ArrayList<String>();
             	
-            	if (rol.equals(RolUsuario.Cliente)) {
-            		statement = sqlProp.getProperty("Select_Usuario_Cuenta_Bancaria");
-            		PreparedStatement stmtCuentaBancaria = con.prepareStatement(statement);
-            		stmtCuentaBancaria.setString(1, dni);            		
-                    ResultSet setCuentabancaria = stmtCuentaBancaria.executeQuery();
-                    
-                    while (setCuentabancaria.next()) {
-                    	cuentasBancarias.add(new PropiedadCuenta(setCuentabancaria.getString(1), RolPropietario.valueOf(setCuentabancaria.getString(2))));
-                    }
-                    
-                    statement = sqlProp.getProperty("Select_Usuario_Tarjeta");
-                    PreparedStatement stmtTarjeta = con.prepareStatement(statement);
-                    stmtTarjeta.setString(1, dni);
-                    ResultSet setTarjeta = stmtTarjeta.executeQuery();
-                    
-                    if (setTarjeta.next()) {
-                    	Collections.addAll(tarjetas, setTarjeta.getString(1).split(","));
-                    }
-            	}
+        		statement = sqlProp.getProperty("Select_Usuario_Cuenta_Bancaria");
+        		PreparedStatement stmtCuentaBancaria = con.prepareStatement(statement);
+        		stmtCuentaBancaria.setString(1, dni);            		
+                ResultSet setCuentabancaria = stmtCuentaBancaria.executeQuery();
+                
+                while (setCuentabancaria.next()) {
+                	cuentasBancarias.add(new PropiedadCuenta(setCuentabancaria.getString(1), RolPropietario.valueOf(setCuentabancaria.getString(2))));
+                }
+                
+                statement = sqlProp.getProperty("Select_Usuario_Tarjeta");
+                PreparedStatement stmtTarjeta = con.prepareStatement(statement);
+                stmtTarjeta.setString(1, dni);
+                ResultSet setTarjeta = stmtTarjeta.executeQuery();
+                
+                if (setTarjeta.next()) {
+                	Collections.addAll(tarjetas, setTarjeta.getString(1).split(","));
+                }
             	
-            	usuario = new UsuarioDTO(dni, set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getInt(5), rol, cuentasBancarias, tarjetas);               
+            	usuario = new UsuarioDTO(dni, set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getInt(5), cuentasBancarias, tarjetas);               
             }
 
             if (stmt != null) {
@@ -82,23 +80,23 @@ public class UsuarioDAO extends DAO {
     }
 
     /**
-     * Busca al usuario de la base de datos cuyo dni coincide con el dado para comprobar su contraseña
+     * Busca al usuario de la base de datos cuyo dni coincide con el dado para comprobar su contraseña y tol
      * 
      * @param dni Dni del usuario a buscar
      * @return Usuario cuyo email coincide con el dado
      */
-    public UsuarioDTO QueryByPassword(String dni) {
-        UsuarioDTO usuario = null;
+    public UsuarioLoginDTO QueryByPassword(String dni) {
+    	UsuarioLoginDTO usuario = null;
 
         try {
             Connection con = getConnection();
-            String statement = sqlProp.getProperty("Select_Usuario_Password");
+            String statement = sqlProp.getProperty("Select_Password");
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, dni);
             ResultSet set = stmt.executeQuery();
 
             if (set.next()) {
-            	usuario = new UsuarioDTO(set.getString(1), set.getString(2), RolUsuario.valueOf(set.getString(3)));
+            	usuario = new UsuarioLoginDTO(dni, set.getString(1), set.getString(2), RolUsuario.valueOf(set.getString(3)));
             }
 
             if (stmt != null) {
@@ -116,25 +114,36 @@ public class UsuarioDAO extends DAO {
      * Inserta un usuario en la base de datos
      * 
      * @param usuario Usuario a introducir en la base de datos
+     * @param usuarioLogin Datos de login del usuario a introducir en la base de datos
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
-    public int Insert(UsuarioDTO usuario) {
+    public int Insert(UsuarioDTO usuario, UsuarioLoginDTO usuarioLogin) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
 
         try {
-            // Falta la direccion, tarjetas y cuentas
             String statement = sqlProp.getProperty("Insert_Usuario");
         	Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, usuario.getDni());
             stmt.setString(2, usuario.getNombre());
             stmt.setString(3, usuario.getApellidos());
-            stmt.setString(4, usuario.getPassword());
-            stmt.setString(5, usuario.getEmail());
-            stmt.setString(6, usuario.getDireccion());
-            stmt.setInt(7, usuario.getTelefono());
-            stmt.setString(8, usuario.getRol().toString());
-            status = stmt.executeUpdate();
+            stmt.setString(4, usuario.getEmail());
+            stmt.setString(5, usuario.getDireccion());
+            stmt.setInt(6, usuario.getTelefono());
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Insert_Password");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, usuarioLogin.getDni());
+            stmt.setString(2, usuarioLogin.getPassword());
+            stmt.setString(3, usuarioLogin.getSalt());
+            stmt.setString(4, usuarioLogin.getRol().toString());
+            stmt.setDate(5, new java.sql.Date(0));
+            stmt.setDate(6, new java.sql.Date(0));
+            results.add(stmt.executeUpdate());
+            
+            status = CheckResults(results);
             
             if (stmt != null) {
             	stmt.close();
@@ -185,15 +194,17 @@ public class UsuarioDAO extends DAO {
      * @param ususario Usuario a actualizar
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
-    public int UpdatePassword(UsuarioDTO usuario) {
+    public int UpdatePassword(UsuarioLoginDTO usuario) {
         int status = 0;
 
         try {
             String statement = sqlProp.getProperty("Update_Password");
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
-            stmt.setString(2, usuario.getDni());
+            stmt.setString(4, usuario.getDni());
             stmt.setString(1, usuario.getPassword());
+            stmt.setDate(2, new java.sql.Date(0));
+            stmt.setDate(3, new java.sql.Date(0));
             status = stmt.executeUpdate();
             
             if (stmt != null) {
@@ -214,6 +225,7 @@ public class UsuarioDAO extends DAO {
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
     public int Delete(String dni) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
 
         try {
@@ -221,7 +233,14 @@ public class UsuarioDAO extends DAO {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, dni);
-            status = stmt.executeUpdate();
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Delete_Password");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, dni);
+            results.add(stmt.executeUpdate());
+            
+            status = CheckResults(results);
             
             if (stmt != null) {
             	stmt.close();

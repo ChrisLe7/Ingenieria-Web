@@ -8,13 +8,11 @@ public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String dni;
-	private String password;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String direccion;
 	private int telefono;
-	private RolUsuario rol;
 	private ArrayList<PropiedadCuenta> cuentasBancarias;
 	private ArrayList<String> tarjetas;
 
@@ -24,30 +22,7 @@ public class UsuarioDTO implements Serializable {
 	 * @param dni Dni del nuevo usuario
 	 */
 	public UsuarioDTO(String dni) {
-		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
-	}
-	
-	/**
-	 * Constructor con dni y password de un usuario
-	 * 
-	 * @param dni Dni del nuevo usuario
-	 * @param password Password del nuevo usuario
-	 */
-	public UsuarioDTO(String dni, String password) {
-		this(dni, "", "", "", "", 0, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
-		this.password = password;
-	}
-	
-	/**
-	 * Constructor con dni, password y rol de un usuario
-	 * 
-	 * @param dni Dni del nuevo usuario
-	 * @param password Password del nuevo usuario
-	 * @param rol Rol del nuevo usuario
-	 */
-	public UsuarioDTO(String dni, String password, RolUsuario rol) {
-		this(dni, "", "", "", "", 0, rol, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
-		this.password = password;
+		this(dni, "", "", "", "", 0, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 	}
 
 	/**
@@ -59,24 +34,22 @@ public class UsuarioDTO implements Serializable {
 	 * @param email Email del nuevo usuario
 	 * @param direccion Direccion del nuevo usuario
 	 * @param telefono Telefono del nuevo usuario
-	 * @param rol Rol del nuevo usuario
 	 * @param cuentasBancarias Lista de cuentas bancarias del nuevo usuario
 	 * @param tarjetas Lista de tarjetas bancarias del nuevo usuario
 	 */
-	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, RolUsuario rol, ArrayList<PropiedadCuenta> cuentasBancarias, ArrayList<String> tarjetas) {
+	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono, ArrayList<PropiedadCuenta> cuentasBancarias, ArrayList<String> tarjetas) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.rol = rol;
 		this.cuentasBancarias = cuentasBancarias;
 		this.tarjetas = tarjetas;
 	}
 
 	/**
-	 * Devuelve el dni de un contato
+	 * Devuelve el dni de un usuario
 	 * 
 	 * @return Dni del usuario
 	 */
@@ -91,24 +64,6 @@ public class UsuarioDTO implements Serializable {
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
-	}
-	
-	/**
-	 * Devuelve la contraseña de un contato
-	 * 
-	 * @return Contraseña del usuario
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Asigna una contraseña a un usuario
-	 * 
-	 * @param password Contraseña a asignar en el usuario
-	 */
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	/**
@@ -195,23 +150,6 @@ public class UsuarioDTO implements Serializable {
 	 */
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
-	}
-	
-	/**
-	 * Devuelve el rol de un usuario
-	 * 
-	 * @return Rol del usuario
-	 */
-	public RolUsuario getRol() {
-		return rol;
-	}
-
-	/**
-	 * Asigna rol a un usuario
-	 * @param rol Rol a asignar al usuario
-	 */
-	public void setRol(RolUsuario rol) {
-		this.rol = rol;
 	}
 
 	/**
@@ -315,8 +253,8 @@ public class UsuarioDTO implements Serializable {
 	 * @return Cadena con el contenido
 	 */
 	public String toString() {
-		return "UsuarioDTO [dni=" + dni + ", password=" + password + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", email=" + email + ", direccion=" + direccion + ", telefono=" + telefono + ", rol=" + rol
+		return "UsuarioDTO [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", email=" + email + ", direccion=" + direccion + ", telefono=" + telefono
 				+ ", cuentasBancarias=" + cuentasBancarias + ", tarjetas=" + tarjetas + "]";
 	}
 	

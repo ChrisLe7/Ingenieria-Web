@@ -11,8 +11,8 @@ import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.negocio.bizum.BizumDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
-import es.uco.iw.negocio.usuario.RolUsuario;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
 
 public class TestBizumDAO {
 
@@ -27,8 +27,7 @@ public static void main(String[] args) throws IOException {
 		UsuarioDAO usuarioDAO = new UsuarioDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		BizumDAO bizumDAO = new BizumDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, RolUsuario.Cliente, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
-		usuarioTest.setPassword("password");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 		BizumDTO bizumTest = new BizumDTO("TransaccionTest", (float) 123.2, TipoOperacion.Pagar, new Date(), "Test", 1234, 5678);
 		
 		// Si hay algun fallo, borra el usuario prueba en caso de haberla
@@ -41,7 +40,7 @@ public static void main(String[] args) throws IOException {
 			bizumDAO.Delete(bizumTest.getIdTransaccion());
 		}
 		
-		assert usuarioDAO.Insert(usuarioTest) > 0 : "No se ha introducido el usuario";
+		assert usuarioDAO.Insert(usuarioTest, new UsuarioLoginDTO(usuarioTest.getDni(), "", "")) > 0 : "No se ha introducido el usuario";
 				
 		assert bizumDAO.Insert(bizumTest) > 0 : "No se ha introducido el bizum";
 		

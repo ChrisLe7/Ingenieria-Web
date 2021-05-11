@@ -39,7 +39,7 @@ public class TestTransaccionDAO {
 			transaccionDAO.Delete(transaccionTest.getIdTransaccion());
 		}
 		
-		cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest", "password"));
+		cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest"));
 		
 		assert transaccionDAO.Insert(transaccionTest) > 0 : "No se ha introducido la transaccion";
 		

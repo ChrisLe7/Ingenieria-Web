@@ -4,7 +4,6 @@ import java.security.SecureRandom;
 
 import es.uco.iw.utilidades.HashPassword;
 
-//ACTUALMENTE NO ESTA EN USO
 public class TestHashPasswordServer {
 
 	public static void main(String[] args) {
@@ -17,11 +16,11 @@ public class TestHashPasswordServer {
 		byte[] salt = new byte[16];
 		random.nextBytes(salt);
 		
-		String passwordHash = HashPassword.getHash(password, salt);
+		String passwordHash = HashPassword.createHash(password, salt.toString());
 		
-		assert !HashPassword.getHash("password", salt).equals(passwordHash) : "Error contraseña incorrecta";
+		assert !HashPassword.createHash("password", salt.toString()).equals(passwordHash) : "Error contraseña incorrecta";
 		
-		assert HashPassword.getHash("myPassword", salt).equals(passwordHash) : "Error contraseña correcta";
+		assert HashPassword.createHash("myPassword", salt.toString()).equals(passwordHash) : "Error contraseña correcta";
 		
 		System.out.println("Exito");
 		
