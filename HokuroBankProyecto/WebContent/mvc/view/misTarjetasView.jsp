@@ -71,7 +71,7 @@ if (logged == false)  {
 			</form>	
 			 	
 			<form method="post" action="ModificarTarjeta">
-				<input type="text" name="modificar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
+				<input type="text" name="idTarjetaModificar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
 				<input type="submit" value="Gestionar">
 			</form>	
 		</div>	 	

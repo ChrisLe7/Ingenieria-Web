@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ page import ="java.util.ArrayList,es.uco.iw.negocio.tarjeta.TarjetaDTO" %>
-<%@ page import ="es.uco.iw.negocio.tarjeta.TipoTarjeta, es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
-<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
+<%@ page import ="java.util.ArrayList,es.uco.iw.negocio.tarjeta.TarjetaDTO, es.uco.iw.negocio.tarjeta.TipoTarjeta" %>
+<%@ page import ="es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO, es.uco.iw.negocio.usuario.PropiedadCuenta" %>
+<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
 
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
 <jsp:useBean  id="UsuarioInfoBean" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>  
-<jsp:useBean  id="infoTarjetas" scope="session" class="es.uco.iw.display.InfoTarjetasBean"></jsp:useBean>  
 
 
 
@@ -37,8 +36,7 @@ if (logged == false)  {
 <% 	
 	UsuarioDTO user = UsuarioInfoBean.getUsuario();
 	
-	ArrayList<PropiedadCuenta> ListaCuentas = new ArrayList<PropiedadCuenta>();
-	ListaCuentas = user.getCuentasBancarias();
+	ArrayList<PropiedadCuenta> listaCuentas = user.getCuentasBancarias();
 	%>	
 	<%@ include file="/include/header.jsp" %>
 			
@@ -60,9 +58,9 @@ if (logged == false)  {
 		
 			<% 
 	
-			for(CuentaBancariaDTO cuenta : ListaCuentas){%>
+			for(PropiedadCuenta cuenta : listaCuentas){%>
 			
-			<label><input type="radio" name="idCuenta" value = "<%=cuenta.idCuentaBancaria %>"> Id: <%=cuenta.idCuentaBancaria %></label> <br/>
+			<label><input type="radio" name="idCuenta" value = "<%=cuenta.getIdCuentaBancaria() %>"> Id: <%=cuenta.getIdCuentaBancaria() %></label> <br/>
 			
 			<%} %>
 			
