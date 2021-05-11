@@ -24,7 +24,7 @@
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 String nextPage = "";
 String mensajeNextPage = "";
-if (!logged)  {
+if (logged == false)  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no esta logueado";
 	%>
@@ -34,51 +34,51 @@ if (!logged)  {
 	<% 
 }else {%>
 	
-	<%@ include file="/include/header.jsp" %>
-	
-	<%
-	if(infoTarjetas.getTarjetas().isEmpty()){
-	
-%> 
-
-<p>
-AUN NO TIENES TARJETAS �QUE TAL SI EMPEZAMOS POR CREAR UNA?
-</p>
-
-<!--  <p>
-Crea una Tarjeta <a href="">AQUÍ</a>
-</p>-->
-
-<% }else{ 
-ArrayList<TarjetaDTO> ListaTarjetas = new ArrayList<TarjetaDTO>();
-ListaTarjetas = infoTarjetas.getTarjetas();
-
-for(TarjetaDTO tarjeta : ListaTarjetas){
-%>
-
-<div class="Tarjetas">
-
-	<h1> Tarjeta  <%=tarjeta.getNumTarjeta()%></h1>
-	Pin: <%=tarjeta.getPin()%><br/>
-	Tipo: <%=tarjeta.getTipotarjeta().toString()%><br/>
-	Dueño: <%=tarjeta.getIdCliente()%><br/>
-	Cuenta Asociada: <%=tarjeta.getIdCuenta()%><br/>	
-	<br/>
-	 
-	 <form method="post" action="Tarjetas">
-		<input type="text" name="tarjeta" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
-		<input type="submit" value="Cancelar">
-	</form>	
-	 	
-	<form method="post" action="Tarjetas">
-		<input type="text" name="gestionar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
-		<input type="submit" value="Gestionar">
-	</form>	
-</div>	 	
-	<%
-
-	}
-}
+			<%@ include file="/include/header.jsp" %>
+			
+			<%
+			if(infoTarjetas.getTarjetas().isEmpty()){
+			
+		%> 
+		
+		<p>
+		AUN NO TIENES TARJETAS �QUE TAL SI EMPEZAMOS POR CREAR UNA?
+		</p>
+		
+		<!--  <p>
+		Crea una Tarjeta <a href="">AQUÍ</a>
+		</p>-->
+		
+		<% }else{ 
+		ArrayList<TarjetaDTO> ListaTarjetas = new ArrayList<TarjetaDTO>();
+		ListaTarjetas = infoTarjetas.getTarjetas();
+		
+		for(TarjetaDTO tarjeta : ListaTarjetas){
+		%>
+		
+		<div class="Tarjetas">
+		
+			<h1> Tarjeta  <%=tarjeta.getNumTarjeta()%></h1>
+			Pin: <%=tarjeta.getPin()%><br/>
+			Tipo: <%=tarjeta.getTipotarjeta().toString()%><br/>
+			Dueño: <%=tarjeta.getIdCliente()%><br/>
+			Cuenta Asociada: <%=tarjeta.getIdCuenta()%><br/>	
+			<br/>
+			 
+			 <form method="post" action="Tarjetas">
+				<input type="text" name="tarjeta" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
+				<input type="submit" value="Cancelar">
+			</form>	
+			 	
+			<form method="post" action="Tarjetas">
+				<input type="text" name="gestionar" value="<%=tarjeta.getNumTarjeta()%>" style=display:none>
+				<input type="submit" value="Gestionar">
+			</form>	
+		</div>	 	
+			<%
+		
+			}
+		}
 }
 %>
 </body>

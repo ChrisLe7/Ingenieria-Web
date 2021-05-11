@@ -22,10 +22,19 @@ boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 System.out.println("BEAN FALLARA");
 String nextPage = "";
 String mensajeNextPage = "";
-if (clienteBean == null || clienteBean.getDni().equals(""))  {
+if (!logged)  {
 	nextPage = "index.jsp";
-	mensajeNextPage = "Usted no está logueado";
-}else{
+	mensajeNextPage = "Usted no esta logueado";
+	%>
+	<jsp:forward page="<%=nextPage%>">
+		<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+	</jsp:forward>
+	<% 
+}else {%>
+	
+	<%@ include file="/include/header.jsp" %>
+	
+	<%
 	
 	UsuarioDTO user = infoClienteBean.getUsuario();
 	

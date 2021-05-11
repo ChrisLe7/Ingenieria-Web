@@ -69,6 +69,16 @@
     <url-pattern>/GestionarTarjetas</url-pattern>    
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>RegistrarTarjeta</servlet-name>
+    <servlet-class>es.uco.iw.servlet.RegistrarTarjetaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarTarjeta</servlet-name>
+    <url-pattern>/RegistrarTarjeta</url-pattern>
+    
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Home</servlet-name>
     <servlet-class>es.uco.iw.servlet.HomeController</servlet-class>
