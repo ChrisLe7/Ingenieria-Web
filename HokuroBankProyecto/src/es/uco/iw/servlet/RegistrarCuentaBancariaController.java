@@ -2,7 +2,6 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,28 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
-import es.uco.iw.datos.TarjetaDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
-import es.uco.iw.display.InfoCuentasBancariasBean;
-import es.uco.iw.display.UsuarioInfoBean;
+import es.uco.iw.display.ListadoClientesBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
-import es.uco.iw.negocio.tarjeta.TarjetaDTO;
-import es.uco.iw.negocio.tarjeta.TipoTarjeta;
-import es.uco.iw.negocio.usuario.PropiedadCuenta;
+import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
- * Servlet implementation class RegistrarTarjetaController
+ * Servlet implementation class RegistrarCuentaBancariaController
  */
 
-public class RegistrarTarjetaController extends HttpServlet {
+public class RegistrarCuentaBancariaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrarTarjetaController() {
+    public RegistrarCuentaBancariaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -62,59 +56,46 @@ public class RegistrarTarjetaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		Boolean login = cliente != null && !cliente.getDni().equals("");
-		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
-		String nextPage  = "";
-		RequestDispatcher disparador = null;
 		
-		if (login) {
-			//Se encuentra logueado deberemos de ver que hacer
+		Boolean login = cliente != null && !cliente.getDni().equals("");
+		RequestDispatcher disparador = null;
+		String nextPage = null;
+		
+		String tipoCuenta = request.getParameter("tipoCuenta");
+		
+		if (tipoCuenta != null) {
+			//Significa que venimos de la vista y deberemos de crear la nueva cuenta.
+			String idTitular = request.getParameter("idTitular");
+			String idCuenta = "";
+			float saldo = 0;
+			boolean estadoBizum = false;
 			
-			String pin = request.getParameter("pin");
+			CuentaBancariaDTO nuevaCuenta = new CuentaBancariaDTO(idCuenta, saldo, TipoCuentaBancaria.valueOf(tipoCuenta), estadoBizum, idTitular);
+			UsuarioDTO usuario = new UsuarioDTO (idTitular);
 			
-			if (pin != null) {
-				//Significa que vengo de la vista deberemos de crear una nueva tarjeta
-				String tipoTarjeta = request.getParameter("tipoTarjeta");
-				
-				String numeroTarjeta = "";
-				String idCliente = cliente.getDni();
-				String idCuenta = request.getParameter ("idCuenta");
-				TarjetaDTO nuevaTarjeta = new TarjetaDTO(numeroTarjeta, Integer.valueOf(pin), TipoTarjeta.valueOf(tipoTarjeta), idCliente, idCuenta);
-				
-				tarjetaDAO.Insert(nuevaTarjeta);
-				
-				nextPage = "MisTarjetas";
-				
-				request.getSession().removeAttribute("infoTarjetas");
-				request.getSession().removeAttribute("UsuarioInfoBean");
-				
-			}
-			else {
-				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
-				
-				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
-				
-				infoUsuario.setUsuario(clienteInfo);
-				session.setAttribute("UsuarioInfoBean", infoUsuario);
-				
-				//redirección a la vista
-				nextPage = "/mvc/view/registrarTarjetaView.jsp";
-				
-			}
-			
-		}else {
-			//No se encuentra logeado mandamos al index.
+			cuentaUserDAO.Insert(nuevaCuenta, usuario);
+			request.getSession().removeAttribute("listadoClientes");
 			nextPage = "Home";
 			
-			String mensajeNextPage = "No se encuentra logueado";
-			request.setAttribute("mensaje", mensajeNextPage);
+		}
+		else {
 			
+			ListadoClientesBean listadoClientes = new ListadoClientesBean ();
+			
+			// QUERY PARA OBTENER EL LISTADO DE USUARIOS COMO DTO's
+			//ArrayList <UsuarioDTO> listadoUsuarios = QUERY;
+			//listadoClientes.setUsuarios(listadoUsuarios);
+			
+			request.getSession().setAttribute("listadoClientes", listadoClientes);
+			nextPage = "/mvc/view/RegistrarCuentaBancaria.jsp";
+		
 		}
 		
+		
 		disparador = request.getRequestDispatcher(nextPage);
-		disparador.forward(request, response);
+		
+		disparador.forward(request, response);		
 		
 	}
 

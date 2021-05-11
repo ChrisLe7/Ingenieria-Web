@@ -13,29 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.TarjetaDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
-import es.uco.iw.display.InfoCuentasBancariasBean;
-import es.uco.iw.display.UsuarioInfoBean;
-import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
+import es.uco.iw.display.InfoTarjetasBean;
 import es.uco.iw.negocio.tarjeta.TarjetaDTO;
-import es.uco.iw.negocio.tarjeta.TipoTarjeta;
-import es.uco.iw.negocio.usuario.PropiedadCuenta;
-import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
- * Servlet implementation class RegistrarTarjetaController
+ * Servlet implementation class ModificarTarjetaController
  */
 
-public class RegistrarTarjetaController extends HttpServlet {
+public class ModificarTarjetaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrarTarjetaController() {
+    public ModificarTarjetaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -63,54 +56,47 @@ public class RegistrarTarjetaController extends HttpServlet {
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		Boolean login = cliente != null && !cliente.getDni().equals("");
-		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
-		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage  = "";
+		String mensajeNextPage = "";
+		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
 		RequestDispatcher disparador = null;
-		
+		TarjetaDTO tarjeta = null;
 		if (login) {
-			//Se encuentra logueado deberemos de ver que hacer
 			
 			String pin = request.getParameter("pin");
-			
+			String idTarjeta = request.getParameter("idTarjetaModificar");
 			if (pin != null) {
-				//Significa que vengo de la vista deberemos de crear una nueva tarjeta
-				String tipoTarjeta = request.getParameter("tipoTarjeta");
-				
-				String numeroTarjeta = "";
-				String idCliente = cliente.getDni();
-				String idCuenta = request.getParameter ("idCuenta");
-				TarjetaDTO nuevaTarjeta = new TarjetaDTO(numeroTarjeta, Integer.valueOf(pin), TipoTarjeta.valueOf(tipoTarjeta), idCliente, idCuenta);
-				
-				tarjetaDAO.Insert(nuevaTarjeta);
-				
-				nextPage = "MisTarjetas";
-				
-				request.getSession().removeAttribute("infoTarjetas");
-				request.getSession().removeAttribute("UsuarioInfoBean");
-				
-			}
-			else {
-				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
-				
-				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
-				
-				infoUsuario.setUsuario(clienteInfo);
-				session.setAttribute("UsuarioInfoBean", infoUsuario);
-				
-				//redirección a la vista
-				nextPage = "/mvc/view/registrarTarjetaView.jsp";
-				
+				tarjeta = new TarjetaDTO (idTarjeta, Integer.valueOf(pin), null, "", "");
+				tarjetaDAO.UpdatePin(tarjeta);
+			}else {
+				//Tengo que ir a la vista
+				if (idTarjeta != null) {
+					tarjeta = tarjetaDAO.QueryByNumTarjeta(idTarjeta);
+					
+					InfoTarjetasBean infoTarjetas = new InfoTarjetasBean();
+					infoTarjetas.setTarjetas(new ArrayList<TarjetaDTO> ());
+					infoTarjetas.set(0, tarjeta);
+					session.setAttribute("infoTarjetas", infoTarjetas);
+					
+					nextPage = "/mvc/view/modificarTarjetaView.jsp";
+				}
+				else {
+					//Error acceden desde otro lado mandamos al home notificando un acceso erroneo
+					nextPage = "Home";
+					mensajeNextPage = "Lo sentimos no puede acceder a modificar Tarjeta sin escoger la tarjeta";
+					request.setAttribute("mensaje", mensajeNextPage);
+					
+				}
 			}
 			
-		}else {
+			
+		}
+		else {
 			//No se encuentra logeado mandamos al index.
 			nextPage = "Home";
 			
-			String mensajeNextPage = "No se encuentra logueado";
+			mensajeNextPage = "No se encuentra logueado";
 			request.setAttribute("mensaje", mensajeNextPage);
-			
 		}
 		
 		disparador = request.getRequestDispatcher(nextPage);

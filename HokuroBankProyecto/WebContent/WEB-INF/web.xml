@@ -59,6 +59,19 @@
     <url-pattern>/ModificarCuenta</url-pattern>   
   </servlet-mapping>
 
+    <servlet>
+    <servlet-name>RegistrarCuentaBancaria</servlet-name>
+    <servlet-class>es.uco.iw.servlet.RegistrarCuentaBancariaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarCuentaBancaria</servlet-name>
+    <url-pattern>/RegistrarCuentaBancaria</url-pattern>
+    <url-pattern>/RegistrarCuenta</url-pattern>
+    <url-pattern>/CrearCuentaBancaria</url-pattern>
+    
+  </servlet-mapping>
+
+
   <servlet>
     <servlet-name>Tarjetas</servlet-name>
     <servlet-class>es.uco.iw.servlet.TarjetaController</servlet-class>
