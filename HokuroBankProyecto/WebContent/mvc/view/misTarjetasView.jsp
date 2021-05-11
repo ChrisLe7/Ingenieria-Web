@@ -2,13 +2,13 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ page import ="java.util.ArrayList,es.uco.iw.negocio.tarjeta.TarjetaDTO" %>
+<%@ page import ="es.uco.iw.negocio.tarjeta.TipoTarjeta, es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
 
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
 
 <jsp:useBean  id="infoTarjetas" scope="session" class="es.uco.iw.display.InfoTarjetasBean"></jsp:useBean>  
 
 
-<%@ page import ="es.uco.iw.negocio.tarjeta.TipoTarjeta, es.uco.iw.negocio.tarjeta.TarjetaDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,21 +17,32 @@
 <title>Mis Tarjetas</title>
 </head>
 <body>
+	<!-- Incluimos la cabecera de la aplicación -->
+	
 
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 String nextPage = "";
-System.out.println("Estoy en la vista");
 String mensajeNextPage = "";
-if (clienteBean == null || clienteBean.getDni().equals(""))  {
+if (!logged)  {
 	nextPage = "index.jsp";
-	mensajeNextPage = "Usted no estÃ¡ logueado";
-}else if(infoTarjetas.getTarjetas().isEmpty()){
+	mensajeNextPage = "Usted no esta logueado";
+	%>
+	<jsp:forward page="<%=nextPage%>">
+		<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+	</jsp:forward>
+	<% 
+}else {%>
+	
+	<%@ include file="/include/header.jsp" %>
+	
+	<%
+	if(infoTarjetas.getTarjetas().isEmpty()){
 	
 %> 
 
 <p>
-AUN NO TIENES TARJETAS Â¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
+AUN NO TIENES TARJETAS ¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
 </p>
 
 <!--  <p>
@@ -67,6 +78,8 @@ for(TarjetaDTO tarjeta : ListaTarjetas){
 	<%
 
 	}
-}%>
+}
+}
+%>
 </body>
 </html>
