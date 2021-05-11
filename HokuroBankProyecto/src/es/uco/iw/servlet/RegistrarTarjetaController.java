@@ -103,6 +103,10 @@ public class RegistrarTarjetaController extends HttpServlet {
 				cuentas.setCuentas(cuentasCliente);
 				
 				session.setAttribute("infoCuentas", cuentas);
+				
+				//redirección a la vista
+				nextPage = "/mvc/view/registrarTarjetaView.jsp";
+				
 			}
 			
 		}else {
