@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <!-- scripts y css -->
 <title>Perfil</title>
 	<script src="js/modificarPerfilBtn.js" defer></script> 
