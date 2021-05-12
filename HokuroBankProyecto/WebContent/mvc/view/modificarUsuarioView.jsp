@@ -1,40 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
 <jsp:useBean  id="infoClienteBean" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <!-- scripts y css -->
+<script src="js/modificarPerfilBtn.js" defer></script> 
+<script src="js/sha512.js" defer></script>
+<script src="js/hashPassword.js" defer></script>
 <title>Perfil</title>
-	<script src="js/modificarPerfilBtn.js" defer></script> 
-	<script src="js/sha512.js" defer></script>
-	<script src="js/hashPassword.js" defer></script>
+
 </head>
 
 <body>
 
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-System.out.println("BEAN FALLARA");
-String nextPage = "";
-String mensajeNextPage = "";
-if (!logged)  {
+
+
+if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
-	mensajeNextPage = "Usted no esta logueado";
-	%>
-	<jsp:forward page="<%=nextPage%>">
-		<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-	</jsp:forward>
-	<% 
-}else {%>
-	
-	<%@ include file="/include/header.jsp" %>
-	
-	<%
+	mensajeNextPage = "Usted no está logueado";
+}else{
 	
 	UsuarioDTO user = infoClienteBean.getUsuario();
 	
@@ -43,7 +34,9 @@ if (!logged)  {
 	}
 %> 
 <!-- Los divs pueden cambiarse de clases a identificadores -->
-<div id="observarP" >
+<main class="main">
+<h1 class="formulario_titulo"></h1> 
+<div class="formulario" id="observarP" >
 
 	<form method="post" action="Perfil">
 	
@@ -62,18 +55,18 @@ if (!logged)  {
 	</form>
 	
 	<!--  Si se clicka, este div debe de hacerse invisible y el de abajo debe dejarse visible -->
-	<button id="observarPButton" onclick="">Habilitar Modificaciones</button>
+	<button id="observarPButton">Habilitar Modificaciones</button>
 
 </div>
 
 <!-- El style se puede poner en el css -->
-<div id="modificarP" style="display:none">
+<div class="formulario" id="modificarP" style="display:none">
 
 	<form method="post" action="Perfil">
 	
 		<label for="DNI">DNI: </label> <%=user.getDni()%><br/>
 		
-		<label for="Contraseña">Contraseña: </label> <input type="password" name="password" required><br/>
+		<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password" required><br/>
 		
 		<label for="Nombre">Nombre: <%=user.getNombre()%></label> <br/>
 		
@@ -92,11 +85,11 @@ if (!logged)  {
 	</form>
 	
 	<!--  Si se clicka, este div debe de hacerse invisible y el de arriba debe dejarse visible -->
-	<button id="modificarPButton" onclick="">Deshabilitar Modificaciones</button>
+	<button id="modificarPButton">Deshabilitar Modificaciones</button>
 
 </div>
 
-
+</main>
 <% } %>
 
 </body>
