@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@ page import ="java.util.ArrayList,es.uco.iw.negocio.tarjeta.TarjetaDTO" %>
 <%@ page import ="es.uco.iw.negocio.tarjeta.TipoTarjeta, es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Mis Tarjetas</title>
 </head>
 <body>
