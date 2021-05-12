@@ -10,7 +10,7 @@
 
 <head>
 
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 
 <!-- scripts y css -->
 <script src="js/sha512.js" defer></script>
