@@ -6,6 +6,8 @@ import java.util.Properties;
 
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
+import es.uco.iw.utilidades.HashPassword;
 
 public class TestUsuarioDAO {
 
@@ -19,18 +21,30 @@ public class TestUsuarioDAO {
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "123");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
 		
 		// Si hay algun fallo, borra el usuario prueba en caso de haberla
 		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
 			usuarioDAO.Delete(usuarioTest.getDni());
 		}
 		
-		assert usuarioDAO.Insert(usuarioTest) > 0 : "No se ha introducido el usuario";
+		String salt = HashPassword.createSalt();
+					
+		String password = "123";
+		
+		String hash = HashPassword.createHash(password, salt);
+		
+		UsuarioLoginDTO usuarioLoginTest = new UsuarioLoginDTO(usuarioTest.getDni(), hash, salt);
+		
+		assert usuarioDAO.Insert(usuarioTest, usuarioLoginTest) > 0 : "No se ha introducido el usuario";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) != null : "No se ha encontrado al usuario";
-		
-		assert usuarioDAO.QueryByPassword(usuarioTest.getDni()).getPassword().equals(usuarioTest.getPassword()) : "Error contraseña";
+				
+		UsuarioLoginDTO queryRes = usuarioDAO.QueryByPassword(usuarioTest.getDni());
+						
+		String queryHash = HashPassword.createHash(password, queryRes.getSalt());
+
+		assert queryHash.equals(queryRes.getPassword()) : "Error contraseña";
 		
 		assert !usuarioDAO.QueryByDni(usuarioTest.getDni()).getNombre().equals("nombre") : "Error en el nombre";
 		
@@ -40,16 +54,24 @@ public class TestUsuarioDAO {
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()).getNombre().equals(usuarioTest.getNombre()) : "Error en el nombre actualizado";
 		
-		usuarioTest.setPassword("456");
+		password = "1234";
 		
-		assert usuarioDAO.UpdatePassword(usuarioTest) > 0 : "Error en actualizacion de contraseña";
+		hash = HashPassword.createHash(password, salt);
 		
-		assert usuarioDAO.QueryByPassword(usuarioTest.getDni()).getPassword().equals(usuarioTest.getPassword()) : "Error contraseña actualizada";
+		usuarioLoginTest.setPassword(hash);
+				
+		assert usuarioDAO.UpdatePassword(usuarioLoginTest) > 0 : "Error en actualizacion de contraseña";
+		
+		queryRes = usuarioDAO.QueryByPassword(usuarioTest.getDni());
+		
+		queryHash = HashPassword.createHash(password, queryRes.getSalt());
+						
+		assert queryHash.equals(queryRes.getPassword()) : "Error contraseña actualizada";
 		
 		assert usuarioDAO.Delete(usuarioTest.getDni()) > 0 : "Error en el borrado";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) == null : "Se ha encontrado un usuario borrado";
-		
+						
 		System.out.println("Exito");
 		
 	}

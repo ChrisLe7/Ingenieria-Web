@@ -12,6 +12,7 @@ import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
 
 public class TestTarjetaDAO {
 
@@ -27,7 +28,7 @@ public class TestTarjetaDAO {
 		CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		TarjetaDAO tarjetaDAO = new TarjetaDAO("jdbc:mysql://hokurobank.ddns.net:3306/IW", "HokuroAdmin", "AdL734Mkj692RJd126#", properties);
 		
-		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "123");
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
 		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false, usuarioTest.getDni());
 		TarjetaDTO tarjetaTest = new TarjetaDTO("TarjetaTest", 123, TipoTarjeta.Credito, "UsuarioTest", "CuentaBancariaTest");
 		
@@ -46,7 +47,7 @@ public class TestTarjetaDAO {
 			tarjetaDAO.Delete(tarjetaTest.getNumTarjeta());
 		}
 		
-		assert (usuarioDAO.Insert(usuarioTest) > 0) : "No se ha introducido el usuario";
+		assert usuarioDAO.Insert(usuarioTest, new UsuarioLoginDTO(usuarioTest.getDni(), "", "")) > 0 : "No se ha introducido el usuario";
 		
 		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, usuarioTest) > 0 : "No se ha introducido la cuenta bancaria";
 		

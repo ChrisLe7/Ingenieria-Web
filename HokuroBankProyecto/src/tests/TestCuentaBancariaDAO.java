@@ -28,7 +28,7 @@ public class TestCuentaBancariaDAO {
 			cuentaBancariaDAO.Delete(cuentaBancariaTest.getIdCuentaBancaria());
 		}
 		
-		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest", "password")) > 0 : "No se ha introducido la cuenta bancaria";
+		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest")) > 0 : "No se ha introducido la cuenta bancaria";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()) != null : "No se ha encontrado la cuenta bancaria";
 		

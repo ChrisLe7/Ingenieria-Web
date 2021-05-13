@@ -2,6 +2,7 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.SecureRandom;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +16,8 @@ import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.negocio.usuario.RolUsuario;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
+import es.uco.iw.utilidades.HashPassword;
 
 /**
  * Servlet implementation class RegistrarUserController
@@ -71,17 +74,25 @@ public class RegistrarUserController extends HttpServlet {
 				String UserRol = request.getParameter("rol");
 				String UserPassword = request.getParameter("password");
 				
-				UsuarioDTO userDTO = new UsuarioDTO (UserDNI, UserPassword);
+				UsuarioDTO userDTO = new UsuarioDTO (UserDNI);
+				
 				userDTO.setEmail(UserEmail);
 				userDTO.setNombre(UserNombre);
 				userDTO.setApellidos(UserApellidos);
-				userDTO.setRol(RolUsuario.valueOf(UserRol));
 				userDTO.setTelefono(Integer.valueOf(UserTelefono));
 				userDTO.setDireccion(UserDireccion);
 				
-				userDAO.Insert(userDTO);
 				
-				nextPage = "/Home";
+				
+				String salt = HashPassword.createSalt();
+				
+				String passwordHash = HashPassword.createHash(UserPassword, salt);
+				
+				UsuarioLoginDTO userLoginDTO  = new UsuarioLoginDTO (UserDNI,passwordHash, UserRol);
+				
+				userDAO.Insert(userDTO, userLoginDTO);
+				
+				nextPage = "Home";
 				disparador = request.getRequestDispatcher(nextPage);
 				
 			}

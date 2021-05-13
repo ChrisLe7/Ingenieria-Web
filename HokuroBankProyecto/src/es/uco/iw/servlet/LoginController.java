@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
+import es.uco.iw.utilidades.HashPassword;
 
 /**
  * Servlet implementation class LoginController
@@ -61,11 +63,18 @@ public class LoginController extends HttpServlet {
 			String UserPassword = request.getParameter("Password");
 
 			if (UserDNI != null) {
-				UsuarioDTO userDTO = userDAO.QueryByPassword(UserDNI);
 				
-				if (UserPassword.equals(userDTO.getPassword())) {
+				
+				UsuarioLoginDTO userDTO = userDAO.QueryByPassword(UserDNI);
+				
+				String saltContraseña = userDTO.getSalt();
+				
+				String passwordHash = HashPassword.createHash(UserPassword, saltContraseña);
+				
+				
+				
+				if (passwordHash.equals(userDTO.getPassword())) {
 					cliente.setDni(UserDNI);
-					
 					cliente.setRol(userDTO.getRol());
 					session.setAttribute("clienteBean", cliente);
 					nextPage = "/Home";

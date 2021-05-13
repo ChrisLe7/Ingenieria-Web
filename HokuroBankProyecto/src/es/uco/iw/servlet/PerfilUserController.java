@@ -15,6 +15,8 @@ import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.UsuarioInfoBean;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
+import es.uco.iw.utilidades.HashPassword;
 
 /**
  * Servlet implementation class PerfilUserController
@@ -61,6 +63,8 @@ public class PerfilUserController extends HttpServlet {
 			System.out.println("Logeado-> Perfil");
 			String UserCorreo = request.getParameter("correo");
 			UsuarioDTO userDTO = null;
+			UsuarioLoginDTO userLoginDTO = null;
+			
 			if (UserCorreo != null) {
 				//Significa que tenemos cambios y venimos del formulario
 				String UserTelefono = request.getParameter("telefono");
@@ -69,14 +73,18 @@ public class PerfilUserController extends HttpServlet {
 				
 				
 				userDTO = userDAO.QueryByDni(cliente.getDni());
+				userLoginDTO = userDAO.QueryByPassword(cliente.getDni());
 				
 				userDTO.setDireccion(UserDireccion);
-				userDTO.setPassword(UserPassword);
+				
+				String passwordHash = HashPassword.createHash(UserPassword, userLoginDTO.getSalt());
+				
+				userLoginDTO.setPassword(passwordHash);
 				userDTO.setTelefono(Integer.valueOf(UserTelefono));
 				userDTO.setEmail(UserCorreo);
 
 				userDAO.Update(userDTO);
-				userDAO.UpdatePassword(userDTO);
+				userDAO.UpdatePassword(userLoginDTO);
 				nextPage = "/Home";
 				disparador = request.getRequestDispatcher(nextPage);
 				
