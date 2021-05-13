@@ -33,7 +33,7 @@ public class TestUsuarioDAO {
 		String password = "123";
 		
 		String hash = HashPassword.createHash(password, salt);
-				
+		
 		UsuarioLoginDTO usuarioLoginTest = new UsuarioLoginDTO(usuarioTest.getDni(), hash, salt);
 		
 		assert usuarioDAO.Insert(usuarioTest, usuarioLoginTest) > 0 : "No se ha introducido el usuario";
@@ -71,7 +71,7 @@ public class TestUsuarioDAO {
 		assert usuarioDAO.Delete(usuarioTest.getDni()) > 0 : "Error en el borrado";
 		
 		assert usuarioDAO.QueryByDni(usuarioTest.getDni()) == null : "Se ha encontrado un usuario borrado";
-		
+						
 		System.out.println("Exito");
 		
 	}

@@ -37,9 +37,7 @@ public class HashPassword {
 	 */
 	public static String createSalt() {
 		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		return salt.toString();
+		return "" + random.nextInt();
 	}
 	
 	/**

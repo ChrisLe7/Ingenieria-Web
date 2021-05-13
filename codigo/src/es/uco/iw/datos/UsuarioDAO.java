@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -151,6 +152,10 @@ public class UsuarioDAO extends DAO {
     public int Insert(UsuarioDTO usuario, UsuarioLoginDTO usuarioLogin) {
     	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        calendar.add(Calendar.MONTH, 6);
+        java.util.Date cambioObligatorio = calendar.getTime();
 
         try {
             String statement = sqlProp.getProperty("Insert_Usuario");
@@ -170,8 +175,8 @@ public class UsuarioDAO extends DAO {
             stmt.setString(2, usuarioLogin.getPassword());
             stmt.setString(3, usuarioLogin.getSalt());
             stmt.setString(4, usuarioLogin.getRol().toString());
-            stmt.setDate(5, new java.sql.Date(0));
-            stmt.setDate(6, new java.sql.Date(0));
+            stmt.setDate(5, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setDate(6, new java.sql.Date(cambioObligatorio.getTime()));
             results.add(stmt.executeUpdate());
             
             status = CheckResults(results);
@@ -227,6 +232,12 @@ public class UsuarioDAO extends DAO {
      */
     public int UpdatePassword(UsuarioLoginDTO usuario) {
         int status = 0;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        calendar.add(Calendar.MONTH, 1);
+        java.util.Date cambioDisponible = calendar.getTime();
+        calendar.add(Calendar.MONTH, 6);
+        java.util.Date cambioObligatorio = calendar.getTime();
 
         try {
             String statement = sqlProp.getProperty("Update_Password");
@@ -234,8 +245,8 @@ public class UsuarioDAO extends DAO {
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(4, usuario.getDni());
             stmt.setString(1, usuario.getPassword());
-            stmt.setDate(2, new java.sql.Date(0));
-            stmt.setDate(3, new java.sql.Date(0));
+            stmt.setDate(2, new java.sql.Date(cambioDisponible.getTime()));
+            stmt.setDate(3, new java.sql.Date(cambioObligatorio.getTime()));
             status = stmt.executeUpdate();
             
             if (stmt != null) {
