@@ -76,12 +76,13 @@ public class TransferenciaController extends HttpServlet {
 				
 				infoTransacciones.setTarjetas(transacciones);
 				session.setAttribute("InfoTransacciones", infoTransacciones);
-				nextPage = "mvc/view/VISTADETRANSACCIONES";
+				//cambio añadido 
+				nextPage = "mvc/view/listarTransaccionesView.jsp";
 			}
 		}
 		else {
 			nextPage = "Login";
-			mensajeNextPage = "No se encuentra logueado, inicie sesi�n";
+			mensajeNextPage = "No se encuentra logueado, inicie sesión";
 			request.setAttribute("mensaje", mensajeNextPage);
 		}
 			
