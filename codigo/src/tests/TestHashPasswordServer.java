@@ -1,7 +1,5 @@
 package tests;
 
-import java.security.SecureRandom;
-
 import es.uco.iw.utilidades.HashPassword;
 
 public class TestHashPasswordServer {
@@ -12,15 +10,13 @@ public class TestHashPasswordServer {
 		
 		String password = "myPassword";
 		
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
+		String salt = HashPassword.createSalt();
 		
-		String passwordHash = HashPassword.createHash(password, salt.toString());
+		String passwordHash = HashPassword.createHash(password, salt);
 		
-		assert !HashPassword.createHash("password", salt.toString()).equals(passwordHash) : "Error contraseña incorrecta";
+		assert !HashPassword.createHash("password", salt).equals(passwordHash) : "Error contraseña incorrecta";
 		
-		assert HashPassword.createHash("myPassword", salt.toString()).equals(passwordHash) : "Error contraseña correcta";
+		assert HashPassword.createHash("myPassword", salt).equals(passwordHash) : "Error contraseña correcta";
 		
 		System.out.println("Exito");
 		
