@@ -87,26 +87,36 @@ public class RealizarTransaccionController extends HttpServlet {
 				String idTransaccion = "";
 				TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, idCuentaOrigen, idCuentaDestino);
 	
-				CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByIdCuentaBancaria(idCuentaOrigen);
-				CuentaBancariaDTO cuentaDestino = cuentaUserDAO.QueryByIdCuentaBancaria(idCuentaDestino);				
-				Float aux = cuentaOrigen.getSaldo() - Float.valueOf(cantidad);
-				if (aux >= 0) {
-					cuentaOrigen.setSaldo(aux);
-					cuentaDestino.setSaldo(cuentaDestino.getSaldo() +  Float.valueOf(cantidad));
-					cuentaUserDAO.UpdateSaldo(cuentaOrigen);
-					cuentaUserDAO.UpdateSaldo(cuentaDestino);
-					
-					transaccionDAO.Insert(transaccion);
-					
-				}
-				else {
-					mensajeNextPage = "Lo sentimos pero la cantidad a realizar es superior a la que posee la cuenta Origen";
+
+				
+				CuentaBancariaDTO cuentaDestino = cuentaUserDAO.QueryByIdCuentaBancaria(idCuentaDestino);	
+				
+				if (cuentaDestino == null) {
+					mensajeNextPage = "Lo sentimos pero la cuenta destino no existe";
 					request.setAttribute("mensaje", mensajeNextPage);
 				}
-				
-				nextPage = "Home";
-				request.getSession().removeAttribute("UsuarioInfoBean");
-		
+				else {
+					CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByIdCuentaBancaria(idCuentaOrigen);
+	
+					Float aux = cuentaOrigen.getSaldo() - Float.valueOf(cantidad);
+					if (aux >= 0) {
+						cuentaOrigen.setSaldo(aux);
+						cuentaDestino.setSaldo(cuentaDestino.getSaldo() +  Float.valueOf(cantidad));
+						cuentaUserDAO.UpdateSaldo(cuentaOrigen);
+						cuentaUserDAO.UpdateSaldo(cuentaDestino);
+						
+						transaccionDAO.Insert(transaccion);
+						
+					}
+					else {
+						mensajeNextPage = "Lo sentimos pero la cantidad a realizar es superior a la que posee la cuenta Origen";
+						request.setAttribute("mensaje", mensajeNextPage);
+					}
+					
+					nextPage = "Home";
+					request.getSession().removeAttribute("UsuarioInfoBean");
+				}
+
 			}
 			else {
 				// Tengo que ir a la vista
