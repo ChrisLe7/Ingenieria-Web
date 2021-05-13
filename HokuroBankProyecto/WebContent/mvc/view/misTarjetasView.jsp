@@ -19,6 +19,7 @@
 		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
 		if (login){
 			%>
+			<main>
 			<table class="myadverts">
 			<tr>
 				<th>Número de Tarjeta</th>
@@ -69,7 +70,7 @@
 			}
 			%>
 			</table>
-	
+		</main>
 			<%
 		}else {
 			//No esta logueado Direccionador al Login

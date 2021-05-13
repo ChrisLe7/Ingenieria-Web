@@ -19,9 +19,9 @@
 
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-System.out.println("BEAN FALLARA");
 String nextPage = "";
 String mensajeNextPage = "";
+System.out.println("HOla");
 if (!logged)  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no esta logueado";
@@ -44,7 +44,7 @@ if (!logged)  {
 	<form method="post" action="Perfil">
 		
 		<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		<label for="Contraseña">Contraseña: </label> <input type="password" name="password" value="<%=infoCliente.getPassword()%>" required><br/>
+		<label for="Contraseña">Contraseña: </label> <input type="password" name="password"  required><br/>
 		
 		<input type="submit" value="Confirmar">
 	

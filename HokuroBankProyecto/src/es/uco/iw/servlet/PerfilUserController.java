@@ -63,7 +63,7 @@ public class PerfilUserController extends HttpServlet {
 			System.out.println("Logeado-> Perfil");
 			String UserCorreo = request.getParameter("correo");
 			UsuarioDTO userDTO = null;
-			UsuarioLoginDTO userLoginDTO = null;
+
 			
 			if (UserCorreo != null) {
 				//Significa que tenemos cambios y venimos del formulario
@@ -73,18 +73,15 @@ public class PerfilUserController extends HttpServlet {
 				
 				
 				userDTO = userDAO.QueryByDni(cliente.getDni());
-				userLoginDTO = userDAO.QueryByPassword(cliente.getDni());
-				
+
 				userDTO.setDireccion(UserDireccion);
 				
-				String passwordHash = HashPassword.createHash(UserPassword, userLoginDTO.getSalt());
-				
-				userLoginDTO.setPassword(passwordHash);
+
 				userDTO.setTelefono(Integer.valueOf(UserTelefono));
 				userDTO.setEmail(UserCorreo);
 
 				userDAO.Update(userDTO);
-				userDAO.UpdatePassword(userLoginDTO);
+
 				nextPage = "/Home";
 				disparador = request.getRequestDispatcher(nextPage);
 				

@@ -66,8 +66,6 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	
 		<label for="DNI">DNI: </label> <%=user.getDni()%><br/>
 		
-		<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password" required><br/>
-		
 		<label for="Nombre">Nombre: <%=user.getNombre()%></label> <br/>
 		
 		<label for="Apellidos">Apellidos: <%=user.getApellidos()%></label> <br/>

@@ -51,6 +51,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ModificarPassword</servlet-name>
+    <servlet-class>es.uco.iw.servlet.CambiarPasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModificarPassword</servlet-name>
+    <url-pattern>/ModificarPassword</url-pattern>
+    
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ModificarCuentas</servlet-name>
     <servlet-class>es.uco.iw.servlet.ModificarCuentaBancariaController</servlet-class>
   </servlet>
@@ -114,19 +124,19 @@
     <param-name>bdName</param-name>
     <param-value>IW</param-value>
   </context-param>
-<!--   
+   
  <context-param>
     <param-name>server</param-name>
     <param-value>hokurobank.ddns.net</param-value>
   </context-param>
-  -->  
- 
+  
+ <!--
   <context-param>
     <param-name>server</param-name>
     <param-value>192.168.0.14</param-value>
   </context-param>
 
-
+  -->
   <context-param>
     <param-name>port</param-name>
     <param-value>3306</param-value>
