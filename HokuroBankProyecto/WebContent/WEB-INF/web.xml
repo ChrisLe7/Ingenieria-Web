@@ -114,18 +114,18 @@
     <param-name>bdName</param-name>
     <param-value>IW</param-value>
   </context-param>
-  
+<!--   
  <context-param>
     <param-name>server</param-name>
     <param-value>hokurobank.ddns.net</param-value>
   </context-param>
-  
-<!--   
+  -->  
+ 
   <context-param>
     <param-name>server</param-name>
     <param-value>192.168.0.14</param-value>
   </context-param>
-  -->
+
 
   <context-param>
     <param-name>port</param-name>
