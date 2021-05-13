@@ -23,7 +23,7 @@ public class TestUsuarioDAO {
 		
 		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
 		
-		// Si hay algun fallo, borra el usuario prueba en caso de haberla
+		// Si hay algun fallo, borra el usuario de prueba en caso de haberla
 		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
 			usuarioDAO.Delete(usuarioTest.getDni());
 		}

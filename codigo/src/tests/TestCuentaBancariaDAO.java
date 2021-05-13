@@ -33,7 +33,7 @@ public class TestCuentaBancariaDAO {
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()) != null : "No se ha encontrado la cuenta bancaria";
 		
 		// FALTA PROBAR QueryByCliente YA QUE ACTUALMENTE NO SE TIENE TODAVIA LA RELACION
-		
+				
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdTitular().equals("UsuarioTest") : "Error titular de cuenta bancaria";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdCotitular().equals("") : "Error cotitular de cuenta bancaria";
@@ -46,7 +46,7 @@ public class TestCuentaBancariaDAO {
 		
 		assert cuentaBancariaDAO.QueryByBizum(cuentaBancariaTest.getIdCuentaBancaria()) : "Error bizum actualizado";
 		
-		//assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getEstadoBizum() : "Error bizum actualizado";
+		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getEstadoBizum() : "Error bizum actualizado";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getSaldo() == (float) 30.5 : "Error saldo";
 		
