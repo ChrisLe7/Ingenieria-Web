@@ -15,10 +15,10 @@ console.log(deshabilitarCambiosBtn)
 
 habilitarCambiosBtn.addEventListener("click", function () {
 	verPerfilDiv.style.display = "none";
-	modificarPerfilDiv.style.display = "inline";
+	modificarPerfilDiv.style.display = "block";
 });
 
 deshabilitarCambiosBtn.addEventListener("click", function () {
-	verPerfilDiv.style.display = "inline";
+	verPerfilDiv.style.display = "block";
 	modificarPerfilDiv.style.display = "none";
 });

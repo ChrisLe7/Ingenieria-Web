@@ -63,7 +63,7 @@ if (logged == false)  {
 			<label><input type="radio" name="idCuenta" value = "<%=cuenta.getIdCuentaBancaria() %>"> Id: <%=cuenta.getIdCuentaBancaria() %></label> <br/>
 			
 			<%} %>
-			
+		<input type="submit" id="submitBtn" value="Crear Tarjeta">
 	</form>
 
 
