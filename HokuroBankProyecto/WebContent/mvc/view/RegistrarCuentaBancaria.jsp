@@ -7,14 +7,14 @@
 
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
 <jsp:useBean  id="UsuarioInfoBean" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>  
-
+<jsp:useBean  id="listadoClientes" scope="session" class="es.uco.iw.display.ListadoClientesBean"></jsp:useBean> 
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Registrar Tarjeta</title>
+<title>Registrar Cuenta</title>
 </head>
 <body>
 	<!-- Incluimos la cabecera de la aplicación -->
@@ -33,37 +33,42 @@ if (logged == false)  {
 	</jsp:forward>
 	<% 
 }else {%>
-<% 	
-	UsuarioDTO user = UsuarioInfoBean.getUsuario();
 	
-	ArrayList<PropiedadCuenta> listaCuentas = user.getCuentasBancarias();
-	%>	
 	<%@ include file="/include/header.jsp" %>
 			
-	<form method="post" action="RegistrarTarjeta">
+	<form method="post" action="RegistrarCuentaBancaria">
+			
+		<label for="Tipo">Tipo de Cuenta: </label>
+		
+			<label><input type="radio" name="tipoCuenta" value = "ahorro" required> Ahorro</label> <br/>
+			
+			<label><input type="radio" name="tipoCuenta" value = "corriente" > Corriente</label> <br/>		
+			
+		<%if(clienteBean.getRol().equals(RolUsuario.Administrador)){ 
+			
 	
-		<label for="Pin">Pin: </label>
+		 ArrayList<UsuarioDTO> listaCuentas = listadoClientes.getUsuarios();%>
 		
-		<input type="text" name="pin" pattern="[0-9]{4}" required>
-		
-		<label for="Tipo">Tipo de Tarjeta: </label>
-		
-			<label><input type="radio" name="tipoTarjeta" value = "Credito" required> Credito</label> <br/>
+		<label>Titular: </label>
 			
-			<label><input type="radio" name="tipoTarjeta" value = "Debito" > Debito</label> <br/>
-		
-			<label><input type="radio" name="tipoTarjeta" value = "Prepago"> Prepago</label> <br/>	
-		
-		<label for="Cuenta">Cuenta a la que enlazarla: </label>
-		
-			<% 
-	
-			for(PropiedadCuenta cuenta : listaCuentas){%>
+			<select id="idTitular" name="idTitular"> 
 			
-			<label><input type="radio" name="idCuenta" value = "<%=cuenta.getIdCuentaBancaria() %>"> Id: <%=cuenta.getIdCuentaBancaria() %></label> <br/>
+				<% for(UsuarioDTO user : listaCuentas){%>
 			
-			<%} %>
+				<option value="<%=user.getDni()%>">	
 			
+				<%} %>
+			
+			</select>
+			
+		<%}else{ %>
+			
+			<input type="text" name="idTitular" value = "<%=clienteBean.getDni()%>" style="display:none"> <br/>	
+			
+		<%} %>
+			
+		<input type="submit" value = "Confirmar"> 
+		
 	</form>
 
 

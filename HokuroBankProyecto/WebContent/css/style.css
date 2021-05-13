@@ -1,7 +1,8 @@
 body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  color: #00000023612011;
-  font-size: 1.2rem; /*tamaño de las letras*/
+  background-color: #EAEAEA;
+  color: #000000;
+  font-size: 1.2rem; /*tamaÃ±o de las letras*/
   line-height: 1.2em; /* interlineado */
   margin: 0;
 }
@@ -27,7 +28,7 @@ p {
 }
 
 .header {
-  background: #333;
+  background: #FA9753;
   color: white;
   padding: 2rem 0;
 
@@ -60,8 +61,8 @@ p {
 
 /* logo */
 .logo {
-  letter-spacing: 0.2em;
-  font-size: 1.3em;
+  letter-spacing: 0.15em;
+  font-size: 2.2em;
 }
 
 a.logo {
@@ -72,55 +73,82 @@ a.logo {
 }
 
 a.logo:hover{
-	background: #f08f7b;
+	background: #DF7F3D;
 }
 
 
-/* todos los "ul" que esten dentro de "navigation" */
-.navigation ul {
+.MenuNavegacion body {
+  margin: 0;
+  position: fixed;
+}
+
+.MenuNavegacion ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style: none;
+  width: 12%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
-.navigation ul li {
-  /* uno al lado del otro */
-  display: inline-block;
-}
-
-/* los enlaces dentro del menu */
-.navigation ul li a {
+.MenuNavegacion li a {
   display: block;
-  padding: 0.3rem 0.5rem;
-  transition: all 0.2s linear;
-  border-radius: 5px;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
 }
 
-.navigation ul li a:hover {
-  background: #f08f7b;
+.MenuNavegacion li a.active {
+  background-color: #4CAF50;
+  color: white;
 }
 
-.article {
-	padding-top: 6rem;
+.MenuNavegacion li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+.CuentasBancarias {
+	margin-left: 12%;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-bottom: 1%;
+}
+
+.Cuenta{
+	border : 0.2em inset #555;
+	margin-top: 1em;
+	padding: 1%;
 }
 
 .main {
-  padding-top: 8rem;
+  padding-top: 6.5rem;
+  
 }
 
 .formulario {
-  padding: 3em;
+  padding-left: 2em;
+  padding-right: 2em;
   max-width: 26em;
-  background-color: #dec094;
+  background-color: #FFCFA4;
   margin: 0 auto;
-  border : 0.5em inset #876229;
-  border-radius: 1em;
+  border : 0.2em inset #876229;
+  border-radius: 0.3em;
 }
+
 
 .formulario h1 {
 	font-size: 2rem;
   	line-height: 0.5em;
 }
+
+.formulario h2 {
+	font-size: 1rem;
+  	line-height: 0.5em;
+}
+
 .formulario input {
   margin-bottom: 15px;
   font-family: "Roboto", sans-serif;
@@ -136,95 +164,18 @@ a.logo:hover{
 
 .formulario .button {
 	display: block;
-	background-color: #0095eb;
+	background-color: #D2D2D2;
 	padding: 0.625em 2.8em 0.625em 2.8em;
 	border: 0;
 	font-size: 1em; 
-	color: 	white;
-  font-family: "Roboto", sans-serif;
+	border : 0.2em inset #7C7C7C;
+	border-radius: 0.2em;
+	color: 	negro;
+  	font-family: "Roboto", sans-serif;
 }
 
-.legend {
-	text-align:center;
-	font-size: 2rem;
-	padding: 0.5em;
+.formulario .button:hover {
+	background: #AFAFAF;
 }
 
-.inputCheckbox {
-	display:none;
-}
 
-.inputCheckbox:checked + .labelCheckbox {
-	color: #724423;
-	font-weight: bold;
-}
-
-.labelCheckbox {
-	padding-left:1.3em;
-	position:relative;
-}
-
-.inputCheckbox {
-	border: solid .2px black;
-	color: #cd170e;
-	font-weight: bold;
-	widht: 0.8em;
-	height: 0.8em;
-	position: absolute;
-	left: 0em;	
-}
-
-table.myadverts {
-	padding: 0em;
-	  max-width: 26em;
-	  margin: 0 auto;
-	  border : 0.5em inset #876229;
-	  border-radius: 1em;
-	
-}
-th {
-  letter-spacing: 2px;
-  text-align: center;
-  background: #804000;
-}
-
-td {
-  letter-spacing: 1px;
-  text-align: justify;
-  padding : 0.5em;
-	
-}
-
-tr.anuncio:nth-child(odd) td {
-	background: #876229;
-}
-
-tr.anuncio:nth-child(even) td {
-	background: #dec094;
-}
-
-tr.anuncio td.opcion  {
-	background: none;
-	text-align: center;
-}
-
-main.main div.info-anuncio ul.anuncio {
-	  padding: 1.5em;
-	  max-width: 26em;
-	  background-color: #dec094;
-	  margin: 0 auto;
-	  border : 0.5em inset #876229;
-	  border-radius: 1em;
-	  list-style: none;
-	  
-}
-
-main.main div.info-anuncio ul.anuncio li{
-	text-align : justify;
-}
-
-main.main div.info-anuncio ul.anuncio li.titulo {
-	margin : 0;
-	text-align : center;
-	padding: 0.5em;
-}
