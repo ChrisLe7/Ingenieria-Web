@@ -21,7 +21,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 }else{
 	TarjetaDTO tarjeta = infoTarjetas.get(0);
 %> 
-
+<main class="main">
 <div>
 
 Bienvenido a Modificar Tarjeta con ID: <%=tarjeta.getNumTarjeta()%> <br/>
@@ -40,7 +40,7 @@ Para modificarlo, cambie el pin de la etiqueta inferior y confirme el cambio<br/
 </form>
 
 </div>
-
+	</main>
 <%} %>
 
 </body>
