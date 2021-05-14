@@ -22,7 +22,6 @@
 			/*Opciones del menú*/
 			
 			%>
-		<main class="main">	
 					
 					<nav class = "MenuNavegacion">
 						<ul class = "option">
@@ -40,7 +39,6 @@
 											
 					</nav>
 				
-		</main>	
 		<% 	
 		}
 		else {
