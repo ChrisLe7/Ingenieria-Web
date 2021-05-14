@@ -62,6 +62,7 @@ ListaCuentas = infoCuentas.getCuentas();
 		<% if (cuenta.getEstadoBizum()) {%>
 			<input type="submit" value="Deshabilitar Bizum">
 		<% } else if (!cuenta.getEstadoBizum()) {%>
+			<input type="tel" name="telefono" pattern="[0-9]{9}" required>
 			<input type="submit" value="Habilitar Bizum">
 		<% } %>
 	</form>	

@@ -54,7 +54,7 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 		InputStream myIO = application.getResourceAsStream(sql);
 		java.util.Properties prop = new java.util.Properties();
 		prop.load(myIO);
-		
+		String mensajeNextPage = "";
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
@@ -66,7 +66,7 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 		if (!login) {
 			//No se encuentra logueado se debe de ir al login.
 			nextPage = "Login";
-			String mensajeNextPage = "No se encuentra logueado, inicie sesión";
+			mensajeNextPage = "No se encuentra logueado, inicie sesión";
 			request.setAttribute("mensaje", mensajeNextPage);
 		}
 		else {
@@ -78,11 +78,38 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 	
 			if (estadoBizum != null) {
 				
-				cuenta = cuentaUserDAO.QueryByIdCuentaBancaria(estadoBizum);
-				UsuarioDTO usuarioDTO = userDAO.QueryByDni(cliente.getDni());
-				cuenta.setEstadoBizum(!cuenta.getEstadoBizum());
-				cuentaUserDAO.UpdateBizum(cuenta, usuarioDTO);
+				String phone = request.getParameter("telefono");
+				int telefono = 0;
+				if (phone != null) {
+					telefono = Integer.valueOf(phone);
+					cuenta = cuentaUserDAO.QueryByTelefono(telefono);
+					if (cuenta != null) {
+						nextPage = "Home";
+						mensajeNextPage = "Lo sentimos el telefono introducido ya se encuentra vinculado a otra cuenta";
+					}
+					else {
+						UsuarioDTO usuarioDTO = new UsuarioDTO (cliente.getDni());
+						cuenta = cuentaUserDAO.QueryByIdCuentaBancaria(estadoBizum);
+						
+						usuarioDTO.setTelefono(telefono);
+						cuenta.setEstadoBizum(!cuenta.getEstadoBizum());
+						cuentaUserDAO.UpdateBizum(cuenta, usuarioDTO);
+						nextPage = "MisCuentas";
+					}
+					
+				}
+				else {
+					//Significa que debemos de cancelar el bizum
+					UsuarioDTO usuarioDTO = new UsuarioDTO (cliente.getDni());
+					cuenta = cuentaUserDAO.QueryByIdCuentaBancaria(estadoBizum);
+					cuenta.setEstadoBizum(!cuenta.getEstadoBizum());
+					cuentaUserDAO.UpdateBizum(cuenta, usuarioDTO);
 					nextPage = "MisCuentas";
+				}
+				
+					
+					
+				
 					request.getSession().removeAttribute("infoCuentas");
 				
 		

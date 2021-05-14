@@ -40,6 +40,18 @@
     <url-pattern>/GestionarTransferencias</url-pattern>    
   </servlet-mapping>
   
+  
+  <servlet>
+    <servlet-name>RealizarTransferencia</servlet-name>
+    <servlet-class>es.uco.iw.servlet.RealizarTransferenciaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RealizarTransferencia</servlet-name>
+    <url-pattern>/</url-pattern>
+    <url-pattern>/GestionarTransferencias</url-pattern>    
+  </servlet-mapping>
+  
+  
   <servlet>
     <servlet-name>Cuentas</servlet-name>
     <servlet-class>es.uco.iw.servlet.CuentaController</servlet-class>
@@ -89,7 +101,9 @@
   <servlet-mapping>
     <servlet-name>Tarjetas</servlet-name>
     <url-pattern>/MisTarjetas</url-pattern>
-    <url-pattern>/GestionarTarjetas</url-pattern>    
+    <url-pattern>/GestionarTarjetas</url-pattern>   
+    <url-pattern>/CancelarTarjeta</url-pattern>   
+     
   </servlet-mapping>
   
     <servlet>
@@ -124,18 +138,18 @@
     <param-name>bdName</param-name>
     <param-value>IW</param-value>
   </context-param>
- <!--   
+   <!-- 
  <context-param>
     <param-name>server</param-name>
     <param-value>hokurobank.ddns.net</param-value>
   </context-param>
-  
   -->
+ 
   <context-param>
     <param-name>server</param-name>
     <param-value>192.168.0.14</param-value>
   </context-param>
-
+ 
 
   <context-param>
     <param-name>port</param-name>

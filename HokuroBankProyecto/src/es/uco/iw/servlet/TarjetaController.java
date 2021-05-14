@@ -68,19 +68,19 @@ public class TarjetaController extends HttpServlet {
 			
 			UsuarioDTO userDTO = userDAO.QueryByDni(cliente.getDni());
 			System.out.println("Compruebo que el usuario se encuentra logueado [TARJETACONTROLLER]");
-			String TarjetaCancelar = request.getParameter("idTarjeta");
-
+			String TarjetaCancelar = request.getParameter("idtarjeta");
+			System.out.println(TarjetaCancelar);
 
 			if (TarjetaCancelar != null) {
 				//Deberemos de cancelar la tarjeta y regresar al home.
-				
-				
-				
-				
+				if (tarjetaDAO.Delete(TarjetaCancelar) == 0) {
+					System.out.println("Ha fallado la cancelación");
+
+				}
 				disparador = request.getRequestDispatcher("Home");
 				String mensajeNextPage = "Se ha cancelado la tarjeta con exito";
 				request.setAttribute("mensaje", mensajeNextPage);
-				
+				session.removeAttribute("infoTarjetas");
 			}
 			else {
 				

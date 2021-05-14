@@ -48,7 +48,7 @@
 								<td><%= misTarjetas.get(i).getIdCuenta()%></td>
 								<td class="BotonCancelar">
 									<form method=post action="CancelarTarjeta">
-										<input type=text name="id-tarjeta" class="hidden" value=<%=misTarjetas.get(i).getNumTarjeta()%>>
+										<input type=text name="idtarjeta" class="hidden" value="<%=misTarjetas.get(i).getNumTarjeta()%>">
 										<input type=submit value=Cancelar> 
 									</form>
 								</td>

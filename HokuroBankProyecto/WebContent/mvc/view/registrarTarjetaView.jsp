@@ -37,7 +37,7 @@
 	
 		<label for="Pin">Pin: </label>
 		
-		<input type="text" name="pin" pattern="[0-9]{4}" required>
+		<input type="password" name="pin" pattern="[0-9]{4}" required>
 		
 		<label for="Tipo">Tipo de Tarjeta: </label>
 		

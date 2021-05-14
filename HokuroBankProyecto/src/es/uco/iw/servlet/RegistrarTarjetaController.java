@@ -79,7 +79,7 @@ public class RegistrarTarjetaController extends HttpServlet {
 				//Significa que vengo de la vista deberemos de crear una nueva tarjeta
 				String tipoTarjeta = request.getParameter("tipoTarjeta");
 				
-				String numeroTarjeta = "";
+				String numeroTarjeta = GeneradorID.GenerarNumTarjeta();;
 				
 				boolean condicion = false;
 				while (!condicion) {
