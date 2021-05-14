@@ -55,20 +55,20 @@ public class TransaccionDAO extends DAO {
     }
 
     /**
-     * Busca las transacciones cuya id de cuenta de origen coincide con la dada
+     * Busca las transacciones de la cuenta bancaria cuya id coincide con la dada
      * 
-     * @param idCuentaOrigen Id de la cuenta de origen a buscar
-     * @return Transacciones cuya id de cuenta de origen coincide con la dada
+     * @param idCuentaBancaria Id de la cuenta bancaria cuyas transacciones se van a buscar
+     * @return Transacciones de la cuenta de origen cuya id coincide con la dada
      */
-    public ArrayList<TransaccionDTO> QueryByIdCuentaOrigen(String idCuentaOrigen) {
+    public ArrayList<TransaccionDTO> QueryByIdCuenta(String idCuentaBancaria) {
         ArrayList<TransaccionDTO> transacciones = new ArrayList<TransaccionDTO>();
         TransaccionDTO transaccion = null;
 
         try {
             Connection con = getConnection();
-            String statement = sqlProp.getProperty("Select_Transaccion_Cuenta_Origen");
+            String statement = sqlProp.getProperty("Select_Transaccion_Cuenta");
             PreparedStatement stmt = con.prepareStatement(statement);
-            stmt.setString(1, idCuentaOrigen);
+            stmt.setString(1, idCuentaBancaria);
             ResultSet set = stmt.executeQuery();
             
             while (set.next()) {

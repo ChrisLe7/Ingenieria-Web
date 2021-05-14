@@ -46,7 +46,7 @@ if (!logged)  {
 			<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password"  required><br/>
 			
-			<input type="submit" value="Confirmar">
+			<input type="submit" id="submitBtn" value="Confirmar">
 		
 		</form>
 	

@@ -18,6 +18,7 @@ import es.uco.iw.display.ListadoClientesBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.utilidades.GeneradorID;
 
 /**
  * Servlet implementation class RegistrarCuentaBancariaController
@@ -67,7 +68,16 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 		if (tipoCuenta != null) {
 			//Significa que venimos de la vista y deberemos de crear la nueva cuenta.
 			String idTitular = request.getParameter("idTitular");
-			String idCuenta = "";
+			String idCuenta = GeneradorID.GenerarIBAN();
+			boolean condicion = false;
+			while (!condicion) {
+				if (cuentaUserDAO.QueryByIdCuentaBancaria(idCuenta) != null) {
+					idCuenta = GeneradorID.GenerarIBAN();
+				}
+				else {
+					condicion = true;
+				}
+			}
 			float saldo = 0;
 			boolean estadoBizum = false;
 			

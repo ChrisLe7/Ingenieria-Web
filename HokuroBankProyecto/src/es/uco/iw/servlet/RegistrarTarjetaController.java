@@ -24,6 +24,7 @@ import es.uco.iw.negocio.tarjeta.TarjetaDTO;
 import es.uco.iw.negocio.tarjeta.TipoTarjeta;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.utilidades.GeneradorID;
 
 /**
  * Servlet implementation class RegistrarTarjetaController
@@ -79,6 +80,18 @@ public class RegistrarTarjetaController extends HttpServlet {
 				String tipoTarjeta = request.getParameter("tipoTarjeta");
 				
 				String numeroTarjeta = "";
+				
+				boolean condicion = false;
+				while (!condicion) {
+					if (tarjetaDAO.QueryByNumTarjeta(numeroTarjeta) != null) {
+						numeroTarjeta = GeneradorID.GenerarNumTarjeta();
+					}
+					else {
+						condicion = true;
+					}
+				}
+				
+				
 				String idCliente = cliente.getDni();
 				String idCuenta = request.getParameter ("idCuenta");
 				TarjetaDTO nuevaTarjeta = new TarjetaDTO(numeroTarjeta, Integer.valueOf(pin), TipoTarjeta.valueOf(tipoTarjeta), idCliente, idCuenta);
