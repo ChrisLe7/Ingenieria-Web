@@ -138,6 +138,37 @@ public class CuentaBancariaDAO extends DAO {
         
         return cuentasBancarias;
     }
+    
+    /**
+     * Busca la cuenta bancaria que este asignada a un telefono para el bizum
+     * 
+     * @param telefono Telefono para buscar la cuenta
+     * @return Cuenta bancaria asignada al telefono
+     */
+    public String QueryByTelefono(int telefono) {
+    	String idCuenta = "";
+    	
+    	try {
+            Connection con = getConnection();
+            String statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Telefono");
+            PreparedStatement stmt = con.prepareStatement(statement);
+            stmt.setInt(1, telefono);
+            ResultSet set = stmt.executeQuery();
+            
+            if (set.next()) {
+                idCuenta = set.getString(1);
+            }
+
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+    	
+    	return idCuenta;
+    }
 
     /**
      * Inserta una cuenta bancaria en la base de datos
