@@ -78,7 +78,7 @@ public class CambiarPasswordController extends HttpServlet {
 				userDAO.UpdatePassword(userLoginDTO);
 				nextPage = "Home";
 			}else {
-				nextPage = "mvc/view/modificarContraseñaUsuaioView.jsp";
+				nextPage = "/mvc/view/modificarContraseñaUsuarioView.jsp";
 			}
 			
 		}

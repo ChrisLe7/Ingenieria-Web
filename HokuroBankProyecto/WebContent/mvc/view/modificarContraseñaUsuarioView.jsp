@@ -21,7 +21,7 @@
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 String nextPage = "";
 String mensajeNextPage = "";
-System.out.println("HOla");
+
 if (!logged)  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no esta logueado";
@@ -37,21 +37,21 @@ if (!logged)  {
 	<%
 
 %> 
-
-<div>
-<!-- ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- cambiar el action al controlador correspondiente -->
-	<form method="post" action="Perfil">
+<main class="main">
+	<div>
+	<!-- ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- cambiar el action al controlador correspondiente -->
+		<form method="post" action="ModificarPassword">
+			
+			<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
+			<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password"  required><br/>
+			
+			<input type="submit" value="Confirmar">
 		
-		<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		<label for="Contraseña">Contraseña: </label> <input type="password" name="password"  required><br/>
-		
-		<input type="submit" value="Confirmar">
+		</form>
 	
-	</form>
-
-</div>
-
+	</div>
+</main>
 <% } %>
 
 </body>
