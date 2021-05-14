@@ -14,6 +14,9 @@
 <body>
 <%@ include file="/include/header.jsp" %>
 <%@ include file="/include/Menu.jsp" %>
+
+<main class="main">
+
 <%  
 
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
@@ -22,7 +25,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 }else if(infoCuentas.getCuentas().isEmpty()){
 	
 %> 
-<main class="main">
+
 <p>
 AUN NO TIENES CUENTAS BANCARIAS ¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
 </p>

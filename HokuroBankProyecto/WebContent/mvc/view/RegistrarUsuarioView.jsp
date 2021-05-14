@@ -30,52 +30,56 @@
 			mensajeNextPage = "Usted no es administrador";	
 		}
 		else{	
-			System.out.println("HOLA");
+	
 			%> 
+			
+			
 			<main class = "main">
-				<div>
+			
+			<div>
+			
+				<form method="post" action="RegistrarUsuario" class = "formulario">
 				
-					<form method="post" action="RegistrarUsuario">
+					<label for="DNI">DNI: </label> <br/>
 					
-						<label for="DNI">DNI: </label> <br/>
-						
-						<input type="text" name="DNI" pattern="[0-9]{8}[A-Za-z]"> <br/>
-					
-						<label for="Nombre">Nombre: </label> <br/>
-						
-						<input type="text" name="nombre" > <br/>
-						
-						<label for="Apellidos">Apellidos: </label> <br/>
-						
-						<input type="text" name="apellidos" > <br/>
-						
-						<label for="Email">Email: </label> <br/>
-						
-						<input type="email" name="email" > <br/>
-						
-						<label for="Direccion">Direccion: </label> <br/>
-						
-						<input type="text" name="direccion" > <br/>
-						
-						<label for="Telefono">Telefono: </label> <br/>
-						
-						<input type="tel" name="telefono" pattern="[0-9]{9}"><br/>
-						
-						<label for="Rol">Rol: </label> <br/>
-						
-						<label><input type="radio" name="rol" value = "Cliente"> Cliente</label> <br/>
-						
-						<label><input type="radio" name="rol" value = "Administrador"> Administrador</label> <br/>
-						
-						<label for="Password">Contraseña: </label> <br/>
-						
-						<input type="password" name="password" ><br/>
-					
-						<input type="submit" id="submitBtn" value="Registrarse">
-						
-					</form>
+					<input type="text" name="DNI" pattern="[0-9]{8}[A-Za-z]"> <br/>
 				
-				</div>
+					<label for="Nombre">Nombre: </label> <br/>
+					
+					<input type="text" name="nombre" > <br/>
+					
+					<label for="Apellidos">Apellidos: </label> <br/>
+					
+					<input type="text" name="apellidos" > <br/>
+					
+					<label for="Email">Email: </label> <br/>
+					
+					<input type="email" name="email" > <br/>
+					
+					<label for="Direccion">Direccion: </label> <br/>
+					
+					<input type="text" name="direccion" > <br/>
+					
+					<label for="Telefono">Telefono: </label> <br/>
+					
+					<input type="tel" name="telefono" pattern="[0-9]{9}"><br/>
+					
+					<label for="Rol">Rol: </label> <br/>
+					
+					<label><input type="radio" name="rol" value = "Cliente"> Cliente</label> <br/>
+					
+					<label><input type="radio" name="rol" value = "Administrador"> Administrador</label> <br/>
+					
+					<label for="Password">Contraseña: </label> <br/>
+					
+					<input type="password" name="password" ><br/>
+				
+					<input type="submit" id="submitBtn" value="Registrarse">
+					
+				</form>
+			
+			</div>
+			
 			</main>
 			
 			<%} %>

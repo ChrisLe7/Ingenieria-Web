@@ -33,11 +33,13 @@ if (logged == false)  {
 	</jsp:forward>
 	<% 
 }else {%>
-	<main class="main">
-	<%@ include file="/include/header.jsp" %>
+	
+			
+					<main class = "main">
 			
 	<form method="post" action="RegistrarCuentaBancaria">
 			
+
 		<label for="Tipo">Tipo de Cuenta: </label>
 		
 			<label><input type="radio" name="tipoCuenta" value = "ahorro" required> Ahorro</label> <br/>
@@ -71,7 +73,9 @@ if (logged == false)  {
 		
 	</form>
 
-	</main>
+</main>
+
+
 <% 	
 }
 %>

@@ -12,14 +12,17 @@
 <title>Gestionar Tarjetas</title>
 </head>
 <body>
-<%@ include file="/include/Menu.jsp" %>
 <%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
+
+<main class = "main">
+
+
 	<% //Comprobar que se encuentra logueado.
 		System.out.println("Estoy en la vista de misTarjeta");
 		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
 		if (login){
 			%>
-			<main class="main">
 			<table class="myadverts">
 			<tr>
 				<th>Número de Tarjeta</th>
@@ -38,7 +41,7 @@
 					for (int  i = 0; i < misTarjetas.size(); i++) {
 						%>
 						<tr class="tarjeta">
-								<td><%= misTarjetas.get(i).getNumTarjeta()%></td>
+								<td><%= misTarjetas.get(i).getNumTarjeta()%></td>	
 								<td><%= misTarjetas.get(i).getTipotarjeta()%></td>
 								
 								<td><%= misTarjetas.get(i).getIdCliente()%></td>
@@ -70,7 +73,7 @@
 			}
 			%>
 			</table>
-		</main>
+	</main>
 			<%
 		}else {
 			//No esta logueado Direccionador al Login
