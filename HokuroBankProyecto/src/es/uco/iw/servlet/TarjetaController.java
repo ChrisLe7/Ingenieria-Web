@@ -64,7 +64,7 @@ public class TarjetaController extends HttpServlet {
 		String nextPage ="/mvc/view/loginView"; 
 		
 		if (login) {
-			//Se encuentra logueado el usuario deberemos de coger la información de sus tarjetas para mostrarlas.
+			//Se encuentra logueado el usuario deberemos de coger la informaciÃ³n de sus tarjetas para mostrarlas.
 			
 			UsuarioDTO userDTO = userDAO.QueryByDni(cliente.getDni());
 			System.out.println("Compruebo que el usuario se encuentra logueado [TARJETACONTROLLER]");
@@ -83,14 +83,13 @@ public class TarjetaController extends HttpServlet {
 				
 			}
 			else {
-				ArrayList<String> tarjetasUsuario = userDTO.getTarjetas();
-				ArrayList<TarjetaDTO> infoTarjetasUsuario = new ArrayList<TarjetaDTO> ();
 				
-				System.out.println("Dirijo al usuario a la vista tras coger la información");
-				for (int i = 0; i< tarjetasUsuario.size();i++) {
-					infoTarjetasUsuario.add(tarjetaDAO.QueryByNumTarjeta(tarjetasUsuario.get(i)));
-				}
+				ArrayList<TarjetaDTO> infoTarjetasUsuario = tarjetaDAO.QueryByIdCliente(cliente.getDni());
 				
+				System.out.println("Dirijo al usuario a la vista tras coger la informaciÃ³n");
+				
+
+
 				InfoTarjetasBean infotarjetas = new InfoTarjetasBean();
 
 				infotarjetas.setTarjetas(infoTarjetasUsuario);
@@ -106,7 +105,7 @@ public class TarjetaController extends HttpServlet {
 		else {
 			//No se encuentra logueado se debe de ir al login.
 			disparador = request.getRequestDispatcher("/Login");
-			String mensajeNextPage = "No se encuentra logueado, inicie sesión";
+			String mensajeNextPage = "No se encuentra logueado, inicie sesiÃ³n";
 			request.setAttribute("mensaje", mensajeNextPage);
 		}
 		
