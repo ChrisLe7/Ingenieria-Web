@@ -35,7 +35,7 @@ public class TestUsuarioDAO_Parte2 {
 		CuentaBancariaDTO cuentaBancariaTest = new CuentaBancariaDTO("CuentaBancariaTest", (float) 30.5, TipoCuentaBancaria.Corriente, false, usuarioTest.getDni());
 		TarjetaDTO tarjetaTest = new TarjetaDTO("TarjetaTest", 123, TipoTarjeta.Credito, "UsuarioTest", "CuentaBancariaTest");
 		
-		// Si hay algun fallo, borra el usuario de prueba en caso de haberla
+		// Si hay algun fallo, borra el usuario de prueba en caso de haberlo
 		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
 			usuarioDAO.Delete(usuarioTest.getDni());
 		}

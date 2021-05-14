@@ -30,7 +30,7 @@ public static void main(String[] args) throws IOException {
 		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest", "Nombre", "Apellidos", "Correo", "Direccion", 1234, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 		BizumDTO bizumTest = new BizumDTO("TransaccionTest", (float) 123.2, TipoOperacion.Pagar, new Date(), "Test", 1234, 5678);
 		
-		// Si hay algun fallo, borra el usuario de prueba en caso de haberla
+		// Si hay algun fallo, borra el usuario de prueba en caso de haberlo
 		if (usuarioDAO.QueryByDni(usuarioTest.getDni()) != null ) {
 			usuarioDAO.Delete(usuarioTest.getDni());
 		}
