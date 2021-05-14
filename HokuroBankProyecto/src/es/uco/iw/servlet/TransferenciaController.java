@@ -70,7 +70,7 @@ public class TransferenciaController extends HttpServlet {
 				nextPage = "/MisCuentas";
 				
 			}else {
-				ArrayList<TransaccionDTO> transacciones =  transaccionDAO.QueryByIdCuentaOrigen(idCuenta);
+				ArrayList<TransaccionDTO> transacciones =  transaccionDAO.QueryByIdCuenta(idCuenta);
 				
 				InfoTransaccionesBean infoTransacciones = new InfoTransaccionesBean();
 				

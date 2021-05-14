@@ -145,8 +145,8 @@ public class CuentaBancariaDAO extends DAO {
      * @param telefono Telefono para buscar la cuenta
      * @return Cuenta bancaria asignada al telefono
      */
-    public String QueryByTelefono(int telefono) {
-    	String idCuenta = "";
+    public CuentaBancariaDTO QueryByTelefono(int telefono) {
+    	CuentaBancariaDTO cuentaBancaria = null;
     	
     	try {
             Connection con = getConnection();
@@ -156,7 +156,7 @@ public class CuentaBancariaDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             if (set.next()) {
-                idCuenta = set.getString(1);
+                cuentaBancaria = QueryByIdCuentaBancaria(set.getString(1));
             }
 
             if (stmt != null) {
@@ -167,7 +167,7 @@ public class CuentaBancariaDAO extends DAO {
             System.out.println(e);
         }
     	
-    	return idCuenta;
+    	return cuentaBancaria;
     }
 
     /**
