@@ -33,7 +33,7 @@ if (logged == false)  {
 	</jsp:forward>
 	<% 
 }else {%>
-	
+	<main class="main">
 	<%@ include file="/include/header.jsp" %>
 			
 	<form method="post" action="RegistrarCuentaBancaria">
@@ -71,7 +71,7 @@ if (logged == false)  {
 		
 	</form>
 
-
+	</main>
 <% 	
 }
 %>
