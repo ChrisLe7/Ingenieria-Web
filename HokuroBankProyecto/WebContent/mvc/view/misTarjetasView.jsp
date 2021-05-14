@@ -35,7 +35,7 @@
 				System.out.println(infoTarjetas);
 				ArrayList<TarjetaDTO> misTarjetas = infoTarjetas.getTarjetas();
 				
-				if (misTarjetas != null && misTarjetas.isEmpty()) {
+				if (misTarjetas != null && !misTarjetas.isEmpty()) {
 					System.out.println("Tenemos tarjetas para el usuario");
 					//Poseemos Tarjetas
 					for (int  i = 0; i < misTarjetas.size(); i++) {
