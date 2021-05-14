@@ -28,12 +28,13 @@ public class TestCuentaBancariaDAO {
 			cuentaBancariaDAO.Delete(cuentaBancariaTest.getIdCuentaBancaria());
 		}
 		
-		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, new UsuarioDTO("UsuarioTest")) > 0 : "No se ha introducido la cuenta bancaria";
+		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
+		usuarioTest.setTelefono(123456789);
+		
+		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, usuarioTest) > 0 : "No se ha introducido la cuenta bancaria";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()) != null : "No se ha encontrado la cuenta bancaria";
-		
-		// FALTA PROBAR QueryByCliente YA QUE ACTUALMENTE NO SE TIENE TODAVIA LA RELACION
-				
+						
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdTitular().equals("UsuarioTest") : "Error titular de cuenta bancaria";
 		
 		assert cuentaBancariaDAO.QueryByIdCuentaBancaria(cuentaBancariaTest.getIdCuentaBancaria()).getIdCotitular().equals("") : "Error cotitular de cuenta bancaria";
@@ -42,7 +43,7 @@ public class TestCuentaBancariaDAO {
 		
 		cuentaBancariaTest.setEstadoBizum(true);
 		
-		assert cuentaBancariaDAO.UpdateBizum(cuentaBancariaTest) > 0 : "Error actualizando bizum";
+		assert cuentaBancariaDAO.UpdateBizum(cuentaBancariaTest, usuarioTest) > 0 : "Error actualizando bizum";
 		
 		assert cuentaBancariaDAO.QueryByBizum(cuentaBancariaTest.getIdCuentaBancaria()) : "Error bizum actualizado";
 		

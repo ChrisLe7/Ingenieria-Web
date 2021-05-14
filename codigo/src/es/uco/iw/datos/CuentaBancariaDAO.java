@@ -243,9 +243,11 @@ public class CuentaBancariaDAO extends DAO {
      * Actualiza el estado de bizum de una cuenta bancaria de la base de datos
      * 
      * @param cuentaBancaria Cuenta bancaria a actualizar
+     * @param usuario Usuario cuyo telefono se va a asignar al bizum
      * @return El numero de filas afectadas o 0 en caso de fallo
      */
-    public int UpdateBizum(CuentaBancariaDTO cuentaBancaria) {
+    public int UpdateBizum(CuentaBancariaDTO cuentaBancaria, UsuarioDTO usuario) {
+    	ArrayList<Integer> results = new ArrayList<Integer>();
         int status = 0;
 
         try {
@@ -254,7 +256,24 @@ public class CuentaBancariaDAO extends DAO {
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
             stmt.setBoolean(1, cuentaBancaria.getEstadoBizum());
-            status = stmt.executeUpdate();
+            results.add(stmt.executeUpdate());
+            
+            if (cuentaBancaria.getEstadoBizum()) {
+            	statement = sqlProp.getProperty("Insert_Cuenta_Bancaria_Bizum");
+            }
+            else {
+            	statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Bizum");
+            }
+            
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, cuentaBancaria.getIdCuentaBancaria());
+            
+            if (cuentaBancaria.getEstadoBizum()) {
+            	stmt.setInt(2, usuario.getTelefono());
+            }
+            
+            results.add(stmt.executeUpdate());            
+            status = CheckResults(results);
             
             if (stmt != null) {
                 stmt.close();
@@ -285,6 +304,11 @@ public class CuentaBancariaDAO extends DAO {
             results.add(stmt.executeUpdate());
             
             statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Usuario");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, idCuentaBancaria);
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Bizum");
             stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
             results.add(stmt.executeUpdate());
