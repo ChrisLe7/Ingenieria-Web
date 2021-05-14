@@ -27,7 +27,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 }else if(InfoTransacciones.getTarjetas().isEmpty()){
 	
 %> 
-
+<main class="main">
 <p>
 AUN NO HA REALIZADO NINGUNA TRANSACCION
 </p>
@@ -59,5 +59,6 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 <%	}
 	
 }%>
+	</main>
 </body>
 </html>
