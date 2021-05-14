@@ -1,6 +1,6 @@
 body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  background-color: #EAEAEA;
+  background-color: rgb(217, 217, 217);
   color: #000000;
   font-size: 1.2rem; /*tamaño de las letras*/
   line-height: 1.2em; /* interlineado */
@@ -28,7 +28,7 @@ p {
 }
 
 .header {
-  background: #FA9753;
+  background: rgb(43, 43, 43);
   color: white;
   padding: 2rem 0;
 
@@ -139,6 +139,67 @@ a.logo:hover{
 	   margin-top: 0;
 }
 
+
+.formularioLogin {
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 14.5em;
+  padding-bottom: 20.5em;
+  max-width: 26em;
+  background-color: rgb(83, 83, 83);
+  opacity: 0.5;
+  margin-top: 5%;
+  margin-left: 35%;
+  position: fixed;
+
+  
+
+}
+
+
+.formularioLogin h1 {
+	font-size: 2rem;
+  	line-height: 0.5em;
+}
+
+.formularioLogin h2 {
+	font-size: 1rem;
+  	line-height: 0.5em;
+}
+
+.formularioLogin input {
+  margin-bottom: 15px;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  padding: 0.5em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+  border: none; 
+  color: #525c66; 
+  font-size: 1em;
+  resize: none;
+}
+
+.formularioLogin .button {
+	display: block;
+	background-color: #D2D2D2;
+	padding: 0.625em 2.8em 0.625em 2.8em;
+	border: 0;
+	font-size: 1em; 
+	border : 0.2em inset #7C7C7C;
+	border-radius: 0.2em;
+	color: 	negro;
+  	font-family: "Roboto", sans-serif;
+}
+
+.formularioLogin .button:hover {
+	background: #AFAFAF;
+}
+
+
+
+
+
 .formulario {
   padding-left: 2em;
   padding-right: 2em;
@@ -188,6 +249,9 @@ a.logo:hover{
 .formulario .button:hover {
 	background: #AFAFAF;
 }
+
+
+
 
 
 
