@@ -88,14 +88,14 @@ public class RealizarPagoBizum extends HttpServlet {
 				TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, idTelefonoOrigen, idTelefonoDestino);
 	
 
-				CuentaBancariaDTO cuentaDestino = cuentaUserDAO.QueryByIdTelefono(idTelefonoDestino);	
+				CuentaBancariaDTO cuentaDestino = cuentaUserDAO.QueryByTelefono(Integer.valueOf(idTelefonoDestino));	
 				
 				if (cuentaDestino == null || !cuentaDestino.getEstadoBizum ()) {
 					mensajeNextPage = "Lo sentimos pero la cuenta destino no existe o no tiene Bizum habilitado";
 					request.setAttribute("mensaje", mensajeNextPage);
 				}
 				else {
-					CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByIdTelefono(idTelefonoOrigen);
+					CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByTelefono(Integer.valueOf(idTelefonoDestino));
 					if (cuentaOrigen.getEstadoBizum()) {
 						Float aux = cuentaOrigen.getSaldo() - Float.valueOf(cantidad);
 						if (aux >= 0) {

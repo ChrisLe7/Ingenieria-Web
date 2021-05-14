@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
+import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
+import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
  * Servlet implementation class CuentaBancariaController
@@ -55,6 +57,8 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
+		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
+		
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
 		String nextPage = null;
@@ -75,8 +79,9 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 			if (estadoBizum != null) {
 				
 				cuenta = cuentaUserDAO.QueryByIdCuentaBancaria(estadoBizum);
+				UsuarioDTO usuarioDTO = userDAO.QueryByDni(cliente.getDni());
 				cuenta.setEstadoBizum(!cuenta.getEstadoBizum());
-				cuentaUserDAO.UpdateBizum(cuenta);
+				cuentaUserDAO.UpdateBizum(cuenta, usuarioDTO);
 					nextPage = "MisCuentas";
 					request.getSession().removeAttribute("infoCuentas");
 				
