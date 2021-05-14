@@ -261,6 +261,36 @@ public class UsuarioDAO extends DAO {
     }
 
     /**
+     * Resetea la contraseÃ±a de un usuario
+     * 
+     * @param ususario Usuario cuya contraseña se va a resetear
+     * @return El numero de filas afectadas o 0 en caso de fallo
+     */
+    public int UpdatePasswordPorReseteo(UsuarioLoginDTO usuario) {
+        int status = 0;
+
+        try {
+            String statement = sqlProp.getProperty("Update_Password");
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement(statement);
+            stmt.setString(4, usuario.getDni());
+            stmt.setString(1, usuario.getPassword());
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            status = stmt.executeUpdate();
+            
+            if (stmt != null) {
+            	stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return status;
+    }
+
+    /**
      * Borra un usuario de la base de datos
      * 
      * @param dni Dni del usuario a borrar
