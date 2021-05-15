@@ -74,7 +74,7 @@ public class RegistrarTarjetaController extends HttpServlet {
 			//Se encuentra logueado deberemos de ver que hacer
 			
 			String pin = request.getParameter("pin");
-			
+			String mensajeNextPage ="";
 			if (pin != null) {
 				//Significa que vengo de la vista deberemos de crear una nueva tarjeta
 				String tipoTarjeta = request.getParameter("tipoTarjeta");
@@ -109,12 +109,19 @@ public class RegistrarTarjetaController extends HttpServlet {
 				
 				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
 				
-				infoUsuario.setUsuario(clienteInfo);
-				session.setAttribute("UsuarioInfoBean", infoUsuario);
-				
-				//redirección a la vista
-				nextPage = "/mvc/view/registrarTarjetaView.jsp";
-				
+				if (infoUsuario.getUsuario().getCuentasBancarias().isEmpty()) {
+					nextPage = "Home";
+					mensajeNextPage = "Lo sentimos pero deber� de contratar primero una cuenta";
+					request.setAttribute("mensaje", mensajeNextPage);
+				}
+				else 
+				{
+					infoUsuario.setUsuario(clienteInfo);
+					session.setAttribute("UsuarioInfoBean", infoUsuario);
+					
+					//redirección a la vista
+					nextPage = "/mvc/view/registrarTarjetaView.jsp";
+				}
 			}
 			
 		}else {

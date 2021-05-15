@@ -28,6 +28,8 @@
   <servlet-mapping>
     <servlet-name>RegistrarUsuario</servlet-name>
     <url-pattern>/RegistrarUsuario</url-pattern>
+    <url-pattern>/CrearUsuario</url-pattern>
+    
     
   </servlet-mapping>
   <servlet>

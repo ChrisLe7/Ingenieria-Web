@@ -72,7 +72,7 @@
 					
 					<label for="Password">Contraseña: </label> <br/>
 					
-					<input type="password" name="password" ><br/>
+					<input type="password" id="password" name="password" ><br/>
 				
 					<input type="submit" id="submitBtn" value="Registrarse">
 					

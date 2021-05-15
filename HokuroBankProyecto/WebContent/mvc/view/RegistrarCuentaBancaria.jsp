@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import ="java.util.ArrayList,es.uco.iw.negocio.tarjeta.TarjetaDTO, es.uco.iw.negocio.tarjeta.TipoTarjeta" %>
-<%@ page import ="es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO, es.uco.iw.negocio.usuario.PropiedadCuenta" %>
+<%@ page import ="es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO, es.uco.iw.negocio.usuario.PropiedadCuenta, es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria" %>
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
 
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
@@ -42,22 +42,29 @@ if (logged == false)  {
 
 		<label for="Tipo">Tipo de Cuenta: </label>
 		
-			<label><input type="radio" name="tipoCuenta" value = "ahorro" required> Ahorro</label> <br/>
+			<label><input type="radio" name="tipoCuenta" value = "<%=TipoCuentaBancaria.Ahorro%>" required> Ahorro</label> <br/>
 			
-			<label><input type="radio" name="tipoCuenta" value = "corriente" > Corriente</label> <br/>		
+			<label><input type="radio" name="tipoCuenta" value = "<%=TipoCuentaBancaria.Corriente %>">Corriente</label> <br/>		
 			
 		<%if(clienteBean.getRol().equals(RolUsuario.Administrador)){ 
 			
 	
-		 ArrayList<UsuarioDTO> listaCuentas = listadoClientes.getUsuarios();%>
+		 ArrayList<UsuarioDTO> listaCuentas = listadoClientes.getUsuarios();
+		 
+			if (listaCuentas.isEmpty()){
+				System.out.println("Lista Vacia");
+			}
+		 
+		 %>
+		
 		
 		<label>Titular: </label>
 			
-			<select id="idTitular" name="idTitular"> 
+			<select id="idTitular" name="idTitular" required> 
 			
 				<% for(UsuarioDTO user : listaCuentas){%>
-			
-				<option value="<%=user.getDni()%>">	
+
+				<option value="<%=user.getDni()%>"><%=user.getDni()%></option>
 			
 				<%} %>
 			
