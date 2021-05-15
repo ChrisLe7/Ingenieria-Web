@@ -13,11 +13,12 @@
 <head>
 <meta charset="UTF-8">
 <script src="js/popup.js" defer></script>
-<link rel="stylesheet" href="css/popup.css">
+<script src="js/crearFiltro.js" defer></script>
+<script src="js/mostrarMovimiento.js" defer></script>
 <title>Mis Transacciones</title>
 </head>
 <body>
-<main class="main">               <button class="button-open-popup" id="button-open-popup">Filtros</button>
+
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
 String nextPage = "";
@@ -26,10 +27,10 @@ String mensajeNextPage = "";
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
-}else if(InfoTransacciones.getTarjetas().isEmpty()){
+}else if(InfoTransacciones.getTransacciones().isEmpty()){
 	System.out.println("Error");
 %> 
-
+<main class="main">
 <p>
 AUN NO HA REALIZADO NINGUNA TRANSACCION
 </p>
@@ -37,7 +38,8 @@ AUN NO HA REALIZADO NINGUNA TRANSACCION
 <% }else{ 
 	System.out.println("Error2");
 ArrayList<TransaccionDTO> ListaTransacciones = new ArrayList<TransaccionDTO>();
-ListaTransacciones = InfoTransacciones.getTarjetas();
+ListaTransacciones = InfoTransacciones.getTransacciones();
+
 for(TransaccionDTO transaccion : ListaTransacciones){
 %>
 
@@ -49,14 +51,23 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 	Tipo: <%=transaccion.getTipoOperacion().toString()%><br/>
 	
-	Fecha: <%=transaccion.getFecha()%> <br/>
+	Fecha: <%=transaccion.getFecha()%><br/>
 	
-	Comentario: <%=transaccion.getComentario()%> <br/>
+	Comentario: <%=transaccion.getComentario()%><br/>
 	
 	Cuenta Origen: <%=transaccion.getIdCuentaOrigen()%><br/>
 	
 	Cuenta Destino: <%=transaccion.getIdCuentaDestino()%><br/>
 	
+	<form>
+		<input type="hidden" name="idTransaccion" value="<%=transaccion.getIdTransaccion()%>">
+		<input type="hidden" name="cantidad" value="<%=transaccion.getCantidad()%>">
+		<input type="hidden" name="fecha" value="<%=transaccion.getFecha()%>">
+		<input type="hidden" name="idCuentaOrigen" value="<%=transaccion.getIdCuentaOrigen()%>">
+		<input type="hidden" name="idCuentaDestino" value="<%=transaccion.getIdCuentaDestino()%>">
+		<input type="hidden" name="idCuentaSeleccionada" value="<%=InfoTransacciones.getIdCuenta()%>">
+	</form>
+
 </div>
 <%	}
 %>
@@ -79,21 +90,13 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 				  <option value="<%=TipoOperacion.Recibir %>">Recibir</option>
 				</select><br/>
 				
-				<label for="Cantidad">Cantidad Minima:</label><br/>
+				<label for="Cantidad">Cantidad:</label><br/>
 				
 				<input type="text" name="cantidad" pattern="[0-9]{+}" ><br/>
 				
-				<label for="Cantidad">Cantidad Maxima:</label><br/>
+				<label for="Fecha">Fecha de la transaccion:</label><br/>
 				
-				<input type="text" name="cantidad" pattern="[0-9]{+}" ><br/>
-				
-				<label for="Fecha">Fecha de inicio del margen:</label><br/>
-				
-				<input type="date" name="fecha_inicio"><br/>
-				
-				<label for="Fecha">Fecha fin del margen:</label><br/>
-				
-				<input type="date" name="fecha_fin"><br/>
+				<input type="date" name="fecha"><br/>
 				
 				<label for="idCuentaOrigen">Id de la Cuenta: </label><br/>	
 				

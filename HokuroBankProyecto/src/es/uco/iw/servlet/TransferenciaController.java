@@ -74,7 +74,8 @@ public class TransferenciaController extends HttpServlet {
 				
 				InfoTransaccionesBean infoTransacciones = new InfoTransaccionesBean();
 				
-				infoTransacciones.setTarjetas(transacciones);
+				infoTransacciones.setIdCuenta(idCuenta);
+				infoTransacciones.setTransacciones(transacciones);
 				session.setAttribute("InfoTransacciones", infoTransacciones);
 				//cambio añadido 
 				nextPage = "/mvc/view/listarTransaccionesView.jsp";

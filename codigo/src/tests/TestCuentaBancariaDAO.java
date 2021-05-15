@@ -29,7 +29,7 @@ public class TestCuentaBancariaDAO {
 		}
 		
 		UsuarioDTO usuarioTest = new UsuarioDTO("UsuarioTest");
-		usuarioTest.setTelefono(123456789);
+		usuarioTest.setTelefono(00000000);
 		
 		assert cuentaBancariaDAO.Insert(cuentaBancariaTest, usuarioTest) > 0 : "No se ha introducido la cuenta bancaria";
 		

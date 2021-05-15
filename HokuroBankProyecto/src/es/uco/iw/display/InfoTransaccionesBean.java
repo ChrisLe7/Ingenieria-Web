@@ -9,14 +9,23 @@ public class InfoTransaccionesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Strin idCuenta = "";
 	private ArrayList<TransaccionDTO> listaTransacciones = null;
 
-	public ArrayList<TransaccionDTO> getTarjetas() {
+	public String getIdCuenta() {
+		return idCuenta;
+	}
+
+	public void setIdCuenta(String idCuenta) {
+		this.idCuenta = idCuenta;
+	}
+
+	public ArrayList<TransaccionDTO> getTransacciones() {
 		return listaTransacciones;
 	}
 
-	public void setTarjetas(ArrayList<TransaccionDTO> tarjetas) {
-		this.listaTransacciones = tarjetas;
+	public void setTransacciones(ArrayList<TransaccionDTO> transacciones) {
+		this.listaTransacciones = transacciones;
 	}
 	
 	public TransaccionDTO get(int indice) {
