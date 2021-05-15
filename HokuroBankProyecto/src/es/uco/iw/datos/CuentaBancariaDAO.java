@@ -169,6 +169,57 @@ public class CuentaBancariaDAO extends DAO {
     	
     	return cuentaBancaria;
     }
+    
+    /**
+     * Devuelve todas las cuentas bancarias
+     * 
+     * @return Cuentsa bancarias
+     */
+    public ArrayList<CuentaBancariaDTO> QueryCuentasBancarias() {
+        ArrayList<CuentaBancariaDTO> cuentasBancarias = new ArrayList<CuentaBancariaDTO>();
+
+        try {
+            Connection con = getConnection();
+            String statement = sqlProp.getProperty("Select_Cuentas_Bancarias");
+            PreparedStatement stmt = con.prepareStatement(statement);
+            ResultSet set = stmt.executeQuery();
+            
+            while (set.next()) {
+            	String idTtitular = "";
+            	String idCotitular = "";
+            	
+            	statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Titular");
+            	PreparedStatement stmtTtitular = con.prepareStatement(statement);
+                stmtTtitular.setString(1, set.getString(1));
+                ResultSet setTtitular = stmtTtitular.executeQuery();
+                
+                if (setTtitular.next()) {
+                	idTtitular = setTtitular.getString(1);
+                }
+                
+                statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Cotitular");
+            	PreparedStatement stmtCotitular = con.prepareStatement(statement);
+                stmtCotitular.setString(1, set.getString(1));
+                ResultSet setCotitular = stmtCotitular.executeQuery();
+                
+                if (setCotitular.next()) {
+                	idCotitular = setCotitular.getString(1);
+                }
+                
+                CuentaBancariaDTO cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTtitular, idCotitular);
+                cuentasBancarias.add(cuentaBancaria)
+;            }
+
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return cuentasBancarias;
+    }
 
     /**
      * Inserta una cuenta bancaria en la base de datos

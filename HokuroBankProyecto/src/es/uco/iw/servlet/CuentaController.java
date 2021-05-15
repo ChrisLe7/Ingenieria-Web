@@ -18,6 +18,7 @@ import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
+import es.uco.iw.negocio.usuario.RolUsuario;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
@@ -39,7 +40,6 @@ public class CuentaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		String port = request.getServletContext().getInitParameter("port");
 		String username_bd = request.getServletContext().getInitParameter("username");
@@ -90,17 +90,21 @@ public class CuentaController extends HttpServlet {
 				}
 			}
 			else {
-
-				clienteInfo = userDAO.QueryByDni(userDNI);
-				
-				ArrayList<PropiedadCuenta> idCuentasCliente = clienteInfo.getCuentasBancarias();
-				
-
-				ArrayList<CuentaBancariaDTO> cuentasCliente = new ArrayList <CuentaBancariaDTO> ();
-				for (int i = 0; i< idCuentasCliente.size(); i++) {
-					cuentasCliente.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentasCliente.get(i).getIdCuentaBancaria()));
+				ArrayList<CuentaBancariaDTO> cuentasCliente = null;
+				if (cliente.getRol().equals(RolUsuario.Administrador)) {
+					cuentasCliente = cuentaUserDAO.QueryCuentasBancarias();
 				}
+				else {
+					clienteInfo = userDAO.QueryByDni(userDNI);
+					
+					ArrayList<PropiedadCuenta> idCuentasCliente = clienteInfo.getCuentasBancarias();
+					
 
+					cuentasCliente = new ArrayList <CuentaBancariaDTO> ();
+					for (int i = 0; i< idCuentasCliente.size(); i++) {
+						cuentasCliente.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentasCliente.get(i).getIdCuentaBancaria()));
+					}
+				}
 				InfoCuentasBancariasBean cuentas = new InfoCuentasBancariasBean();
 
 				cuentas.setCuentas(cuentasCliente);
