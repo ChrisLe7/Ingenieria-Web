@@ -63,7 +63,7 @@ public class CuentaController extends HttpServlet {
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
 		String nextPage ="/mvc/view/MisCuentasView.jsp"; 
-		
+		UsuarioDTO clienteInfo = null;
 		if (login) {
 			//Deberemos de coger la información de las cuentas del cliente para enviarsela a la vista
 			String userDNI = cliente.getDni();
@@ -71,11 +71,27 @@ public class CuentaController extends HttpServlet {
 			String idCuenta = request.getParameter("idCuenta");
 
 			if (idCuenta != null){
-				//No se que opciones pondremos por lo que lo dejo vacio por ahora
+				//Significa que somos admin y desamos cancelar la cuenta del cliente.
+				CuentaBancariaDTO cuentaACancelar = cuentaUserDAO.QueryByIdCuentaBancaria(idCuenta);
+				if (cuentaACancelar.getSaldo() != 0) {
+					clienteInfo = userDAO.QueryByDni(cuentaACancelar.getIdTitular());
+					//TENGO QUE REALIZAR LO QUE TENEMOS PUESTO EN EL DIAGRAMA DE ENVIAR EL DINERO A 
+					// LA OTRA CUENTA Y LUEGO MANDAR UN CORREO
+				}
+				else {
+					if (cuentaUserDAO.Delete(idCuenta) == 0) {
+						System.out.println("Ha fallado la cancelación");
+
+					}
+					disparador = request.getRequestDispatcher("Home");
+					String mensajeNextPage = "Se ha cancelado la cuenta con exito";
+					request.setAttribute("mensaje", mensajeNextPage);
+					session.removeAttribute("infoCuentas");
+				}
 			}
 			else {
 
-				UsuarioDTO clienteInfo = userDAO.QueryByDni(userDNI);
+				clienteInfo = userDAO.QueryByDni(userDNI);
 				
 				ArrayList<PropiedadCuenta> idCuentasCliente = clienteInfo.getCuentasBancarias();
 				
