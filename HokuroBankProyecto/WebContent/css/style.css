@@ -72,8 +72,9 @@ a.logo {
   border-radius: 5px;
 }
 
-a.logo:hover{
-	background: #DF7F3D;
+a.logo:hover {
+  background-color: #fff;
+  color: #000000;
 }
 
 

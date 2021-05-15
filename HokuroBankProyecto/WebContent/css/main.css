@@ -1,8 +1,4 @@
-/*
-	Daraz by TEMPLATE STOCK
-    templatestock.co @templatestock
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
+
 
 @import url(http://fonts.googleapis.com/css?family=Raleway:700,500,400);
 
@@ -45,10 +41,10 @@ a.main-stroked-button {
   color: #fff;
   font-weight: 600;
   letter-spacing: 1px;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0s ease 0s;
+  -moz-transition: all 0s ease 0s;
+  -o-transition: all 0s ease 0s;
+  transition: all 0s ease 0s;
 }
 
 a.main-stroked-button:hover {
