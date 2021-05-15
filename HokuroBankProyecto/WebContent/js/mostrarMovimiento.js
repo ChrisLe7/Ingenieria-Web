@@ -73,4 +73,6 @@ function mostrarMovimiento (movimiento) {
 			return false;
 		}
 	}
+
+	return true;
 }
