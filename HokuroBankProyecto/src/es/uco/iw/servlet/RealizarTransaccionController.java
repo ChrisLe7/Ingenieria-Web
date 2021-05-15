@@ -122,11 +122,11 @@ public class RealizarTransaccionController extends HttpServlet {
 				// Tengo que ir a la vista
 				//Debere de coger que cuentas pueden realizar el pago.
 				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
-				//nextPage = "/mvc/view/listarTransaccionesView.jsp";
+				nextPage = "/mvc/view/registrarTransaccionView.jsp";
 				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
 				
 				infoUsuario.setUsuario(clienteInfo);
-				session.setAttribute("UsuarioInfoBean", infoUsuario);
+				session.setAttribute("infoUsuario", infoUsuario);
 				
 				
 			}

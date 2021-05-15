@@ -43,11 +43,13 @@
   
   <servlet>
     <servlet-name>RealizarTransferencia</servlet-name>
-    <servlet-class>es.uco.iw.servlet.RealizarTransferenciaController</servlet-class>
+    <servlet-class>es.uco.iw.servlet.RealizarTransaccionController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RealizarTransferencia</servlet-name>
     <url-pattern>/RealizarTransferencia</url-pattern>
+    <url-pattern>/RealizarTransaccion</url-pattern>
+    
   </servlet-mapping>
   
    <servlet>
@@ -57,7 +59,6 @@
   <servlet-mapping>
     <servlet-name>RealizarPagoBizum</servlet-name>
     <url-pattern>/RealizarTransferenciaBizum</url-pattern>
-    <url-pattern>/RealizarPagoBizum</url-pattern>
 
   </servlet-mapping>
   
@@ -158,18 +159,18 @@
     <param-name>bdName</param-name>
     <param-value>IW</param-value>
   </context-param>
-   <!-- 
+
  <context-param>
     <param-name>server</param-name>
     <param-value>hokurobank.ddns.net</param-value>
   </context-param>
-  -->
- 
+
+    <!-- 
   <context-param>
     <param-name>server</param-name>
     <param-value>192.168.0.14</param-value>
   </context-param>
- 
+   -->
 
   <context-param>
     <param-name>port</param-name>

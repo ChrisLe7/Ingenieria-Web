@@ -31,7 +31,7 @@
 						<ul class = "option">
 						<li><a href = "Logout">Desconectar</a></li>
 						<li><a href = "Perfil">Ver Perfil</a></li>
-						<li><a href = "MisTransferencias">Realizar Transferencia</a></li>
+						<li><a href = "RealizarTransferencia">Realizar Transferencia</a></li>
 						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
 						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
 						<li><a href = "RegistrarTarjeta">Crear Tarjeta</a></li>

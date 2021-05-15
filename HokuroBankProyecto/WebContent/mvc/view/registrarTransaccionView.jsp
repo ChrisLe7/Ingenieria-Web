@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
-<jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
-<jsp:useBean  id="InfoTransacciones" scope="session" class="es.uco.iw.display.InfoTransaccionesBean"></jsp:useBean>
+<jsp:useBean  id="infoUsuario" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
-<%@ page import ="es.uco.iw.negocio.transaccion.TransaccionDTO, es.uco.iw.negocio.transaccion.TipoOperacion " %>
+<%@ page import ="es.uco.iw.negocio.usuario.PropiedadCuenta" %>
+<%@ page import ="es.uco.iw.negocio.transaccion.TipoOperacion" %>
 <%@ page import ="java.util.ArrayList" %>
 
 <!DOCTYPE html>
@@ -30,37 +30,44 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	</jsp:forward>
 	<% 
 }else{ 
-	ArrayList<CuentaBancariaDTO> ListaCuentas = new ArrayList<CuentaBancariaDTO>();
-	ListaCuentas = infoCuentas.getCuentas();
-%>
+	ArrayList<PropiedadCuenta> ListaCuentas = new ArrayList<PropiedadCuenta>();
+	if (infoUsuario.getUsuario() == null) {
+		System.out.println("Vacio");
+	}
+	else {
+		ListaCuentas = infoUsuario.getUsuario().getCuentasBancarias();
+	}
+	%>
 
-<main class="main">
-
-	<div>
+	<main class="main">
 	
-		<form method="post" action="RealizarTransaccion">
+		<div>
 		
-		<input type="text" name="idCuentaDestino" required>
+			<form method="post" action="RealizarTransaccion">
+			
+			<input type="text" name="idCuentaDestino" required>
+			
+			<select name="idCuentaOrigen" required>
+				<%for(PropiedadCuenta cuenta : ListaCuentas){ %>
+				 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
+				<%} %>
+			</select>
+			
+			<input type="text" name="descripcion" required>
+			
+			<input type="text" name="cantidad" pattern="[0-9]{+}" required>
 		
-		<select name="idCuentaOrigen" required>
-			<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
-		  <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
-		  <%} %>
-		</select>
-		
-		<input type="text" name="descripcion" required>
-		
-		<input type="text" name="cantidad" required>
-	
-		<select name="tipoOperacion" required>
-		  <option value="pagar">Pagar</option>
-		  <option value="recibir">Recibir</option>
-		</select>
-		
-		</form>
-		
-	</div>
-</main>
+			<select name="tipoOperacion" required>
+			  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
+			  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
+			</select>
+			
+			<input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
+			
+			</form>
+			
+		</div>
+	</main>
 <%	}
 	
 %>
