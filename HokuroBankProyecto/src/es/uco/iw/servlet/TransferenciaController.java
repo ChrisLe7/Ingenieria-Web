@@ -77,7 +77,7 @@ public class TransferenciaController extends HttpServlet {
 				infoTransacciones.setTarjetas(transacciones);
 				session.setAttribute("InfoTransacciones", infoTransacciones);
 				//cambio añadido 
-				nextPage = "mvc/view/listarTransaccionesView.jsp";
+				nextPage = "/mvc/view/listarTransaccionesView.jsp";
 			}
 		}
 		else {
@@ -86,7 +86,8 @@ public class TransferenciaController extends HttpServlet {
 			request.setAttribute("mensaje", mensajeNextPage);
 		}
 			
-		
+		disparador = request.getRequestDispatcher(nextPage);
+		disparador.forward(request, response);	
 	}
 
 	/**

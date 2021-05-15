@@ -66,6 +66,12 @@ ListaCuentas = infoCuentas.getCuentas();
 			<input type="submit" value="Habilitar Bizum">
 		<% } %>
 	</form>	
+	
+	 <form method="post" action="MisTransferencias">
+		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+		<input type="submit" value="Mis Transferencias">
+	</form>	
+	
 	 	
 	</div>
 	 	

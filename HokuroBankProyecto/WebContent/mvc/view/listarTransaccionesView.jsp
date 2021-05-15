@@ -25,7 +25,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
 }else if(InfoTransacciones.getTarjetas().isEmpty()){
-	
+	System.out.println("Error");
 %> 
 <main class="main">
 <p>
@@ -33,6 +33,7 @@ AUN NO HA REALIZADO NINGUNA TRANSACCION
 </p>
 
 <% }else{ 
+	System.out.println("Error2");
 ArrayList<TransaccionDTO> ListaTransacciones = new ArrayList<TransaccionDTO>();
 ListaTransacciones = InfoTransacciones.getTarjetas();
 
