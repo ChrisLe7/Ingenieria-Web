@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
 <jsp:useBean  id="infoUsuario" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
@@ -15,12 +14,13 @@
 <title>Realizar Transacciones</title>
 </head>
 <body>
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
+
 System.out.println("Estoy en la vista");
-String mensajeNextPage = "";
+
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
@@ -39,7 +39,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	}
 	%>
 
-	<main class="main">
+		<main class="main">
 	
 		<div>
 		

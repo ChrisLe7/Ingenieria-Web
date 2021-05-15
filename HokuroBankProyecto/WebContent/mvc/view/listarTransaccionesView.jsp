@@ -58,6 +58,47 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 </div>
 <%	}
+%>
+	
+	<div class="overlay" id="overlay">
+	
+		<div class="popup" id="popup">
+		
+			<form method="post" action="" id="filter">
+				<a href="#" id="button-close-popup" class="button-close-popup"><i class="fas fa-times">Cerrar</i></a>
+				
+				<label for="idTransaccion">Id de la Transaccion:</label><br/>
+				
+				<input type="text" name="idTransaccion"><br/>
+				
+				<label for="tipoOperacion">Tipo de Operación:</label><br/>	
+				
+				<select name="tipoOperacion">
+				  <option value="<%=TipoOperacion.Pagar %>">Pagar</option>
+				  <option value="<%=TipoOperacion.Recibir %>">Recibir</option>
+				</select><br/>
+				
+				<label for="Cantidad">Cantidad:</label><br/>
+				
+				<input type="text" name="cantidad" pattern="[0-9]{+}" ><br/>
+				
+				<label for="Fecha">Fecha de la transaccion:</label><br/>
+				
+				<input type="date" name="fecha"><br/>
+				
+				<label for="idCuentaOrigen">Id de la Cuenta: </label><br/>	
+				
+				<input type="text" name="idCuenta"><br/>
+				
+				<input id="button-submit" type="submit" value="Filtrar" name="filter">
+				
+			</form>
+		
+		</div>
+	
+	</div>
+	
+<% 
 	
 }%>
 	</main>
