@@ -26,6 +26,8 @@
 	UsuarioDTO user = UsuarioInfoBean.getUsuario();
 	
 	ArrayList<PropiedadCuenta> listaCuentas = user.getCuentasBancarias();
+	if (!listaCuentas.isEmpty()) {
+	
 	%>	
 	<%@ include file="/include/header.jsp" %>
 	<%@ include file="/include/Menu.jsp" %>
@@ -62,6 +64,15 @@
 
 
 	</main>
-
+ 	<%}
+	else {
+		System.out.println("No cuentas");
+		String nextPage = "Home";
+		String mensajeNextPage = "No posee cuentas, contrate una antes de solicitar una tarjeta";
+	%>
+	<jsp:forward page="<%=nextPage%>">
+		<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+	</jsp:forward>
+	<% }%>
 </body>
 </html>

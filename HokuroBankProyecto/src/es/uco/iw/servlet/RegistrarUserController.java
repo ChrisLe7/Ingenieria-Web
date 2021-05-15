@@ -89,6 +89,7 @@ public class RegistrarUserController extends HttpServlet {
 				String passwordHash = HashPassword.createHash(UserPassword, salt);
 				
 				UsuarioLoginDTO userLoginDTO  = new UsuarioLoginDTO (UserDNI,passwordHash, UserRol);
+				userLoginDTO.setSalt(salt);
 				
 				userDAO.Insert(userDTO, userLoginDTO);
 				

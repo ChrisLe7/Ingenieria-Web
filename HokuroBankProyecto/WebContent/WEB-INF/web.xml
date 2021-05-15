@@ -134,7 +134,7 @@
   <servlet-mapping>
     <servlet-name>RegistrarTarjeta</servlet-name>
     <url-pattern>/RegistrarTarjeta</url-pattern>
-    
+    <url-pattern>/ContratarTarjeta</url-pattern>
   </servlet-mapping>
   
   <servlet>

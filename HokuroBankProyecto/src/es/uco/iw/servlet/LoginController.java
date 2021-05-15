@@ -74,6 +74,7 @@ public class LoginController extends HttpServlet {
 				
 				
 				if (passwordHash.equals(userDTO.getPassword())) {
+					cliente = new ClienteBean ();
 					cliente.setDni(UserDNI);
 					cliente.setRol(userDTO.getRol());
 					session.setAttribute("clienteBean", cliente);
@@ -81,7 +82,8 @@ public class LoginController extends HttpServlet {
 					disparador = request.getRequestDispatcher(nextPage);
 				}
 				else {
-					nextPage = "/mvc/view/loginView";
+					nextPage = "/mvc/view/loginView.jsp";
+					System.out.println("Contraseña Errorne");
 					disparador = request.getRequestDispatcher(nextPage);
 					String mensajeNextPage = "Error de Contraseña, Intentelo de Nuevo";
 					request.setAttribute("mensaje", mensajeNextPage);

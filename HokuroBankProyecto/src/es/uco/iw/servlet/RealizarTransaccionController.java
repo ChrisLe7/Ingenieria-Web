@@ -22,6 +22,7 @@ import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.negocio.transaccion.TransaccionDTO;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.utilidades.GeneradorID;
 
 /**
  * Servlet implementation class RealizarTransaccionController
@@ -84,7 +85,7 @@ public class RealizarTransaccionController extends HttpServlet {
 				String descripcion = request.getParameter("descripcion");
 				String cantidad = request.getParameter("cantidad");
 				String tipoOperacion = request.getParameter("tipoOperacion");
-				String idTransaccion = "";
+				String idTransaccion = GeneradorID.GenerarIdTransaccion();
 				TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, idCuentaOrigen, idCuentaDestino);
 	
 

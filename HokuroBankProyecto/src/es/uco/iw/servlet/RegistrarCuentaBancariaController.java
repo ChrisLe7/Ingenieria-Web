@@ -2,6 +2,7 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
+import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.ListadoClientesBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
@@ -57,6 +59,7 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
+		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		
 		Boolean login = cliente != null && !cliente.getDni().equals("");
@@ -94,8 +97,8 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 			ListadoClientesBean listadoClientes = new ListadoClientesBean ();
 			
 			// QUERY PARA OBTENER EL LISTADO DE USUARIOS COMO DTO's
-			//ArrayList <UsuarioDTO> listadoUsuarios = QUERY;
-			//listadoClientes.setUsuarios(listadoUsuarios);
+			ArrayList <UsuarioDTO> listadoUsuarios = userDAO.QueryUsuarios();
+			listadoClientes.setUsuarios(listadoUsuarios);
 			
 			request.getSession().setAttribute("listadoClientes", listadoClientes);
 			nextPage = "/mvc/view/RegistrarCuentaBancaria.jsp";
