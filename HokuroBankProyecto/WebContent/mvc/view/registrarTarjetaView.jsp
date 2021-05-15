@@ -47,9 +47,9 @@
 	
 		<label for="Pin">Pin: </label>
 		
-		<input type="password" name="pin" pattern="[0-9]{4}" required>
+		<input type="password" name="pin" pattern="[0-9]{4}" required><br/>
 		
-		<label for="Tipo">Tipo de Tarjeta: </label>
+		<label for="Tipo">Tipo de Tarjeta: </label><br/>
 		
 			<label><input type="radio" name="tipoTarjeta" value = "Credito" required> Credito</label> <br/>
 			
