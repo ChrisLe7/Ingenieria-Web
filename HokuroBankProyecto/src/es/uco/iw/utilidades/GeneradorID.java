@@ -4,6 +4,11 @@ import java.util.Random;
 
 public class GeneradorID {
 
+	/**
+	 * Genera un IBAN aleatorio para una cuenta bancaria
+	 * 
+	 * @return IBAN para la cuenta bancaria
+	 */
 	public static String GenerarIBAN() {
 		Random random = new Random();
 		String iban = "ES";
@@ -21,6 +26,11 @@ public class GeneradorID {
 		return iban;
 	}
 	
+	/**
+	 * Crea un numero de tarjeta aleatorio
+	 * 
+	 * @return Numero de tarjeta
+	 */
 	public static String GenerarNumTarjeta() {
 		Random random = new Random();
 		String numTarjeta = "" + random.nextInt(10);

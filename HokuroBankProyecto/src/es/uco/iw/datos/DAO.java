@@ -64,14 +64,11 @@ public abstract class DAO {
      * Comprueba los resultados del acceso a la base de datos
      * 
      * @param results Lista con los resultados
-     * @return 1 en caso de exito, 0 en caso de que no ocurra nada y -1 en caso de error
+     * @return 1 en caso de exito y 0 en caso de error
      */
 	protected int CheckResults(ArrayList<Integer> results) {
 		for (int i = 0; i < results.size(); i++) {
         	if (results.get(i) == -1) {
-        		return -1;
-        	}
-        	else if (results.get(i) == 0) {
         		return 0;
         	}
         }

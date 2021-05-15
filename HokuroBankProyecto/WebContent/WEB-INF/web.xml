@@ -50,6 +50,18 @@
     <url-pattern>/RealizarTransferencia</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>RealizarPagoBizum</servlet-name>
+    <servlet-class>es.uco.iw.servlet.RealizarPagoBizumController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RealizarPagoBizum</servlet-name>
+    <url-pattern>/RealizarTransferenciaBizum</url-pattern>
+    <url-pattern>/RealizarPagoBizum</url-pattern>
+
+  </servlet-mapping>
+  
+  
   
   <servlet>
     <servlet-name>Cuentas</servlet-name>
@@ -69,6 +81,15 @@
     <servlet-name>ModificarPassword</servlet-name>
     <url-pattern>/ModificarPassword</url-pattern>
     
+  </servlet-mapping>
+
+ <servlet>
+    <servlet-name>ResetPassword</servlet-name>
+    <servlet-class>es.uco.iw.servlet.ResetPasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResetPassword</servlet-name>
+    <url-pattern>/ResetPassword</url-pattern>
   </servlet-mapping>
 
   <servlet>

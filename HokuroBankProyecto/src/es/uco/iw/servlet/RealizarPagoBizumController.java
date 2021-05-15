@@ -27,13 +27,13 @@ import es.uco.iw.negocio.usuario.UsuarioDTO;
  * Servlet implementation class RealizarPagoBizum
  */
 @WebServlet("/RealizarPagoBizum")
-public class RealizarPagoBizum extends HttpServlet {
+public class RealizarPagoBizumController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RealizarPagoBizum() {
+    public RealizarPagoBizumController() {
         super();
         // TODO Auto-generated constructor stub
     }
