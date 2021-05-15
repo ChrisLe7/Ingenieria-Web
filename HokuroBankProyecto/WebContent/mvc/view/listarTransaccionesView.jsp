@@ -12,6 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="js/popup.js" defer></script>
 <title>Mis Transacciones</title>
 </head>
 <body>
