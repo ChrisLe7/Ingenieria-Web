@@ -106,9 +106,9 @@ public class RegistrarTarjetaController extends HttpServlet {
 			}
 			else {
 				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
-				
+
 				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
-				
+				infoUsuario.setUsuario(clienteInfo);
 				if (infoUsuario.getUsuario().getCuentasBancarias().isEmpty()) {
 					nextPage = "Home";
 					mensajeNextPage = "Lo sentimos pero deber· de contratar primero una cuenta";
@@ -116,7 +116,6 @@ public class RegistrarTarjetaController extends HttpServlet {
 				}
 				else 
 				{
-					infoUsuario.setUsuario(clienteInfo);
 					session.setAttribute("UsuarioInfoBean", infoUsuario);
 					
 					//redirecci√≥n a la vista
