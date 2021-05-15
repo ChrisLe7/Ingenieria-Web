@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-   <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
+
 	<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario" %>
 
 <!DOCTYPE html>
@@ -11,14 +11,17 @@
 
 <body>
 	<%@ include file="/include/header.jsp" %>
-
+	<%@ include file="/include/Menu.jsp" %>
 		<% 
 		System.out.println(clienteBean);
 		System.out.println(clienteBean.getDni());
 		
-		boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-		String nextPage = "Login";
-		String mensajeNextPage = "";
+		logged = clienteBean != null && !clienteBean.getDni().equals("");
+		mensajeNextPage = (String)request.getAttribute("mensaje");
+		nextPage = "/mvc/view/MainMenu.jsp";
+		if (mensajeNextPage == null) mensajeNextPage = "";	
+		
+		
 		if (logged)  {
 			/* Significa que el usuario se encuentra logueado. */
 			
@@ -27,22 +30,12 @@
 			%>
 
 					
-					<nav class = "MenuNavegacion">
-						<ul class = "option">
-						<li><a href = "Logout">Desconectar</a></li>
-						<li><a href = "Perfil">Ver Perfil</a></li>
-						<li><a href = "RealizarTransferencia">Realizar Transferencia</a></li>
-						<li><a href = "MisCuentas">Gestionar Cuentas</a></li>
-						<li><a href = "MisTarjetas">Gestionar Tarjetas</a></li>
-						<li><a href = "RegistrarTarjeta">Crear Tarjeta</a></li>
-						<% if ( (clienteBean != null) && (clienteBean.getRol().equals(RolUsuario.Administrador))) { %>
-						<li><a href = "RegistrarUsuario">Añadir Nuevo Usuario</a></li>
-						<li><a href = "RegistrarCuentaBancaria">Crear Cuenta Bancaria</a></li>
-						
-						<% } %>
-						</ul>
-											
-					</nav>
+<main class="main">
+
+<%= mensajeNextPage %>
+</main>
+
+	
 				
 	
 		<% 	
