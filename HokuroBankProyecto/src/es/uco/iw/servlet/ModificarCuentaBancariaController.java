@@ -122,8 +122,10 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 				//Limpiamos el conjunto de las cuentas para ahora solo tener uno
 				cuenta = cuentaUserDAO.QueryByIdCuentaBancaria(modificarSaldo);
 				infoCuentas = new InfoCuentasBancariasBean();
-				infoCuentas.setCuentas(new ArrayList<CuentaBancariaDTO>());
-				infoCuentas.set(0, cuenta);
+				ArrayList<CuentaBancariaDTO> arraycuentas = new ArrayList<CuentaBancariaDTO>();
+				arraycuentas.add(cuenta);
+				System.out.println("holahola");
+				infoCuentas.setCuentas(arraycuentas);
 				request.getSession().setAttribute("infoCuentas", infoCuentas);
 				
 				
@@ -145,6 +147,7 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 			
 			
 		}
+		System.out.println("prueba");
 		disparador = request.getRequestDispatcher(nextPage);
 		
 		disparador.forward(request, response);
