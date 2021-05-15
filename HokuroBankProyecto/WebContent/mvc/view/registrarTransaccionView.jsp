@@ -68,8 +68,8 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 			<label for="TipoOperacion">Tipo de Operacion: </label>		
 				
 			<select name="tipoOperacion" required>
-			  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
-			  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
+			  <option value="<%=TipoOperacion.Pagar %>">Pagar</option>
+			  <option value="<%=TipoOperacion.Recibir %>">Recibir</option>
 			</select>
 			
 			<input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
