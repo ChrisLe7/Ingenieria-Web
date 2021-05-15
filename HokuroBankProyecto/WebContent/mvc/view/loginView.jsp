@@ -1,64 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-	<%@ page import ="es.uco.iw.negocio.usuario.RolUsuario" %>
-
+<%@ page language="java" contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-</head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/Login.css"> 
+    <header class="header">
+	<div class="container logo-nav-container">
+		<a href="index.jsp" class="logo">HokuroBank</a>
+	</div>
+</header>
+    <script src="js/sha512.js" defer></script>
+    <script src="js/hashPassword.js" defer></script>
+    <script src="js/login.js" defer></script>
+    <title>Login</title>
+
+
 
 
 <body>
-	<%@ include file="/include/header.jsp" %>
-	<%@ include file="/include/Menu.jsp" %>
-		<% 
-		System.out.println(clienteBean);
-		System.out.println(clienteBean.getDni());
-		
-		logged = clienteBean != null && !clienteBean.getDni().equals("");
-		mensajeNextPage = (String)request.getAttribute("mensaje");
-		nextPage = "/mvc/view/MainMenu.jsp";
-		if (mensajeNextPage == null) mensajeNextPage = "";	
-		
-		
-		if (logged)  {
-			/* Significa que el usuario se encuentra logueado. */
-			
-			/*Opciones del menú*/
-			
-			%>
 
-					
-<main class="main">
-
-<%= mensajeNextPage %>
-</main>
-
-	
-				
-	
-		<% 	
-		}
-		else {
-			//No se encuentra logueado deberá de irse al controlador de login.
-			nextPage = "/mvc/view/MainMenu.jsp";
-			mensajeNextPage = "Debera de Iniciar Sesion para acceder al Sistema";
-		%>
-		<jsp:forward page="<%=nextPage%>">
-			<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-		</jsp:forward>
-
-		<%} %>
-		
-	<main class="main">
+<%
 
 
-	
-	
+String nextPage = "Login";
 
+String mensajeNextPage = (String)request.getAttribute("mensaje");
 
-</main>
+if (mensajeNextPage == null) mensajeNextPage = "";	
 
+%> 
+
+<div id="warp">
+Monotone Admin Login CSS
+  <form  method = "post" action="Login" id="formularioUsuario">
+    	<div class="admin">
+			      <div class="rota">
+				        <h1>HOKURO</h1>
+        				<input id="dni" type="text" name="DNI" placeholder="DNI" required/><br/>
+				        <input id="password" type="password" name="Password" placeholder="Contraseña" required/>
+      			</div>
+    		</div>
+    		<div class="cms">
+      			<div class="roti">
+			        	<h1>BANK</h1>
+				        <input class="elsubmit" type="submit" id="submitBtn" value="Iniciar Sesión"><br/>
+				        <p><a href="index.jsp">Ayuda</a> </p>
+      </div>
+    		</div>
+
+  	</form>
+  	    	
+</div>
+
+<div>
+
+    		<h2>⠀⠀</h2><br/><br/>
+    		</div><%= mensajeNextPage %>
 </body>
 </html>
