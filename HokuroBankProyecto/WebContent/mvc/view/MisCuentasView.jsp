@@ -84,6 +84,10 @@ ListaCuentas = infoCuentas.getCuentas();
 			<input type="submit" value="Modificar Saldo">
 		 </form>	
 	
+		<form method=post action="CancelarCuentaBancaria">
+			<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+			<input type=submit value="Cancelar Cuenta Bancaria"> 
+		</form>
 
 <% 		}%>
 	</div>
