@@ -141,6 +141,35 @@ public class UsuarioDAO extends DAO {
     	
     	return usuarios;
     }
+    
+    /**
+     * Devuelve todos los usuarios que sean clientes
+     * 
+     * @return Usuarios clientes
+     */
+    public ArrayList<UsuarioDTO> QueryUsuarios() {
+    	ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
+    	
+    	try {
+            Connection con = getConnection();
+            String statement = sqlProp.getProperty("Select_Usuarios");
+            PreparedStatement stmt = con.prepareStatement(statement);
+            ResultSet set = stmt.executeQuery();
+
+            while (set.next()) {
+            	usuarios.add(new UsuarioDTO(set.getString(1)));
+            }
+
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+    	
+    	return usuarios;
+    }
 
     /**
      * Inserta un usuario en la base de datos
