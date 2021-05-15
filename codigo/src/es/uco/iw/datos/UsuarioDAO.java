@@ -265,7 +265,7 @@ public class UsuarioDAO extends DAO {
         calendar.setTime(new java.util.Date());
         calendar.add(Calendar.MONTH, 1);
         java.util.Date cambioDisponible = calendar.getTime();
-        calendar.add(Calendar.MONTH, 6);
+        calendar.add(Calendar.MONTH, 5);
         java.util.Date cambioObligatorio = calendar.getTime();
 
         try {
