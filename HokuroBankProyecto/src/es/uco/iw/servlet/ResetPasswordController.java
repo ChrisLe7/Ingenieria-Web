@@ -75,10 +75,10 @@ public class ResetPasswordController extends HttpServlet {
 				if (idUserCliente == null) {
 					idUserCliente = cliente.getDni();
 				}
+
+				String newPassword = request.getParameter("prehashPassword");
+				String newPasswordHasheada = request.getParameter("password");
 				
-				//Generamos la contraseña nueva por defecto.
-				//NO SE QUE HACER AQUÍ 
-				String newPassword = "";
 				UsuarioLoginDTO userLoginDTO = userDAO.QueryByPassword(idUserCliente);
 				
 				if (userLoginDTO == null) {
@@ -86,7 +86,7 @@ public class ResetPasswordController extends HttpServlet {
 					nextPage = "Home";
 				}
 				else {
-					String passwordHash = HashPassword.createHash(newPassword, userLoginDTO.getSalt());
+					String passwordHash = HashPassword.createHash(newPasswordHasheada, userLoginDTO.getSalt());
 					userLoginDTO.setPassword(passwordHash);
 					
 					userDAO.UpdatePasswordPorReseteo(userLoginDTO);
@@ -96,7 +96,7 @@ public class ResetPasswordController extends HttpServlet {
 					String mensaje = "Su contraseña se ha reseteado de forma correcta, su contraseña nueva será: " + newPassword;
 					EnvioCorreo.EnviarCorreo(UserEmail, asunto, mensaje);
 					nextPage = "Home";
-					mensajeNextPage = "La contraseña del usuario "+ idUserCliente +" se ha reseteado de forma correcta";
+					mensajeNextPage = "La contraseña del usuario "+ idUserCliente +" se ha reseteado de forma correcta. Es: "+ newPassword;
 				}
 			}
 			else {

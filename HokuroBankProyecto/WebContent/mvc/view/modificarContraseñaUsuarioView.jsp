@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- scripts y css -->
-<title>Perfil</title>
+<title>Modificar Contraseña</title>
 	<script src="js/modificarPerfilBtn.js" defer></script> 
 	<script src="js/sha512.js" defer></script>
 	<script src="js/hashPassword.js" defer></script>
@@ -46,7 +46,7 @@ if (!logged)  {
 			<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password"  required><br/>
 			
-			<input type="submit" value="Confirmar">
+			<input type="submit" id="submitBtn" value="Confirmar">
 		
 		</form>
 	
