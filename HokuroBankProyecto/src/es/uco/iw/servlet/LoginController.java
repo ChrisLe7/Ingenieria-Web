@@ -67,9 +67,9 @@ public class LoginController extends HttpServlet {
 				
 				UsuarioLoginDTO userDTO = userDAO.QueryByPassword(UserDNI);
 				
-				String saltContraseña = userDTO.getSalt();
+				String saltContraseÃ±a = userDTO.getSalt();
 				
-				String passwordHash = HashPassword.createHash(UserPassword, saltContraseña);
+				String passwordHash = HashPassword.createHash(UserPassword, saltContraseÃ±a);
 				
 				
 				
@@ -83,21 +83,21 @@ public class LoginController extends HttpServlet {
 				}
 				else {
 					nextPage = "/mvc/view/loginView.jsp";
-					System.out.println("Contraseña Errorne");
+					System.out.println("ContraseÃ±a Errorne");
 					disparador = request.getRequestDispatcher(nextPage);
-					String mensajeNextPage = "Error de Contraseña, Intentelo de Nuevo";
+					String mensajeNextPage = "Error de ContraseÃ±a, Intentelo de Nuevo";
 					request.setAttribute("mensaje", mensajeNextPage);
 				}
 			}
 			else {
 				nextPage = "/mvc/view/loginView.jsp";
 				disparador = request.getRequestDispatcher(nextPage);
-				String mensajeNextPage = "No se encuentra logueado, debe de iniciar sesión";
+				String mensajeNextPage = "Accede a HokuroBank con tu DNI y Clave.";
 				request.setAttribute("mensaje", mensajeNextPage);
 			}
 		}
 		else {
-			//Se encuentra logueado deberá de acceder al Home.
+			//Se encuentra logueado deberÃ¡ de acceder al Home.
 			//nextPage = "index.jsp";
 			//disparador = request.getRequestDispatcher(nextPage);
 			
