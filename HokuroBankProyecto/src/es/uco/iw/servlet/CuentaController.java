@@ -113,11 +113,7 @@ public class CuentaController extends HttpServlet {
 					
 					String asunto = "Cancelacion de Cuenta";
 					
-					ArrayList<TarjetaDTO> tarjetasCuenta = tarjetaDAO.QueryByIdCuentaBancaria(cuentaACancelar.getIdCuentaBancaria());
 					
-					for (int i = 0 ; i <tarjetasCuenta.size(); i++) {
-						tarjetaDAO.Delete(tarjetasCuenta.get(i).getNumTarjeta());
-					}
 					cuentaUserDAO.Delete(cuentaACancelar.getIdCuentaBancaria());
 					EnvioCorreo.EnviarCorreo(clienteInfo.getEmail(), asunto, mensaje);
 					disparador = request.getRequestDispatcher("Home");
@@ -127,11 +123,6 @@ public class CuentaController extends HttpServlet {
 				}
 				else {
 					
-					ArrayList<TarjetaDTO> tarjetasCuenta = tarjetaDAO.QueryByIdCuentaBancaria(cuentaACancelar.getIdCuentaBancaria());
-					
-					for (int i = 0 ; i <tarjetasCuenta.size(); i++) {
-						tarjetaDAO.Delete(tarjetasCuenta.get(i).getNumTarjeta());
-					}
 					
 					if (cuentaUserDAO.Delete(idCuenta) == 0) {
 						System.out.println("Ha fallado la cancelación");

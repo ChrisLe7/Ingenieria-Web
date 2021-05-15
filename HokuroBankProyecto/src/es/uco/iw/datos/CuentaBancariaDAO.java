@@ -348,18 +348,23 @@ public class CuentaBancariaDAO extends DAO {
         int status = 0;
 
         try {
-            String statement = sqlProp.getProperty("Delete_Cuenta_Bancaria");
+            String statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Usuario");
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
             results.add(stmt.executeUpdate());
             
-            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Usuario");
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Bizum");
             stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
             results.add(stmt.executeUpdate());
             
-            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Bizum");
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria_Tarjeta");
+            stmt = con.prepareStatement(statement);
+            stmt.setString(1, idCuentaBancaria);
+            results.add(stmt.executeUpdate());
+            
+            statement = sqlProp.getProperty("Delete_Cuenta_Bancaria");
             stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
             results.add(stmt.executeUpdate());
