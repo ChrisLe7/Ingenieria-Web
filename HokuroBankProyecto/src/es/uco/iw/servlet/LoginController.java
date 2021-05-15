@@ -67,9 +67,9 @@ public class LoginController extends HttpServlet {
 				
 				UsuarioLoginDTO userDTO = userDAO.QueryByPassword(UserDNI);
 				
-				String saltContraseña = userDTO.getSalt();
+				String saltPassword = userDTO.getSalt();
 				
-				String passwordHash = HashPassword.createHash(UserPassword, saltContraseña);
+				String passwordHash = HashPassword.createHash(UserPassword, saltPassword);
 				
 				
 				

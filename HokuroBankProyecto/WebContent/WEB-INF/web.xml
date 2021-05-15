@@ -73,7 +73,8 @@
   <servlet-mapping>
     <servlet-name>Cuentas</servlet-name>
     <url-pattern>/MisCuentas</url-pattern>
-    <url-pattern>/GestionarCuentas</url-pattern>    
+    <url-pattern>/GestionarCuentas</url-pattern>
+    <url-pattern>/CancelarCuentaBancaria</url-pattern>     
   </servlet-mapping>
 
   <servlet>
@@ -101,7 +102,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ModificarCuentas</servlet-name>
-    <url-pattern>/ModificarCuenta</url-pattern>   
+    <url-pattern>/ModificarCuenta</url-pattern> 
+    <url-pattern>/ModificarSaldo</url-pattern> 
+  
+       
   </servlet-mapping>
 
     <servlet>

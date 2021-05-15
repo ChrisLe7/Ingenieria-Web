@@ -73,9 +73,8 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 			//Se encuentra logueado
 			String estadoBizum = request.getParameter("modificar_bizum");
 			String modificarSaldo = request.getParameter("modificar_saldo");
-			String saldo =  request.getParameter("saldoCuenta");
+			String saldo =  request.getParameter("saldo");
 			CuentaBancariaDTO cuenta = null;
-	
 			if (estadoBizum != null) {
 				
 				String phone = request.getParameter("telefono");
@@ -115,8 +114,9 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 		
 			}
 			else if (modificarSaldo != null){
+				System.out.println("Hola 2");
 				//Significa que desean modificar el saldo por lo cual deberemos de enviar la información de la cuenta concreta, el resto se podra eliminar.
-				nextPage = "/mvc/view/ModificarCuentaBancaria.jsp";
+				nextPage = "/mvc/view/ModificarCuentaBancariaView.jsp";
 				
 				request.getSession().removeAttribute("infoCuentas");
 				//Limpiamos el conjunto de las cuentas para ahora solo tener uno
@@ -124,7 +124,6 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 				infoCuentas = new InfoCuentasBancariasBean();
 				ArrayList<CuentaBancariaDTO> arraycuentas = new ArrayList<CuentaBancariaDTO>();
 				arraycuentas.add(cuenta);
-				System.out.println("holahola");
 				infoCuentas.setCuentas(arraycuentas);
 				request.getSession().setAttribute("infoCuentas", infoCuentas);
 				
@@ -137,11 +136,12 @@ public class ModificarCuentaBancariaController extends HttpServlet {
 					cuenta.setSaldo(Float.valueOf(saldo));
 					cuentaUserDAO.UpdateSaldo(cuenta);
 					request.getSession().removeAttribute("infoCuentas");
-					nextPage = "MisCuentas";
+					nextPage = "index.jsp";
 				
 			}else {
+
 				//Ha accedido sin permiso. Dirigimos a mis Cuentas si esta logueado.
-				nextPage ="/mvc/view/MisCuentasView.jsp"; 
+				nextPage ="MisCuentasView"; 
 				
 			}
 			

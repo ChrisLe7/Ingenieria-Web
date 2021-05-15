@@ -33,26 +33,26 @@ if (!logged)  {
 }else{
 	CuentaBancariaDTO cuenta = infoCuentas.get(0);
 %> 
-
-<div>
-
-Bienvenido a Modificar Saldo la cuenta del cliente : <%=cuenta.getIdTitular()%> <br/>
-
-Su saldo actual es <%=cuenta.getSaldo()%> <br/>
-
-Para modificarlo, cambie el saldo y confirme el cambio<br/>
-
-<form method="post" action="ModificarCuenta">
-
-	<label for="Saldo">Saldo: <input type="text" id="saldoCuenta" name="saldo" value="<%=cuenta.getSaldo()%>"></label>
-	<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+<main class="main">
+	<div>
 	
-	<input type="submit" value="Confirmar">
-
-</form>
-
-</div>
-
+	Bienvenido a Modificar Saldo la cuenta del cliente : <%=cuenta.getIdTitular()%> <br/>
+	
+	Su saldo actual es <%=cuenta.getSaldo()%> <br/>
+	
+	Para modificarlo, cambie el saldo y confirme el cambio<br/>
+	
+	<form method="post" action="ModificarCuenta">
+	
+		<label for="Saldo">Saldo: <input type="text" id="saldoCuenta" name="saldo" value="<%=cuenta.getSaldo()%>"></label>
+		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+		
+		<input type="submit" value="Confirmar">
+	
+	</form>
+	
+	</div>
+</main>
 <%} 
 
 }%>
