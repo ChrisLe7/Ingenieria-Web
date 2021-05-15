@@ -73,7 +73,7 @@ ListaCuentas = infoCuentas.getCuentas();
 	</form>	
 	
 	 	
-	</div>
+	
 	 	
 	<%
 
@@ -83,10 +83,13 @@ ListaCuentas = infoCuentas.getCuentas();
 		 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
 			<input type="submit" value="Modificar Saldo">
 		 </form>	
+	
+
+<% 		}%>
 	</div>
-</main>
-<% 		}
-	}
+<%	}
 }%>
+</div>
+</main>
 </body>
 </html>
