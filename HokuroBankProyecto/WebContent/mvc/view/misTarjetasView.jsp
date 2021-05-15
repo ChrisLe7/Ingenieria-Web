@@ -18,7 +18,7 @@
 <main class = "main">
 
 
-	<% //Comprobar que se encuentra logueado.
+	<% //Comprobar que se encuentra logeado.
 		System.out.println("Estoy en la vista de misTarjeta");
 		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
 		if (login){
