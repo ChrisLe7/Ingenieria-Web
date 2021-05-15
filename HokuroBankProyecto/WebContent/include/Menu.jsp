@@ -43,7 +43,7 @@
 		}
 		else {
 			//No se encuentra logueado deberá de irse al controlador de login.
-			nextPage = "/Login";
+			nextPage = "mvc/view/MainMenu.jsp";
 			mensajeNextPage = "Debera de Iniciar Sesion para acceder al Sistema";
 		%>
 		<jsp:forward page="<%=nextPage%>">
