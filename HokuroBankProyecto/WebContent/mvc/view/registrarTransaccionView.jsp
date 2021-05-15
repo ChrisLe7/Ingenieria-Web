@@ -45,18 +45,28 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		
 			<form method="post" action="RealizarTransaccion">
 			
+			<label for="idCuentaDestino">Id de la cuenta Destion: </label>	
+				
 			<input type="text" name="idCuentaDestino" required>
 			
+			<label for="idCuentaOrigen">Id de la cuenta Origen: </label>		
+				
 			<select name="idCuentaOrigen" required>
 				<%for(PropiedadCuenta cuenta : ListaCuentas){ %>
 				 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
 				<%} %>
 			</select>
 			
+			<label for="Descripcion">Descripción: </label>		
+				
 			<input type="text" name="descripcion" required>
 			
+			<label for="Cantidad">Cantidad: </label>	
+				
 			<input type="text" name="cantidad" pattern="[0-9]{+}" required>
 		
+			<label for="TipoOperacion">Tipo de Operacion: </label>		
+				
 			<select name="tipoOperacion" required>
 			  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
 			  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
