@@ -1,6 +1,7 @@
 package es.uco.iw.utilidades;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class GeneradorID {
 
@@ -27,7 +28,7 @@ public class GeneradorID {
 	}
 	
 	/**
-	 * Crea un numero de tarjeta aleatorio
+	 * Genera un numero de tarjeta aleatorio
 	 * 
 	 * @return Numero de tarjeta
 	 */
@@ -44,6 +45,15 @@ public class GeneradorID {
 		}
 		
 		return numTarjeta;
+	}
+	
+	/**
+	 * Genera una id para una transacción bancaria
+	 * 
+	 * @return Id de la transacción bancaria
+	 */
+	public static String GenerarIdTransaccion() {
+		return UUID.randomUUID().toString().replace("-", " ");
 	}
 	
 }

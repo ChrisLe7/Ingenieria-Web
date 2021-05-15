@@ -20,6 +20,12 @@ public class TestGeneradorID {
 			System.out.println(GeneradorID.GenerarNumTarjeta());
 		}
 		
+		System.out.println("Generando id de transaccion bancarias aleatoria");
+		
+		for (int i = 0; i < 5; i++) {
+			System.out.println(GeneradorID.GenerarIdTransaccion());
+		}
+		
 		System.out.println("Exito");
 		
 	}
