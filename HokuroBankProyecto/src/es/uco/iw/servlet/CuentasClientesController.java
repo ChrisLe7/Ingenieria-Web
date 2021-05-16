@@ -19,6 +19,7 @@ import es.uco.iw.datos.TransaccionDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.ListadoClientesBean;
+import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.RolPropietario;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
@@ -68,19 +69,26 @@ public class CuentasClientesController extends HttpServlet {
 		String nextPage ="/mvc/view/listadoClientesView.jsp"; 
 		UsuarioDTO clienteInfo = null;
 		String idCliente = request.getParameter("idCliente");
+		String mensaje = "";
 		if (idCliente != null) {
 			//Deberemos de cancelar las cuentas de los usuarios
 			
 			UsuarioDTO clienteDTO = userDAO.QueryByDni(idCliente);
 			ArrayList<PropiedadCuenta> cuentas = clienteDTO.getCuentasBancarias();
+			float cantidadDevolver = 0;
+			CuentaBancariaDTO cuentaAux = null;
 			for (int i = 0 ; i < cuentas.size(); i++) {
 				if (cuentas.get(i).getRol().equals(RolPropietario.Titular)) {
+					cuentaAux = cuentaUserDAO.QueryByIdCuentaBancaria(cuentas.get(i).getIdCuentaBancaria());
+					cantidadDevolver =cantidadDevolver + cuentaAux.getSaldo();
 					cuentaUserDAO.Delete(cuentas.get(i).getIdCuentaBancaria());
 				}
 			}
-			System.out.println("Hemos querido cancelar la cuenta");
+			
 			
 			userDAO.Delete(idCliente);
+			mensaje = "Se cancelo la cuenta de usuario y deberá de ir al banco a recoger el dinero de sus cuentas -> " + cantidadDevolver ;
+			request.setAttribute("mensaje", mensaje);
 			request.getSession().removeAttribute("listadoClientes");
 			nextPage = "Home";
 		}else {

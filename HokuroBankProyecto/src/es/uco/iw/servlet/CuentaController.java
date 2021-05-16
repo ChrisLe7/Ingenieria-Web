@@ -91,14 +91,16 @@ public class CuentaController extends HttpServlet {
 					CuentaBancariaDTO cuentaDestino = null;
 					if (cuentas.size() > 1) {
 						for (int i = 0; i< cuentas.size(); i++) {
-							if (cuentas.get(i).getIdCuentaBancaria() != cuentaACancelar.getIdCuentaBancaria()) {
+							if (!cuentas.get(i).getIdCuentaBancaria().equals(cuentaACancelar.getIdCuentaBancaria())) {
 								cuentaDestino = cuentaUserDAO.QueryByIdCuentaBancaria(cuentas.get(i).getIdCuentaBancaria());
 								i = cuentas.size();
 							}
 
 						}
+												
 						cuentaDestino.setSaldo(cuentaDestino.getSaldo() +  cuentaACancelar.getSaldo());
 						cuentaUserDAO.UpdateSaldo(cuentaDestino);
+						
 						String idTransaccion = GeneradorID.GenerarIdTransaccion();
 						String descripcion = "Cancelación de una de sus cuentas";
 						TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, cuentaACancelar.getSaldo(), TipoOperacion.Pagar, new Date(), descripcion , cuentaACancelar.getIdCuentaBancaria(), cuentaDestino.getIdCuentaBancaria());
@@ -115,10 +117,9 @@ public class CuentaController extends HttpServlet {
 					
 					
 					cuentaUserDAO.Delete(cuentaACancelar.getIdCuentaBancaria());
-					EnvioCorreo.EnviarCorreo(clienteInfo.getEmail(), asunto, mensaje);
+	//				EnvioCorreo.EnviarCorreo(clienteInfo.getEmail(), asunto, mensaje);
 					disparador = request.getRequestDispatcher("Home");
-					String mensajeNextPage = "Se ha cancelado la cuenta con exito";
-					request.setAttribute("mensaje", mensajeNextPage);
+					request.setAttribute("mensaje", mensaje);
 					session.removeAttribute("infoCuentas");
 				}
 				else {
