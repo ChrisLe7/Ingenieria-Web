@@ -32,7 +32,7 @@ if (!logged)  {
 	CuentaBancariaDTO cuenta = infoCuentas.get(0);
 %> 
 <main class="main">
-	<div>
+	<div class="formulario">
 	
 	Bienvenido a Modificar Saldo la cuenta del cliente : <%=cuenta.getIdTitular()%> <br/>
 	
