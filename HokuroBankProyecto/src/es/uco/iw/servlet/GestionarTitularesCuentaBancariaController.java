@@ -121,7 +121,7 @@ public class GestionarTitularesCuentaBancariaController extends HttpServlet {
 						cuenta.setIdCotitular(idCoTitular);
 						cuentaUserDAO.UpdateCotitular(cuenta);
 					}
-					
+					nextPage = "MisCuentas";
 				}
 			} 
 			else { 

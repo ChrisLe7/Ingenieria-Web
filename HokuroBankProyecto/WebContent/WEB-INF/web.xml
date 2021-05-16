@@ -100,7 +100,15 @@
     <url-pattern>/GestionarCotitulares</url-pattern>     
   </servlet-mapping>
   
-  
+   <servlet>
+    <servlet-name>EliminarTitular</servlet-name>
+    <servlet-class>es.uco.iw.servlet.EliminarCotitularController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminarTitular</servlet-name>
+    <url-pattern>/EliminarCotitular</url-pattern>
+    <url-pattern>/EliminarTitular</url-pattern>  
+  </servlet-mapping>
 
 
   <servlet>

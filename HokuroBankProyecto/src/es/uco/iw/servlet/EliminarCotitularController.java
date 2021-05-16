@@ -15,6 +15,10 @@ import javax.servlet.http.HttpSession;
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
+import es.uco.iw.display.InfoCuentasBancariasBean;
+import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
+import es.uco.iw.negocio.usuario.RolUsuario;
+
 
 /**
  * Servlet implementation class EliminarCotitularController
@@ -69,13 +73,32 @@ public class EliminarCotitularController extends HttpServlet {
 		
 		else {
 			
-			String idCuenta = request.getParameter("idCuenta");
-			String idCoTitular = request.getParameter("idCoTitular");
+			if(cliente.getRol().equals(RolUsuario.Administrador)){ 
 			
-			if (idCuenta != null && idCoTitular != null) {
-				cuentaUserDAO.DeleteCotitular();
+				String idCuenta = request.getParameter("idCuenta");
+				String idCoTitular = request.getParameter("idCoTitular");
+				InfoCuentasBancariasBean infoCuenta = null;
+				CuentaBancariaDTO cuenta = null;
+				infoCuenta = (InfoCuentasBancariasBean) session.getAttribute("infoCuentas");
+				
+				cuenta = infoCuenta.get(0);
+				if (idCuenta != null && idCoTitular != null) {
+					cuentaUserDAO.DeleteCotitular(cuenta);
+				}
+				request.getSession().removeAttribute("listadoClientes");
+				request.getSession().removeAttribute("infoCuentas");
+				nextPage = "MisCuentas";
+			}
+			else {
+				nextPage = "MisCuentas";
+				mensajeNextPage = "No es admin, acceso no autorizado";
+				request.setAttribute("mensaje", mensajeNextPage);
 			}
 		}
+		
+		disparador = request.getRequestDispatcher(nextPage);
+		
+		disparador.forward(request, response);	
 	}
 
 	/**
