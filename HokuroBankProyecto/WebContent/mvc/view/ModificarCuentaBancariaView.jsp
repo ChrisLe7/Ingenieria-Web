@@ -44,7 +44,7 @@ if (!logged)  {
 	
 	<form method="post" action="ModificarCuenta">
 	
-		<label for="Saldo">Saldo: <input type="text" id="saldoCuenta" name="saldo" value="<%=cuenta.getSaldo()%>"></label>
+		<label for="Saldo">Saldo: <input type="text" id="saldoCuenta" name="saldo" pattern="[0-9]+(.[0-9]{1,2})?" value="<%=cuenta.getSaldo()%>"></label>
 		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
 		
 		<input type="submit" value="Confirmar">

@@ -92,7 +92,7 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 				
 				<label for="Cantidad">Cantidad:</label><br/>
 				
-				<input type="text" name="cantidad" pattern="[0-9]{+}" ><br/>
+				<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" ><br/>
 				
 				<label for="Fecha">Fecha de la transaccion:</label><br/>
 				

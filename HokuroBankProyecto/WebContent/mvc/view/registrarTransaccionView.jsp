@@ -63,7 +63,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 			
 			<label for="Cantidad">Cantidad: </label>	
 				
-			<input type="text" name="cantidad" pattern="[0-9]{+}" required>
+			<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" required>
 		
 			<label for="TipoOperacion">Tipo de Operacion: </label>		
 				
