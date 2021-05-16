@@ -62,8 +62,11 @@ public class TransferenciaController extends HttpServlet {
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage ="/mvc/view/loginView"; 
 		String mensajeNextPage = "";
+				
 		if (login) {
 			String idCuenta = request.getParameter("idCuenta");
+			System.out.println(idCuenta);
+						
 			if (idCuenta == null ) {
 				mensajeNextPage = "Lo sentimos pero ha accedido sin permisos, no habia seleccionado la cuenta anteriormente";
 				request.setAttribute("mensaje", mensajeNextPage);
@@ -78,6 +81,7 @@ public class TransferenciaController extends HttpServlet {
 				else {
 					infoTransacciones = new InfoTransaccionesBean();
 				}
+				
 				System.out.println("Transacciones de la cuenta: " + idCuenta);
 				
 				ArrayList<TransaccionDTO> transacciones =  transaccionDAO.QueryByIdCuenta(idCuenta);

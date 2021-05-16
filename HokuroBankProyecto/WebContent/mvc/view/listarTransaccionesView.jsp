@@ -44,8 +44,6 @@ AUN NO HA REALIZADO NINGUNA TRANSACCION
 ArrayList<TransaccionDTO> ListaTransacciones = new ArrayList<TransaccionDTO>();
 ListaTransacciones = InfoTransacciones.getTransacciones();
 
-System.out.println(ListaTransacciones.size());
-
 for(TransaccionDTO transaccion : ListaTransacciones){
 %>
 
@@ -76,6 +74,7 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 
 </div>
 <%	}
+}
 %>
 	
 	<div class="overlay" id="overlay">
@@ -116,9 +115,11 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 
 				<input type="date" name="fechaFin"><br/>
 				
-				<label for="idCuenta">Id de la Cuenta: </label><br/>	
+				<label for="idCuentaInvolucrada">Id de la Cuenta: </label><br/>	
 				
-				<input type="text" name="idCuenta"><br/>
+				<input type="text" name="idCuentaInvolucrada"><br/>
+				
+				<input type="hidden" name="idCuenta" value="<%=InfoTransacciones.getIdCuenta()%>">
 				
 				<input id="button-submit" type="submit" value="Filtrar" name="filter">
 				
@@ -128,9 +129,6 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 	</div>
 	
-<% 
-	
-}%>
 	</main>
 </body>
 </html>

@@ -44,7 +44,7 @@ filtroForm.addEventListener("submit", function () {
 			filtroForm.cantidadMax.value,
 			filtroForm.fechaInicio.value,
 			filtroForm.fechaFin.value,
-			filtroForm.idCuenta.value
+			filtroForm.idCuentaInvolucrada.value
 		);
 	sessionStorage.setItem('filtro', JSON.stringify(filtroObj));
-});
+	});

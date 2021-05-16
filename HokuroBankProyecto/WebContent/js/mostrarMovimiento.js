@@ -21,15 +21,14 @@ for (let i = 0; i < movimientos.length; i++) {
 }
 
 function mostrarMovimiento (movimiento) {
-	console.log(movimiento);
-	
+	console.log(movimiento)
 	
 	if (filtro == null) {
 		return true;
 	}
 	
 	console.log(filtro);
-
+	
 	if (filtro.idTransaccion_ != undefined && filtro.idTransaccion_ != "" && movimiento.idTransaccion.value.indexOf(filtro.idTransaccion_) == -1) {
 		return false;
 	}
@@ -52,23 +51,19 @@ function mostrarMovimiento (movimiento) {
 	}
 
 	if (filtro.fechaInicio_ != undefined && filtro.fechaInicio_ != "") {
-		let fechaInicioTexto = Date.parse(filtro.fechaInicio_);
-		let fechaInicio = new Date(fechaInicioTexto);
-		let fechaMovimientoTexto = Date.parse(movimiento.fecha.value);
-		let fechaMovimiento = new Date(fechaMovimientoTexto);
+		let fechaInicio = new Date(new Date(filtro.fechaInicio_).toDateString()).getTime()
+		let fechaMovimiento = new Date(new Date(movimiento.fecha.value.replace(/CEST /g, "")).toDateString()).getTime()
 
-		if (fechaInicio.getTime() > fechaMovimiento.getTime()) {
+		if (fechaInicio > fechaMovimiento) {
 			return false;
 		}
 	}
 
 	if (filtro.fechaFin_ != undefined && filtro.fechaFin_ != "") {
-		let fechaFinTexto = Date.parse(filtro.fechaFin_);
-		let fechaFin = new Date(fechaFinTexto);
-		let fechaMovimientoTexto = Date.parse(movimiento.fecha.value);
-		let fechaMovimiento = new Date(fechaMovimientoTexto);
+		let fechaFin = new Date(new Date(filtro.fechaFin_).toDateString()).getTime()
+		let fechaMovimiento = new Date(new Date(movimiento.fecha.value.replace(/CEST /g, "")).toDateString()).getTime()
 
-		if (fechaFin.getTime() < fechaMovimiento.getTime()) {
+		if (fechaFin < fechaMovimiento) {
 			return false;
 		}
 	}
