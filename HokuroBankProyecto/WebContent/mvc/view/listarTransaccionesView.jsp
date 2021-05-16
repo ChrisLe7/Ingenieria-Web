@@ -12,12 +12,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/popup.css">
 <script src="js/popup.js" defer></script>
 <script src="js/crearFiltro.js" defer></script>
 <script src="js/mostrarMovimiento.js" defer></script>
 <title>Mis Transacciones</title>
 </head>
 <body>
+
+<main class="main">
+
+<button class="button-open-popup" id="button-open-popup">Filtros</button>
 
 <%  
 boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
@@ -30,7 +35,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 }else if(InfoTransacciones.getTransacciones().isEmpty()){
 	System.out.println("Error");
 %> 
-<main class="main">
+
 <p>
 AUN NO HA REALIZADO NINGUNA TRANSACCION
 </p>
@@ -90,15 +95,23 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 				  <option value="<%=TipoOperacion.Recibir %>">Recibir</option>
 				</select><br/>
 				
-				<label for="Cantidad">Cantidad:</label><br/>
+				<label for="Cantidad">Cantidad Minima:</label><br/>
 				
-				<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" ><br/>
+				<input type="text" name="cantidadMin" pattern="[0-9]+(.[0-9]{1,2})?" ><br/>
 				
-				<label for="Fecha">Fecha de la transaccion:</label><br/>
+				<label for="Cantidad">Cantidad Maxima:</label><br/>
+
+				<input type="text" name="cantidadMax" pattern="[0-9]+(.[0-9]{1,2})?" ><br/>
 				
-				<input type="date" name="fecha"><br/>
+				<label for="FechaInicio">Fecha de inicio del margen:</label><br/>
 				
-				<label for="idCuentaOrigen">Id de la Cuenta: </label><br/>	
+				<input type="date" name="fechaInicio"><br/>
+				
+				<label for="FechaFin">Fecha fin del margen:</label><br/>
+
+				<input type="date" name="fechaFin"><br/>
+				
+				<label for="idCuenta">Id de la Cuenta: </label><br/>	
 				
 				<input type="text" name="idCuenta"><br/>
 				
