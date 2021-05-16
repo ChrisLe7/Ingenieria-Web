@@ -36,15 +36,15 @@ if (!logged)  {
 
 %> 
 <main class="main">
-	<div>
+	<div class="boxContrasena">
 	<!-- ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<!-- cambiar el action al controlador correspondiente -->
-		<form method="post" action="ModificarPassword">
+		<form  method="post" action="ModificarPassword">
 			
 			<!-- En el caso de que no funcione, tener en cuenta el "name" del input!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<label for="Contraseña">Contraseña: </label> <input type="password" id="password" name="password"  required><br/>
+			<label for="Contraseña ">Contraseña: </label> <input type="password" id="password" name="password"  required>
 			
-			<input type="submit" id="submitBtn" value="Confirmar">
+			<input class="boton" type="submit" id="submitBtn" value="Confirmar">
 		
 		</form>
 	
