@@ -5,7 +5,6 @@
 <%@ page import ="es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO, es.uco.iw.negocio.usuario.PropiedadCuenta, es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria" %>
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
 
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>  
 <jsp:useBean  id="UsuarioInfoBean" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>  
 <jsp:useBean  id="listadoClientes" scope="session" class="es.uco.iw.display.ListadoClientesBean"></jsp:useBean> 
 
@@ -17,13 +16,14 @@
 <title>Registrar Cuenta</title>
 </head>
 <body>
+
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 	<!-- Incluimos la cabecera de la aplicación -->
 	
 
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
-String mensajeNextPage = "";
+
 if (logged == false)  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no esta logueado";
@@ -40,7 +40,7 @@ if (logged == false)  {
 	<form method="post" action="RegistrarCuentaBancaria">
 			
 
-		<label for="Tipo">Tipo de Cuenta: </label>
+		<label for="Tipo">Tipo de Cuenta: </label><br/>
 		
 			<label><input type="radio" name="tipoCuenta" value = "<%=TipoCuentaBancaria.Ahorro%>" required> Ahorro</label> <br/>
 			
