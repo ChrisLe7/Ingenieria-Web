@@ -35,7 +35,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 %> 
 <!-- Los divs pueden cambiarse de clases a identificadores -->
 <main class="main">
-<h1 class="formulario_titulo"></h1> 
+
 <div class="formulario" id="observarP" >
 
 	<form method="post" action="Perfil">
@@ -78,7 +78,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		 
 		
 		
-		<input type="submit" id="submitBtn" value="Enviar Modificación">
+		<input class="boton" type="submit" id="submitBtn" value="Enviar Modificación">
 	
 	</form>
 	
