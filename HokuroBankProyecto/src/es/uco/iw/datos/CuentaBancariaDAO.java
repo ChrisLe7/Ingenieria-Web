@@ -263,6 +263,35 @@ public class CuentaBancariaDAO extends DAO {
     }
 
     /**
+     * Asignar un cotitular a la cuenta bancaria
+     * 
+     * @param cuentaBancaria Cuenta bancaria a la que se va a asignar un nuevo cotitular
+     * @return El numero de filas afectadas o 0 en caso de fallo
+     */
+    public int InsertCotitular(CuentaBancariaDTO cuentaBancaria) {
+    	int status = 0;
+    	
+    	try {
+            String statement = sqlProp.getProperty("Insert_Cuenta_Bancaria_Usuario");
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement(statement);
+            stmt.setString(1, cuentaBancaria.getIdCotitular());
+            stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
+            stmt.setString(3, RolPropietario.Cotitular.toString());
+            status = stmt.executeUpdate();
+            
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return status;
+    }
+    
+    /**
      * Actualiza el saldo de una cuenta bancaria de la base de datos
      * 
      * @param cuentaBancaria Cuenta bancaria a actualizar
@@ -336,6 +365,34 @@ public class CuentaBancariaDAO extends DAO {
 
         return status;
     }
+    
+    /**
+     * Actualiza el cotitular de la cuenta bancaria
+     * 
+     * @param cuentaBancaria Cuenta bancaria cuyo cotitular se va a modificar
+     * @return El numero de filas afectadas o 0 en caso de fallo
+     */
+    public int UpdateCotitular(CuentaBancariaDTO cuentaBancaria) {
+    	int status = 0;
+    	
+    	try {
+            String statement = sqlProp.getProperty("Update_Cuenta_Bancaria_Cotitular");
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement(statement);
+            stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
+            stmt.setString(1, cuentaBancaria.getIdCotitular());
+            status = stmt.executeUpdate();
+            
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return status;
+    }
 
     /**
      * Borra una cuenta bancaria de la base de datos
@@ -370,6 +427,34 @@ public class CuentaBancariaDAO extends DAO {
             results.add(stmt.executeUpdate());
             
             status = CheckResults(results);
+            
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return status;
+    }
+    
+    /**
+     * Borra el cotitular de la cuenta bancaria
+     * 
+     * @param cuentaBancaria Cuenta bancaria cuyo cotitular se va a borrar
+     * @return El numero de filas afectadas o 0 en caso de fallo
+     */
+    public int DeleteCotitular(CuentaBancariaDTO cuentaBancaria) {
+    	int status = 0;
+    	
+    	try {
+            String statement = sqlProp.getProperty("Borrar_Cuenta_Bancaria_Cotitular");
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement(statement);
+            stmt.setString(1, cuentaBancaria.getIdCotitular());
+            stmt.setString(2, cuentaBancaria.getIdCuentaBancaria());
+            status = stmt.executeUpdate();
             
             if (stmt != null) {
                 stmt.close();
