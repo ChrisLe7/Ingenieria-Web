@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
+
 <jsp:useBean  id="infoClienteBean" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO" %>
@@ -16,11 +16,10 @@
 </head>
 
 <body>
-
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
-String mensajeNextPage = "";
+
 
 if (!logged)  {
 	nextPage = "index.jsp";
@@ -32,7 +31,6 @@ if (!logged)  {
 	<% 
 }else {%>
 	
-	<%@ include file="/include/header.jsp" %>
 	
 	<%
 
