@@ -22,7 +22,7 @@ public class TestUsuarioDAO_Parte2 {
 	public static void main(String[] args) throws IOException {
 		
 		Properties properties = new Properties();
-		FileReader fileReader = new FileReader("sql.properties");
+		FileReader fileReader = new FileReader("WebContent/WEB-INF/sql.properties");
 		properties.load(fileReader);
 			
 		System.out.println("Test UsuarioDAO_Parte2");
