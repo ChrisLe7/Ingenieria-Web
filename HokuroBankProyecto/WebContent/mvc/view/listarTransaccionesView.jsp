@@ -47,9 +47,9 @@ ListaTransacciones = InfoTransacciones.getTransacciones();
 for(TransaccionDTO transaccion : ListaTransacciones){
 %>
 
-<div class="Transacciones">
+<div class="transaccion">
 
-	<h1> Transacción  <%=transaccion.getIdTransaccion()%></h1>
+	Transacción  <%=transaccion.getIdTransaccion()%><br/>
 	
 	Cantidad: <%=transaccion.getCantidad()%><br/>
 	
@@ -81,7 +81,7 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 		<div class="popup" id="popup">
 		
-			<form method="post" action="" id="filter">
+			<form class="transaccion" method="post" action="" id="filter">
 				<a href="#" id="button-close-popup" class="button-close-popup"><i class="fas fa-times">Cerrar</i></a>
 				
 				<label for="idTransaccion">Id de la Transaccion:</label><br/>
