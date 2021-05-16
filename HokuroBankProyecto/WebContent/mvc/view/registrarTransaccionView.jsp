@@ -43,36 +43,36 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	
 		<div>
 		
-			<form method="post" action="RealizarTransaccion">
+			<form class="formularioTransaccion" method="post" action="RealizarTransaccion">
 			
-			<label for="idCuentaDestino">Id de la cuenta Destion: </label>	
+			<label for="idCuentaDestino">Id de la cuenta Destion: </label>
 				
-			<input type="text" name="idCuentaDestino" required>
+			<input type="text" name="idCuentaDestino" required><br/>
 			
 			<label for="idCuentaOrigen">Id de la cuenta Origen: </label>		
 				
-			<select name="idCuentaOrigen" required>
+			<select class="select" name="idCuentaOrigen" required>
 				<%for(PropiedadCuenta cuenta : ListaCuentas){ %>
 				 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
 				<%} %>
 			</select>
 			
-			<label for="Descripcion">Descripción: </label>		
+			<br/><label for="Descripcion">Descripción: </label>		
 				
 			<input type="text" name="descripcion" required>
 			
-			<label for="Cantidad">Cantidad: </label>	
+			<br/><label for="Cantidad">Cantidad: </label>	
 				
-			<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" required>
+			<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" required><br/>
 		
 			<label for="TipoOperacion">Tipo de Operacion: </label>		
 				
-			<select name="tipoOperacion" required>
+			<select c name="tipoOperacion" required>
 			  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
 			  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
 			</select>
 			
-			<input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
+			<br/><input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
 			
 			</form>
 			
