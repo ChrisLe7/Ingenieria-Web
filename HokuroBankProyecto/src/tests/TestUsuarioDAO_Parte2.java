@@ -95,7 +95,7 @@ public class TestUsuarioDAO_Parte2 {
 		assert cuentaBancariaDAO.Delete(cuentaBancariaTest.getIdCuentaBancaria()) > 0 : "Error en el borrado";
 		
 		assert usuarioDAO.Delete(usuarioTest.getDni()) > 0 : "Error en el borrado";
-		
+				
 		System.out.println("Exito");
 		
 	}

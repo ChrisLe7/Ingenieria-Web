@@ -120,14 +120,21 @@ public class UsuarioDAO extends DAO {
     	ArrayList<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
     	
     	try {
+    		usuarios = QueryUsuarios();
+    		
             Connection con = getConnection();
             String statement = sqlProp.getProperty("Select_Usuario_Cuentas");
             PreparedStatement stmt = con.prepareStatement(statement);
             ResultSet set = stmt.executeQuery();
-
+            
             while (set.next()) {
-            	if (set.getString(2).split(",").length != 2) {
-            		usuarios.add(new UsuarioDTO(set.getString(1)));
+            	if (set.getString(2).split(",").length >= 2) {
+            		for (int i = usuarios.size() - 1; i >= 0; i--) {
+            			if (usuarios.get(i).getDni().equals(set.getString(1))) {
+            				usuarios.remove(i);
+            				break;
+            			}
+            		}
             	}
             }
 
