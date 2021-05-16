@@ -45,6 +45,8 @@ AUN NO HA REALIZADO NINGUNA TRANSACCION
 ArrayList<TransaccionDTO> ListaTransacciones = new ArrayList<TransaccionDTO>();
 ListaTransacciones = InfoTransacciones.getTransacciones();
 
+System.out.println(ListaTransacciones.size());
+
 for(TransaccionDTO transaccion : ListaTransacciones){
 %>
 
@@ -90,10 +92,14 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 				
 				<label for="tipoOperacion">Tipo de Operación:</label><br/>	
 				
-				<select name="tipoOperacion">
+				<!-- <select name="tipoOperacion">
 				  <option value="<%=TipoOperacion.Pagar %>">Pagar</option>
 				  <option value="<%=TipoOperacion.Recibir %>">Recibir</option>
-				</select><br/>
+				</select><br/>  -->
+				
+				<label><input type="radio" name="tipoOperacion" value="Pagar">Pagar</label>
+				
+				<label><input type="radio" name="tipoOperacion" value="Recibir">Recibir</label><br/>
 				
 				<label for="Cantidad">Cantidad Minima:</label><br/>
 				

@@ -21,9 +21,14 @@ for (let i = 0; i < movimientos.length; i++) {
 }
 
 function mostrarMovimiento (movimiento) {
+	console.log(movimiento);
+	
+	
 	if (filtro == null) {
 		return true;
 	}
+	
+	console.log(filtro);
 
 	if (filtro.idTransaccion != undefined && filtro.idTransaccion != "" && movimiento.idTransaccion.value.indexOf(filtro.idTransaccion) == -1) {
 		return false;
@@ -38,11 +43,11 @@ function mostrarMovimiento (movimiento) {
 		}
 	}
 
-	if (filtro.cantidadMin != undefined && filtro.cantidadMin != "" && parseFloat(movimiento.cantidadMin.value) < filtro.cantidadMin) {
+	if (filtro.cantidadMin_ != undefined && filtro.cantidadMin_ != "" && parseFloat(movimiento.cantidad.value) < filtro.cantidadMin_) {
 		return false;
 	}
 
-	if (filtro.cantidadMax != undefined && filtro.cantidadMax != "" && parseFloat(movimiento.cantidadMax.value) > filtro.cantidadMax) {
+	if (filtro.cantidadMax_ != undefined && filtro.cantidadMax_ != "" && parseFloat(movimiento.cantidad.value) > filtro.cantidadMax_) {
 		return false;
 	}
 

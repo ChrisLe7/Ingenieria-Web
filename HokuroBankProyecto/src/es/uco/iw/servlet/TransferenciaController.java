@@ -70,7 +70,11 @@ public class TransferenciaController extends HttpServlet {
 				nextPage = "/MisCuentas";
 				
 			}else {
+				System.out.println("Transacciones de la cuenta: " + idCuenta);
+				
 				ArrayList<TransaccionDTO> transacciones =  transaccionDAO.QueryByIdCuenta(idCuenta);
+				
+				System.out.println("Numero de transacciones: " + transacciones.size());
 				
 				InfoTransaccionesBean infoTransacciones = new InfoTransaccionesBean();
 				

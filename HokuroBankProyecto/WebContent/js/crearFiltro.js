@@ -4,47 +4,47 @@ Crea un filtro para las transacciones
 
 class Filtro {
 	constructor(idTransaccion, operacion, cantidadMin, cantidadMax, fechaInicio, fechaFin, idCuenta) {
-		this.idTransaccion = idTransaccion;
-		this.operacion = operacion;
-		this.cantidadMin = cantidadMin;
-		this.cantidadMax = cantidadMax;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.idCuenta = idCuenta;
+		this.idTransaccion_ = idTransaccion;
+		this.operacion_ = operacion;
+		this.cantidadMin_ = cantidadMin;
+		this.cantidadMax_ = cantidadMax;
+		this.fechaInicio_ = fechaInicio;
+		this.fechaFin_ = fechaFin;
+		this.idCuenta_ = idCuenta;
 	}
 	get idTransaccion() {
-		return this.idTransaccion;
+		return this.idTransaccion_;
 	}
 	get operacion() {
-		return this.operacion;
+		return this.operacion_;
 	}
 	get cantidadMin() {
-		return this.cantidadMin;
+		return this.cantidadMin_;
 	}
 	get cantidadMax() {
-		return this.cantidadMax;
+		return this.cantidadMax_;
 	}
 	get fechaInicio() {
-		return this.fechaInicio;
+		return this.fechaInicio_;
 	}
 	get fechaFin() {
-		return this.fechaFin;
+		return this.fechaFin_;
 	}
 	get idCuenta() {
-		return this.idCuenta;
+		return this.idCuenta_;
 	}
 }
 
-let filtro = document.getElementById('filter');
-filtro.addEventListener("submit", function () {
+let filtroForm = document.getElementById('filter');
+filtroForm.addEventListener("submit", function () {
 	let filtroObj = new Filtro(
-			filtro.idTransaccion.value,
-			filtro.tipoOperacion.value,
-			filtro.cantidadMin.value,
-			filtro.cantidadMax.value,
-			filtro.fechaInicio.value,
-			filtro.fechaFin.value,
-			filtro.idCuenta.value
+			filtroForm.idTransaccion.value,
+			filtroForm.tipoOperacion.value,
+			filtroForm.cantidadMin.value,
+			filtroForm.cantidadMax.value,
+			filtroForm.fechaInicio.value,
+			filtroForm.fechaFin.value,
+			filtroForm.idCuenta.value
 		);
 	sessionStorage.setItem('filtro', JSON.stringify(filtroObj));
 });
