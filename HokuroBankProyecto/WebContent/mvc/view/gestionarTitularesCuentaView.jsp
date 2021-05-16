@@ -44,6 +44,7 @@ if (logged == false)  {
 						%> Activo <% } 
 					else {
 				%> No Activo <%	}%>
+					<br/>
 					Titular <%=cuenta.getIdTitular()%><br/>
 					CoTitular <%=cuenta.getIdCotitular()%><br/>
 					<% if (!cuenta.getIdCotitular().equals("")) {%>
@@ -61,7 +62,10 @@ if (logged == false)  {
 						
 				
 					 ArrayList<UsuarioDTO> listaCuentas = listadoClientes.getUsuarios();
-					 
+						if (listaCuentas == null) {
+							System.out.println("ES NULO");
+						}  
+						
 						if (listaCuentas.isEmpty()){
 							System.out.println("Lista Vacia");
 						}

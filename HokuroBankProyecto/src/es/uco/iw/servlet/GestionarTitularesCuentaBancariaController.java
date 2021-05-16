@@ -96,15 +96,24 @@ public class GestionarTitularesCuentaBancariaController extends HttpServlet {
 					for (int i = 0; i < clientes.size(); i++) {
 						if (clientes.get(i).getDni().equals(cuenta.getIdTitular())) {
 							clientes.remove(i);
-							i = clientes.size();
+							break;
 						}
 					}
-					
+					listadoClientes.setUsuarios(clientes);
+					if (clientes.isEmpty()) {
+						System.out.println("VAICI");
+					}
 					ArrayList<CuentaBancariaDTO> aux = new ArrayList<CuentaBancariaDTO> ();
 					aux.add(cuenta);
+					System.out.println(aux.size() + "Tamaño");
 					infoCuenta.setCuentas(aux);
-					request.getSession().setAttribute("listadoClientes", listadoClientes);
-					request.getSession().setAttribute("infoCuentas", infoCuenta);
+					
+					session.setAttribute("listadoClientes", listadoClientes);
+					session.setAttribute("infoCuentas", infoCuenta);
+					System.out.println("IR A LA VISTA");
+					if (infoCuenta.getCuentas()== null) {
+						System.out.println("ESTA VACIO 1");
+					}
 					
 				}
 				else {

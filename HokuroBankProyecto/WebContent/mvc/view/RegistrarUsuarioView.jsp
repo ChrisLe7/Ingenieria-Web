@@ -66,9 +66,9 @@
 					
 					<label for="Rol">Rol: </label> <br/>
 					
-					<label><input type="radio" name="rol" value = "Cliente"> Cliente</label> <br/>
+					<label> Cliente <input type="radio" name="rol" value = "Cliente"></label> <br/>
 					
-					<label><input type="radio" name="rol" value = "Administrador"> Administrador</label> <br/>
+					<label>Administrador <input type="radio" name="rol" value = "Administrador"> </label> <br/>
 					
 					<label for="Password">Contraseña: </label> <br/>
 					
