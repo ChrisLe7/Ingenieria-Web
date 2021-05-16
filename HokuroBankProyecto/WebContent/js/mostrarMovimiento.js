@@ -30,15 +30,15 @@ function mostrarMovimiento (movimiento) {
 	
 	console.log(filtro);
 
-	if (filtro.idTransaccion != undefined && filtro.idTransaccion != "" && movimiento.idTransaccion.value.indexOf(filtro.idTransaccion) == -1) {
+	if (filtro.idTransaccion_ != undefined && filtro.idTransaccion_ != "" && movimiento.idTransaccion.value.indexOf(filtro.idTransaccion_) == -1) {
 		return false;
 	}
 
-	if (filtro.operacion != undefined && filtro.operacion != "") {
-		if (filtro.operacion == "Pagar" && movimiento.idCuentaOrigen.value.indexOf(movimiento.idCuentaSeleccionada.value) == -1) {
+	if (filtro.operacion_ != undefined && filtro.operacion_ != "") {
+		if (filtro.operacion_ == "Pagar" && movimiento.idCuentaOrigen.value.indexOf(movimiento.idCuentaSeleccionada.value) == -1) {
 			return false;
 		}
-		else if (filtro.operacion == "Recibir" && movimiento.idCuentaDestino.value.indexOf(movimiento.idCuentaSeleccionada.value) == -1) {
+		else if (filtro.operacion_ == "Recibir" && movimiento.idCuentaDestino.value.indexOf(movimiento.idCuentaSeleccionada.value) == -1) {
 			return false;
 		}
 	}
@@ -51,8 +51,8 @@ function mostrarMovimiento (movimiento) {
 		return false;
 	}
 
-	if (filtro.fechaInicio != undefined && filtro.fechaInicio != "") {
-		let fechaInicioTexto = Date.parse(filtro.fechaInicio);
+	if (filtro.fechaInicio_ != undefined && filtro.fechaInicio_ != "") {
+		let fechaInicioTexto = Date.parse(filtro.fechaInicio_);
 		let fechaInicio = new Date(fechaInicioTexto);
 		let fechaMovimientoTexto = Date.parse(movimiento.fecha.value);
 		let fechaMovimiento = new Date(fechaMovimientoTexto);
@@ -62,8 +62,8 @@ function mostrarMovimiento (movimiento) {
 		}
 	}
 
-	if (filtro.fechaFin != undefined && filtro.fechaFin != "") {
-		let fechaFinTexto = Date.parse(filtro.fechaFin);
+	if (filtro.fechaFin_ != undefined && filtro.fechaFin_ != "") {
+		let fechaFinTexto = Date.parse(filtro.fechaFin_);
 		let fechaFin = new Date(fechaFinTexto);
 		let fechaMovimientoTexto = Date.parse(movimiento.fecha.value);
 		let fechaMovimiento = new Date(fechaMovimientoTexto);
@@ -73,8 +73,8 @@ function mostrarMovimiento (movimiento) {
 		}
 	}
 
-	if (filtro.idCuenta != undefined && filtro.idCuenta != "") {
-		if (movimiento.idCuentaOrigen.value.indexOf(filtro.idCuenta) == -1 && movimiento.idCuentaDestino.value.indexOf(filtro.idCuenta) == -1) {
+	if (filtro.idCuenta_ != undefined && filtro.idCuenta_ != "") {
+		if (movimiento.idCuentaOrigen.value.indexOf(filtro.idCuenta_) == -1 && movimiento.idCuentaDestino.value.indexOf(filtro.idCuenta_) == -1) {
 			return false;
 		}
 	}
