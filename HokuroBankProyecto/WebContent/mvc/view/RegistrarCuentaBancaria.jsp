@@ -35,9 +35,9 @@ if (logged == false)  {
 }else {%>
 	
 			
-					<main class = "main">
+<main class = "main">
 			
-	<form method="post" action="RegistrarCuentaBancaria">
+	<form class="formulario" method="post" action="RegistrarCuentaBancaria">
 			
 
 		<label for="Tipo">Tipo de Cuenta: </label><br/>
