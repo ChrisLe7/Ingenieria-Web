@@ -157,7 +157,7 @@ public class UsuarioDAO extends DAO {
             ResultSet set = stmt.executeQuery();
 
             while (set.next()) {
-            	usuarios.add(new UsuarioDTO(set.getString(1)));
+            	usuarios.add(new UsuarioDTO(set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getString(5), set.getInt(6)));
             }
 
             if (stmt != null) {

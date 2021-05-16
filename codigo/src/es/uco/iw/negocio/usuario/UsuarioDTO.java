@@ -24,6 +24,20 @@ public class UsuarioDTO implements Serializable {
 	public UsuarioDTO(String dni) {
 		this(dni, "", "", "", "", 0, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
 	}
+	
+	/**
+	 * Constructor con dni, nombre, apellidos, email, direccion y telefono de un usuario 
+	 * 
+	 * @param dni Dni del nuevo usuario
+	 * @param nombre Nombre del nuevo usuario
+	 * @param apellidos Apellidos del nuevo usuario
+	 * @param email Email del nuevo usuario
+	 * @param direccion Direccion del nuevo usuario
+	 * @param telefono Telefono del nuevo usuario
+	 */
+	public UsuarioDTO(String dni, String nombre, String apellidos, String email, String direccion, int telefono) {
+		this(dni, nombre, apellidos, email, direccion, telefono, new ArrayList<PropiedadCuenta>(), new ArrayList<String>());
+	}
 
 	/**
 	 * Constructor completo de un usuario 
