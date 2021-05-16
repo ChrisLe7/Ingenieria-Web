@@ -70,13 +70,21 @@ public class TransferenciaController extends HttpServlet {
 				nextPage = "/MisCuentas";
 				
 			}else {
+				InfoTransaccionesBean infoTransacciones = null;
+				if (idCuenta.equals("")) {
+					infoTransacciones = (InfoTransaccionesBean) session.getAttribute("InfoTransacciones");
+					idCuenta = infoTransacciones.getIdCuenta();
+				}
+				else {
+					infoTransacciones = new InfoTransaccionesBean();
+				}
 				System.out.println("Transacciones de la cuenta: " + idCuenta);
 				
 				ArrayList<TransaccionDTO> transacciones =  transaccionDAO.QueryByIdCuenta(idCuenta);
 				
 				System.out.println("Numero de transacciones: " + transacciones.size());
 				
-				InfoTransaccionesBean infoTransacciones = new InfoTransaccionesBean();
+
 				
 				infoTransacciones.setIdCuenta(idCuenta);
 				infoTransacciones.setTransacciones(transacciones);
