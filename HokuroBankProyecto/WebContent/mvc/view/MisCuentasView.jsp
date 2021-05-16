@@ -27,12 +27,9 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 %> 
 
 <p>
-AUN NO TIENES CUENTAS BANCARIAS ¿QUE TAL SI EMPEZAMOS POR CREAR UNA?
+	Aun no tienes una cuenta bancaría, ¿que tal si se contacta con nuestros administradores?
 </p>
 
-<!--  <p>
-Crea una Cuenta Bancaria <a href="">AQUÍ</a>
-</p>-->
 
 <% }else{ 
 ArrayList<CuentaBancariaDTO> ListaCuentas = new ArrayList<CuentaBancariaDTO>();

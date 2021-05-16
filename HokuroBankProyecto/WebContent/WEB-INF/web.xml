@@ -21,6 +21,7 @@
     <servlet-name>Perfil</servlet-name>
     <url-pattern>/Perfil</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>RegistrarUsuario</servlet-name>
     <servlet-class>es.uco.iw.servlet.RegistrarUserController</servlet-class>
@@ -28,10 +29,21 @@
   <servlet-mapping>
     <servlet-name>RegistrarUsuario</servlet-name>
     <url-pattern>/RegistrarUsuario</url-pattern>
-    <url-pattern>/CrearUsuario</url-pattern>
-    
-    
+    <url-pattern>/CrearUsuario</url-pattern>   
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GestionarClientes</servlet-name>
+    <servlet-class>es.uco.iw.servlet.CuentasClientesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestionarClientes</servlet-name>
+    <url-pattern>/GestionarClientes</url-pattern>
+    <url-pattern>/ListadoClientes</url-pattern>   
+    <url-pattern>/CancelarCuentaUsuario</url-pattern>
+  </servlet-mapping>
+  
+  
   <servlet>
     <servlet-name>Transferencias</servlet-name>
     <servlet-class>es.uco.iw.servlet.TransferenciaController</servlet-class>

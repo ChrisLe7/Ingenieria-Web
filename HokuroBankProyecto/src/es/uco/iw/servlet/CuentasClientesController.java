@@ -65,7 +65,7 @@ public class CuentasClientesController extends HttpServlet {
 		TransaccionDAO transaccionDAO = new TransaccionDAO(dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
-		String nextPage ="/mvc/view/ListadoClientesView.jsp"; 
+		String nextPage ="/mvc/view/listadoClientesView.jsp"; 
 		UsuarioDTO clienteInfo = null;
 		String idCliente = request.getParameter("idCliente");
 		if (idCliente != null) {
@@ -78,20 +78,21 @@ public class CuentasClientesController extends HttpServlet {
 					cuentaUserDAO.Delete(cuentas.get(i).getIdCuentaBancaria());
 				}
 			}
+			System.out.println("Hemos querido cancelar la cuenta");
 			
 			userDAO.Delete(idCliente);
 			request.getSession().removeAttribute("listadoClientes");
 			nextPage = "Home";
 		}else {
-			nextPage = "/mvc/view/ListadoClientesView.jsp"; 
+			nextPage = "/mvc/view/listadoClientesView.jsp"; 
 			ListadoClientesBean listadoClientes = new ListadoClientesBean ();
 			ArrayList<UsuarioDTO> usuarios = userDAO.QueryUsuarios();
 			listadoClientes.setUsuarios(usuarios);
-			
+			System.out.println("Iremos a la vista");
 			request.getSession().setAttribute("listadoClientes", listadoClientes);
-			nextPage = "/mvc/view/RegistrarCuentaBancaria.jsp";
 		}
 		
+		System.out.println("Disparador");
 		
 		disparador = request.getRequestDispatcher(nextPage);
 		disparador.forward(request, response);

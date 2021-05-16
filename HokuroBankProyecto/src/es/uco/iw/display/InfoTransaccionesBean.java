@@ -9,7 +9,7 @@ public class InfoTransaccionesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Strin idCuenta = "";
+	private String idCuenta = "";
 	private ArrayList<TransaccionDTO> listaTransacciones = null;
 
 	public String getIdCuenta() {

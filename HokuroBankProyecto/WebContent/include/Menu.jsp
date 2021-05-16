@@ -34,6 +34,8 @@
 						<li><a href = "RegistrarTarjeta">Crear Tarjeta</a></li>
 						<% if ( (clienteBean != null) && (clienteBean.getRol().equals(RolUsuario.Administrador))) { %>
 						<li><a href = "RegistrarUsuario">Agregar Cuenta</a></li>
+						<li><a href = "RegistrarCuentaBancaria">Crear nueva Cuenta Bancaria</a></li>
+						<li><a href = "GestionarClientes">Gestionar Clientes</a></li>
 						<% } %>
 						</ul>
 											
