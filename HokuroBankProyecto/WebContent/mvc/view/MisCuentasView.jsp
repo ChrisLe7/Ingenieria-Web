@@ -86,6 +86,10 @@ ListaCuentas = infoCuentas.getCuentas();
 			<input type=submit value="Cancelar Cuenta Bancaria"> 
 		</form>
 
+		<form method=post action="GestionarTitulares">
+			<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+			<input type=submit value="Gestionar Titulares"> 
+		</form>
 <% 		}%>
 	</div>
 <%	}

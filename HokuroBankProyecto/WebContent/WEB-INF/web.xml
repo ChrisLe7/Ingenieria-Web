@@ -73,7 +73,7 @@
   <servlet-mapping>
     <servlet-name>RealizarPagoBizum</servlet-name>
     <url-pattern>/RealizarTransferenciaBizum</url-pattern>
-
+    <url-pattern>/RealizarPago</url-pattern>
   </servlet-mapping>
   
   
@@ -88,6 +88,20 @@
     <url-pattern>/GestionarCuentas</url-pattern>
     <url-pattern>/CancelarCuentaBancaria</url-pattern>     
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GestionarTitulares</servlet-name>
+    <servlet-class>es.uco.iw.servlet.GestionarTitularesCuentaBancariaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestionarTitulares</servlet-name>
+    <url-pattern>/GestionarTitulares</url-pattern>
+    <url-pattern>/ActualizarTitular</url-pattern>
+    <url-pattern>/GestionarCotitulares</url-pattern>     
+  </servlet-mapping>
+  
+  
+
 
   <servlet>
     <servlet-name>ModificarPassword</servlet-name>
