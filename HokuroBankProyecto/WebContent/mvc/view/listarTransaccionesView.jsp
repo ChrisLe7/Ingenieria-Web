@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
 <jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 <jsp:useBean  id="InfoTransacciones" scope="session" class="es.uco.iw.display.InfoTransaccionesBean"></jsp:useBean>
 
@@ -19,16 +18,16 @@
 <title>Mis Transacciones</title>
 </head>
 <body>
-
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 <main class="main">
 
 <button class="button-open-popup" id="button-open-popup">Filtros</button>
 
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
+
 System.out.println("Estoy en la vista");
-String mensajeNextPage = "";
+
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
