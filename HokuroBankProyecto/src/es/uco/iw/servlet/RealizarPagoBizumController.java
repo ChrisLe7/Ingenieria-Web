@@ -70,7 +70,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 		if (!login) {
 			//No se encuentra logueado se debe de ir al login.
 			nextPage = "Login";
-			mensajeNextPage = "No se encuentra logueado, inicie sesión";
+			mensajeNextPage = "No se encuentra logueado, inicie sesiÃ³n";
 			request.setAttribute("mensaje", mensajeNextPage);
 		}	
 		
@@ -122,7 +122,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 				// Tengo que ir a la vista
 				//Debere de coger que cuentas pueden realizar el pago.
 				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
-				//nextPage = "/mvc/view/listarTransaccionesView.jsp";
+				nextPage = "/mvc/view/realizarPagoBizumView.jsp";
 				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
 				
 				infoUsuario.setUsuario(clienteInfo);
