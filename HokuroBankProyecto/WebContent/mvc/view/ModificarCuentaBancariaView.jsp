@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
+
 <jsp:useBean  id="infoCuentas" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
 <!DOCTYPE html>
@@ -10,11 +10,10 @@
 <title>Modificar Cuenta</title>
 </head>
 <body>
-
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
 <%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
-String mensajeNextPage = "";
+
 if (!logged)  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no esta logueado";
@@ -25,7 +24,6 @@ if (!logged)  {
 	<% 
 }else {%>
 	
-	<%@ include file="/include/header.jsp" %>
 	
 	<% if(!clienteBean.getRol().equals(RolUsuario.Administrador)){
 	nextPage = "index.jsp";
