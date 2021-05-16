@@ -25,7 +25,7 @@
 	<div>
 	<!-- ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<!-- cambiar el action al controlador correspondiente -->
-		<form method="post" action="ResetPassword">
+		<form class="boxContraseña" method="post" action="ResetPassword">
 			
 			<label for="Email">Email: </label> <input type="email" name="email"  required><br/>
 			<input type="password" id="prehashPassword" name="prehashPassword" style=display:none><br/>
