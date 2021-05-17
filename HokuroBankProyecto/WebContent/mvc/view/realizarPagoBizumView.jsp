@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
 <jsp:useBean  id="infoCuentasUsuario" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
@@ -15,12 +14,17 @@
 <title>Realizar Transacciones</title>
 </head>
 <body>
+ 
 
-<%  
-boolean logged = clienteBean != null && !clienteBean.getDni().equals("");
-String nextPage = "";
-System.out.println("Estoy en la vista");
-String mensajeNextPage = "";
+<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/Menu.jsp" %>
+
+
+
+<%
+
+nextPage = "";
+mensajeNextPage = "";
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
@@ -52,7 +56,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 					
 				<select name="idCuentaOrigen" required>
 					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
-					 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getTelefono()%></option>
+					 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
 					<%} %>
 				</select> <br/>
 				
