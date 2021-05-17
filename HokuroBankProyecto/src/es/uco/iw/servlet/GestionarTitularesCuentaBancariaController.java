@@ -125,12 +125,19 @@ public class GestionarTitularesCuentaBancariaController extends HttpServlet {
 					if (cuenta.getIdCotitular().equals("")) {
 						cuenta.setIdCotitular(idCoTitular);
 						cuentaUserDAO.InsertCotitular(cuenta);
+						mensajeNextPage = "Se ha agregado el Cotitular " + idCoTitular + " a la cuenta " + idCuenta;
+
 					}
 					else {
 						cuenta.setIdCotitular(idCoTitular);
 						cuentaUserDAO.UpdateCotitular(cuenta);
+						mensajeNextPage = "Se ha actualizado al cotitular " + idCoTitular + " para la cuenta " + idCuenta;
+						
 					}
-					nextPage = "MisCuentas";
+					nextPage = "Home";
+					request.setAttribute("mensaje", mensajeNextPage);
+					session.removeAttribute("listadoClientes");
+					session.removeAttribute("infoCuentas");
 				}
 			} 
 			else { 

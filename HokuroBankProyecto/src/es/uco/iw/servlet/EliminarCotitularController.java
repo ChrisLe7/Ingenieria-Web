@@ -85,12 +85,14 @@ public class EliminarCotitularController extends HttpServlet {
 				if (idCuenta != null && idCoTitular != null) {
 					cuentaUserDAO.DeleteCotitular(cuenta);
 				}
-				request.getSession().removeAttribute("listadoClientes");
+				mensajeNextPage = "Se ha eliminado con exito, al cotitular " + idCoTitular + " de la cuenta " + idCuenta;
+				request.setAttribute("mensaje", mensajeNextPage);
+				request.getSession().removeAttribute("listadoClientes"); 
 				request.getSession().removeAttribute("infoCuentas");
-				nextPage = "MisCuentas";
+				nextPage = "Home";
 			}
 			else {
-				nextPage = "MisCuentas";
+				nextPage = "Home";
 				mensajeNextPage = "No es admin, acceso no autorizado";
 				request.setAttribute("mensaje", mensajeNextPage);
 			}

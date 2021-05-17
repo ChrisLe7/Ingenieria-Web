@@ -2,6 +2,7 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -13,14 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.uco.iw.datos.BizumDAO;
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.TransaccionDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
+import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.display.UsuarioInfoBean;
+import es.uco.iw.negocio.bizum.BizumDTO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.negocio.transaccion.TransaccionDTO;
+import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
@@ -63,7 +68,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
-		TransaccionDAO transaccionDAO = new TransaccionDAO(dbURL, username_bd, password_bd, prop);
+		BizumDAO bizumDAO = new BizumDAO(dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage ="/mvc/view/loginView"; 
 		String mensajeNextPage = "";
@@ -85,7 +90,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 				String cantidad = request.getParameter("cantidad");
 				String tipoOperacion = request.getParameter("tipoOperacion");
 				String idTransaccion = "";
-				TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, idTelefonoOrigen, idTelefonoDestino);
+				BizumDTO transaccionBizum = new BizumDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, Integer.valueOf(idTelefonoOrigen), Integer.valueOf(idTelefonoDestino));
 	
 
 				CuentaBancariaDTO cuentaDestino = cuentaUserDAO.QueryByTelefono(Integer.valueOf(idTelefonoDestino));	
@@ -104,7 +109,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 							cuentaUserDAO.UpdateSaldo(cuentaOrigen);
 							cuentaUserDAO.UpdateSaldo(cuentaDestino);
 							
-							transaccionDAO.Insert(transaccion);
+							bizumDAO.Insert(transaccionBizum);
 							
 						}
 						else {
@@ -123,11 +128,18 @@ public class RealizarPagoBizumController extends HttpServlet {
 				//Debere de coger que cuentas pueden realizar el pago.
 				UsuarioDTO clienteInfo = userDAO.QueryByDni(cliente.getDni());
 				nextPage = "/mvc/view/realizarPagoBizumView.jsp";
-				UsuarioInfoBean infoUsuario = new UsuarioInfoBean();
+
 				
-				infoUsuario.setUsuario(clienteInfo);
-				session.setAttribute("UsuarioInfoBean", infoUsuario);
+				ArrayList<PropiedadCuenta> idCuentas = clienteInfo.getCuentasBancarias();
+				ArrayList<CuentaBancariaDTO> listadoCuentas = new ArrayList<CuentaBancariaDTO> ();
+				for (int i = 0; i< idCuentas.size(); i++) {
+					listadoCuentas.add(cuentaUserDAO.QueryByIdCuentaBancaria(idCuentas.get(i).getIdCuentaBancaria()));
+				}
 				
+				InfoCuentasBancariasBean infoCuentasUsuario = new InfoCuentasBancariasBean();
+				infoCuentasUsuario.setCuentas(listadoCuentas);
+
+				session.setAttribute("infoCuentasUsuario", infoCuentasUsuario);
 				
 			}
 			

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean  id="clienteBean" scope="session" class="es.uco.iw.display.ClienteBean"></jsp:useBean>
-<jsp:useBean  id="infoUsuario" scope="session" class="es.uco.iw.display.UsuarioInfoBean"></jsp:useBean>
+<jsp:useBean  id="infoCuentasUsuario" scope="session" class="es.uco.iw.display.InfoCuentasBancariasBean"></jsp:useBean>
 
 <%@ page import ="es.uco.iw.negocio.usuario.RolUsuario, es.uco.iw.negocio.usuario.UsuarioDTO , es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO" %>
 <%@ page import ="es.uco.iw.negocio.usuario.PropiedadCuenta" %>
@@ -30,13 +30,12 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	</jsp:forward>
 	<% 
 }else{ 
-	ArrayList<PropiedadCuenta> ListaCuentas = new ArrayList<PropiedadCuenta>();
-	if (infoUsuario.getUsuario() == null) {
-		System.out.println("Vacio");
-	}
-	else {
-		ListaCuentas = infoUsuario.getUsuario().getCuentasBancarias();
-	}
+	ArrayList<CuentaBancariaDTO> ListaCuentas = new ArrayList<CuentaBancariaDTO>();
+
+	
+		ListaCuentas = infoCuentasUsuario.getCuentas();
+		System.out.println("infoUsuario -> " + ListaCuentas.isEmpty());
+	
 	%>
 
 	<main class="main">
@@ -52,8 +51,8 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 				<label for="idCuentaOrigen">Id de la cuenta Origen: </label> <br/>		
 					
 				<select name="idCuentaOrigen" required>
-					<%for(PropiedadCuenta cuenta : ListaCuentas){ %>
-					 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
+					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
+					 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getTelefono()%></option>
 					<%} %>
 				</select> <br/>
 				

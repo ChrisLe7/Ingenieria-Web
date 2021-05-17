@@ -90,7 +90,7 @@ if (logged == false)  {
 						<input type="text" name="idCoTitular" value = "<%=clienteBean.getDni()%>" style="display:none"> <br/>	
 						
 					<%} %>
-						
+					<input type="hidden" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>">
 					<input type="submit" value = "Confirmar"> 
 					
 				</form>
