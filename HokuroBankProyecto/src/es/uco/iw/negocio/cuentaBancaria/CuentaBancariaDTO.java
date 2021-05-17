@@ -11,6 +11,7 @@ public class CuentaBancariaDTO implements Serializable {
 	private boolean estadoBizum;
 	private String idTitular;
 	private String idCotitular;
+	private int telefonoBizum;
 
 	/**
 	 * Constructor con id, saldo, tipo de cuenta, estado de bizum e id de Ttitular una cuenta bancaria 
@@ -151,6 +152,24 @@ public class CuentaBancariaDTO implements Serializable {
 	public void setIdCotitular(String idCotitular) {
 		this.idCotitular = idCotitular;
 	}
+	
+	/**
+	 * Devuelve el telefono del bizum asignado
+	 * 
+	 * @return Telefono del bizum asignado
+	 */
+	public int getTelefonoBizum() {
+		return telefonoBizum;
+	}
+	
+	/**
+	 * Asigna un telefono para el bizum de la cuenta bancaria
+	 * 
+	 * @param telefono Telefono a asignar al bizum de la cuenta bancaria
+	 */
+	public void setTelefonoBizum(int telefono) {
+		this.telefonoBizum = telefono;
+	}
 
 	@Override
 	/**
@@ -161,7 +180,7 @@ public class CuentaBancariaDTO implements Serializable {
 	public String toString() {
 		return "CuentaBancariaDTO [idCuentaBancaria=" + idCuentaBancaria + ", saldo=" + saldo + ", tipoCuenta="
 				+ tipoCuenta + ", estadoBizum=" + estadoBizum + ", idTitular=" + idTitular + ", idCotitular="
-				+ idCotitular + "]";
+				+ idCotitular + ", telefonoBizum=" + telefonoBizum + "]";
 	}
 
 }

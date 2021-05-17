@@ -42,16 +42,17 @@ public class CuentaBancariaDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             if (set.next()) {
-            	String idTtitular = "";
+            	String idTitular = "";
             	String idCotitular = "";
+            	int telefono = 0;
             	
             	statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Titular");
-            	PreparedStatement stmtTtitular = con.prepareStatement(statement);
-                stmtTtitular.setString(1, idCuentaBancaria);
-                ResultSet setTtitular = stmtTtitular.executeQuery();
+            	PreparedStatement stmtTitular = con.prepareStatement(statement);
+                stmtTitular.setString(1, idCuentaBancaria);
+                ResultSet setTitular = stmtTitular.executeQuery();
                 
-                if (setTtitular.next()) {
-                	idTtitular = setTtitular.getString(1);
+                if (setTitular.next()) {
+                	idTitular = setTitular.getString(1);
                 }
                 
                 statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Cotitular");
@@ -63,7 +64,17 @@ public class CuentaBancariaDAO extends DAO {
                 	idCotitular = setCotitular.getString(1);
                 }
                 
-                cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTtitular, idCotitular);
+                statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Telefono");
+            	PreparedStatement stmtTelefono = con.prepareStatement(statement);
+            	stmtTelefono.setString(1, idCuentaBancaria);
+                ResultSet setTelefono = stmtTelefono.executeQuery();
+                
+                if (setTelefono.next()) {
+                	telefono = setTelefono.getInt(1);
+                }
+                
+                cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTitular, idCotitular);
+                cuentaBancaria.setTelefonoBizum(telefono);
             }
 
             if (stmt != null) {
@@ -150,7 +161,7 @@ public class CuentaBancariaDAO extends DAO {
     	
     	try {
             Connection con = getConnection();
-            String statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Telefono");
+            String statement = sqlProp.getProperty("Select_Telefono_Cuenta_Bancaria");
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setInt(1, telefono);
             ResultSet set = stmt.executeQuery();
@@ -185,16 +196,17 @@ public class CuentaBancariaDAO extends DAO {
             ResultSet set = stmt.executeQuery();
             
             while (set.next()) {
-            	String idTtitular = "";
+            	String idTitular = "";
             	String idCotitular = "";
+            	int telefono = 0;
             	
             	statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Titular");
-            	PreparedStatement stmtTtitular = con.prepareStatement(statement);
-                stmtTtitular.setString(1, set.getString(1));
-                ResultSet setTtitular = stmtTtitular.executeQuery();
+            	PreparedStatement stmtTitular = con.prepareStatement(statement);
+                stmtTitular.setString(1, set.getString(1));
+                ResultSet setTitular = stmtTitular.executeQuery();
                 
-                if (setTtitular.next()) {
-                	idTtitular = setTtitular.getString(1);
+                if (setTitular.next()) {
+                	idTitular = setTitular.getString(1);
                 }
                 
                 statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Cotitular");
@@ -206,7 +218,17 @@ public class CuentaBancariaDAO extends DAO {
                 	idCotitular = setCotitular.getString(1);
                 }
                 
-                CuentaBancariaDTO cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTtitular, idCotitular);
+                statement = sqlProp.getProperty("Select_Cuenta_Bancaria_Telefono");
+            	PreparedStatement stmtTelefono = con.prepareStatement(statement);
+            	stmtTelefono.setString(1, set.getString(1));
+                ResultSet setTelefono = stmtTelefono.executeQuery();
+                
+                if (setTelefono.next()) {
+                	telefono = setTelefono.getInt(1);
+                }
+                
+                CuentaBancariaDTO cuentaBancaria = new CuentaBancariaDTO(set.getString(1), set.getFloat(2), TipoCuentaBancaria.valueOf(set.getString(3)), set.getBoolean(4), idTitular, idCotitular);
+                cuentaBancaria.setTelefonoBizum(telefono);
                 cuentasBancarias.add(cuentaBancaria)
 ;            }
 
