@@ -99,20 +99,14 @@ public class ResetPasswordController extends HttpServlet {
 					String mensaje = "Su contraseña se ha reseteado de forma correcta, su contraseña nueva será: " + newPassword;
 					EnvioCorreo.EnviarCorreo(UserEmail, asunto, mensaje);
 					nextPage = "Home";
-					mensajeNextPage = "La contraseña del usuario "+ idUserCliente +" se ha reseteado de forma correcta. Es: "+ newPassword;
+					mensajeNextPage = "La contraseña del usuario "+ idUserCliente +" se ha reseteado de forma correcta.";
 				}
 				request.getSession().removeAttribute("listadoClientes");
 			}
 			else {
 				//Dirigimos a la vista
-				nextPage = "/mvc/view/resetPasswordView.jsp";
-				ListadoClientesBean listadoClientes = new ListadoClientesBean ();
-				
-				// QUERY PARA OBTENER EL LISTADO DE USUARIOS COMO DTO's
-				ArrayList <UsuarioDTO> listadoUsuarios = userDAO.QueryUsuarios();
-				listadoClientes.setUsuarios(listadoUsuarios);
-				
-				request.getSession().setAttribute("listadoClientes", listadoClientes);
+				nextPage = "Home";
+				mensajeNextPage = "Acceso no autorizado, unicamente se puede resetear la password desde el gestionar clientes";
 			}
 	
 		}

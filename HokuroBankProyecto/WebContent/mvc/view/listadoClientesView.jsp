@@ -12,6 +12,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Clientes</title>
+
+	<script src="js/crearPasswordAleatoria.js" defer></script> 
+	<script src="js/sha512.js" defer></script>
+	<script src="js/hashPassword.js" defer></script>
+
 </head>
 <body>
 <%@ include file="/include/header.jsp" %>
@@ -71,6 +76,15 @@
 				<input type="hidden" name="idCliente" value="<%=user.getDni()%>">
 				<input type="submit" value="Cancelar Cuenta Usuario">
 			</form>
+			<form method=post action="ResetPassword">
+				<label for="Email">Email: </label> <input type="email" name="email"  required><br/>
+				<input type="hidden" name="idCliente" value="<%=user.getDni()%>"><br/>
+				<input type="hidden" id="prehashPassword" name="prehashPassword" ><br/>
+				<input type="hidden" id="password" name="password" ><br/>
+				<input type="submit" id="submitBtn" value="Resetear Password">
+			</form>
+			
+			
 		</div>
 	<%	}
 	}%>
