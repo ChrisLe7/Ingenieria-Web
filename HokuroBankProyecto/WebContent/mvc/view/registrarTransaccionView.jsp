@@ -65,12 +65,15 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 				
 			<input type="text" name="cantidad" pattern="[0-9]+(.[0-9]{1,2})?" required><br/>
 		
-			<label for="TipoOperacion">Tipo de Operacion: </label>		
+			<!-- <label for="TipoOperacion">Tipo de Operacion: </label>	 -->
 				
-			<select c name="tipoOperacion" required>
+			<!-- <select name="tipoOperacion" required>
 			  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
 			  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
-			</select>
+			</select>  -->
+			
+			<!-- Puesto para no romper el controlador, aunque no tiene efecto -->
+			<input type="hidden" name="tipoOperacion" value="Pagar" style="display:none">
 			
 			<br/><input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
 			

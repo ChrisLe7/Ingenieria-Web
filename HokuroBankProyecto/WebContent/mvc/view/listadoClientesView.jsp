@@ -68,8 +68,8 @@
 
 			</form>
 			<form method=post action="CancelarCuentaUsuario">
-				<input type=text name="idCliente" class="hidden" value="<%=user.getDni()%>" style=display:none>
-				<input type=submit value="Cancelar Cuenta Usuario"> 
+				<input type="hidden" name="idCliente" value="<%=user.getDni()%>">
+				<input type="submit" value="Cancelar Cuenta Usuario">
 			</form>
 		</div>
 	<%	}

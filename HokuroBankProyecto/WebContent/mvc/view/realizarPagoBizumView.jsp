@@ -46,7 +46,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	
 		<div>
 		
-			<form method="post" action="RealizarTransferenciaBizum">
+			<form class="formularioTransaccion" method="post" action="RealizarTransferenciaBizum">
 			
 				<label for="IdTelefonoDestino">Telefono del destinatario del Bizum: </label> <br/>
 					
@@ -54,7 +54,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 				
 				<label for="idCuentaOrigen">Id de la cuenta Origen: </label> <br/>		
 					
-				<select name="idCuentaOrigen" required>
+				<select class="select" name="idCuentaOrigen" required>
 					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
 					 	 <option value="<%=cuenta.getTelefonoBizum()%>"><%=cuenta.getTelefonoBizum()%></option>
 					<%} %>
@@ -68,12 +68,15 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 					
 				<input type="text" name="cantidad" pattern="[0-9]{+}" required> <br/>
 			
-				<label for="TipoOperacion">Tipo de Operacion: </label> <br/>	
-					
-				<select name="tipoOperacion" required>
+				<!-- <label for="TipoOperacion">Tipo de Operacion: </label>	 -->
+				
+				<!-- <select name="tipoOperacion" required>
 				  <option value=<%=TipoOperacion.Pagar %>>Pagar</option>
 				  <option value=<%=TipoOperacion.Recibir %>>Recibir</option>
-				</select> <br/>
+				</select>  -->
+				
+				<!-- Puesto para no romper el controlador, aunque no tiene efecto -->
+				<input type="hidden" name="tipoOperacion" value="Pagar" style="display:none">
 				
 				<input class="button" type="submit" id="submitBtn" value="Realizar Transaccion">
 			
