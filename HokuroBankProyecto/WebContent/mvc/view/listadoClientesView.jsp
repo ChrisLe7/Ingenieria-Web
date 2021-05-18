@@ -78,9 +78,9 @@
 			</form>
 			<form method=post action="ResetPassword">
 				<label for="Email">Email: </label> <input type="email" name="email"  required><br/>
-				<input type="hidden" name="idCliente" value="<%=user.getDni()%>"><br/>
-				<input type="hidden" id="prehashPassword" name="prehashPassword" ><br/>
-				<input type="hidden" id="password" name="password" ><br/>
+				<input type="hidden" name="idCliente" value="<%=user.getDni()%>">
+				<input type="hidden" id="prehashPassword" name="prehashPassword">
+				<input type="hidden" id="password" name="password">
 				<input type="submit" id="submitBtn" value="Resetear Password">
 			</form>
 			

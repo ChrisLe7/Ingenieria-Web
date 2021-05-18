@@ -70,7 +70,7 @@ ListaCuentas = infoCuentas.getCuentas();
 	</form>	
     <form method="post" action="MisPagosBizum">
 		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Mis Transferencias">
+		<input type="submit" value="Mis Pagos Bizum">
 	</form>	
 	 	
 	

@@ -53,7 +53,7 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 	Cantidad: <%=transaccion.getCantidad()%><br/>
 	
-	Tipo: <%=transaccion.getTipoOperacion().toString()%><br/>
+	<!-- Tipo: <%=transaccion.getTipoOperacion().toString()%><br/>  -->
 	
 	Fecha: <%=transaccion.getFecha()%><br/>
 	

@@ -45,7 +45,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 		
 			<form class="formularioTransaccion" method="post" action="RealizarTransaccion">
 			
-			<label for="idCuentaDestino">Id de la cuenta Destion: </label>
+			<label for="idCuentaDestino">Id de la cuenta Destino: </label>
 				
 			<input type="text" name="idCuentaDestino" required><br/>
 			
