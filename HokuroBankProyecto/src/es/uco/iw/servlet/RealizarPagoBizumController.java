@@ -100,9 +100,13 @@ public class RealizarPagoBizumController extends HttpServlet {
 					request.setAttribute("mensaje", mensajeNextPage);
 				}
 				else {
-					CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByTelefono(Integer.valueOf(idTelefonoDestino));
+					CuentaBancariaDTO cuentaOrigen = cuentaUserDAO.QueryByTelefono(Integer.valueOf(idTelefonoOrigen));
 					if (cuentaOrigen.getEstadoBizum()) {
 						Float aux = cuentaOrigen.getSaldo() - Float.valueOf(cantidad);
+						System.out.println(aux);
+						System.out.println(cuentaOrigen);
+						System.out.println(cuentaDestino);
+						
 						if (aux >= 0) {
 							cuentaOrigen.setSaldo(aux);
 							cuentaDestino.setSaldo(cuentaDestino.getSaldo() +  Float.valueOf(cantidad));
@@ -110,7 +114,8 @@ public class RealizarPagoBizumController extends HttpServlet {
 							cuentaUserDAO.UpdateSaldo(cuentaDestino);
 							
 							bizumDAO.Insert(transaccionBizum);
-							
+							mensajeNextPage = "El Pago se ha realizado con exito, se le han transferido " + cantidad + " al telefono " + idTelefonoDestino;
+							request.setAttribute("mensaje", mensajeNextPage); 
 						}
 						else {
 							mensajeNextPage = "Lo sentimos pero la cantidad a realizar es superior a la que posee la cuenta Origen";

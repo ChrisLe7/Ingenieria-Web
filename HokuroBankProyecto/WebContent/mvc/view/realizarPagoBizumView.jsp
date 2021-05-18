@@ -56,7 +56,7 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 					
 				<select name="idCuentaOrigen" required>
 					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
-					 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
+					 	 <option value="<%=cuenta.getTelefonoBizum()%>"><%=cuenta.getTelefonoBizum()%></option>
 					<%} %>
 				</select> <br/>
 				
