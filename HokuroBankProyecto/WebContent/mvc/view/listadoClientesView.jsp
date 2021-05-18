@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Clientes</title>
 </head>
 <body>
 <%@ include file="/include/header.jsp" %>
