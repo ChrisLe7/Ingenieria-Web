@@ -18,6 +18,20 @@ p {
   margin-bottom: 1.6em; 
 }
 
+.opcion form{
+	display:inline;
+}
+
+input.inline{
+	display:inline;
+}
+
+
+.formulario .select {
+	width: 25em;
+	height: 3em;
+}
+
 .hidden {
   display:none;
 }
