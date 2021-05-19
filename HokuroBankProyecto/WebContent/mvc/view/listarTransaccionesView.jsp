@@ -25,9 +25,7 @@
 <button class="button-open-popup" id="button-open-popup">Filtros</button>
 
 <%  
-
 System.out.println("Estoy en la vista");
-
 if (clienteBean == null || clienteBean.getDni().equals(""))  {
 	nextPage = "index.jsp";
 	mensajeNextPage = "Usted no está logueado";
@@ -43,7 +41,6 @@ AUN NO HA REALIZADO NINGUNA TRANSACCION
 	System.out.println("Error2");
 ArrayList<TransaccionDTO> ListaTransacciones = new ArrayList<TransaccionDTO>();
 ListaTransacciones = InfoTransacciones.getTransacciones();
-
 for(TransaccionDTO transaccion : ListaTransacciones){
 %>
 
@@ -81,7 +78,7 @@ for(TransaccionDTO transaccion : ListaTransacciones){
 	
 		<div class="popup" id="popup">
 		
-			<form class="transaccion" method="post" action="" id="filter">
+			<form method="post" action="" id="filter">
 				<a href="#" id="button-close-popup" class="button-close-popup"><i class="fas fa-times">Cerrar</i></a>
 				
 				<label for="idTransaccion">Id de la Transaccion:</label><br/>
