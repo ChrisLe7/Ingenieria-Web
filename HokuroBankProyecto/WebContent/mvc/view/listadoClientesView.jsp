@@ -27,10 +27,15 @@
 	<%  
 
 	if (clienteBean == null || clienteBean.getDni().equals("") || clienteBean.getRol().equals(RolUsuario.Cliente))  {
-		nextPage = "index.jsp";
+		nextPage = "Home";
 		mensajeNextPage = "Usted no está logueado";
 		if (clienteBean.getRol().equals(RolUsuario.Cliente)) {
 			mensajeNextPage = "Usted no tiene permiso para acceder a la gestión de Usuarios";
+			%>
+				<jsp:forward page="<%=nextPage%>">
+					<jsp:param value="<%=mensajeNextPage%>" name="message"/>
+				</jsp:forward>
+			<% 
 		}
 		
 	}else if(listadoClientes.getUsuarios().isEmpty()){
