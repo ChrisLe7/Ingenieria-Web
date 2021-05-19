@@ -69,6 +69,7 @@ public class TransaccionDAO extends DAO {
             String statement = sqlProp.getProperty("Select_Transaccion_Cuenta");
             PreparedStatement stmt = con.prepareStatement(statement);
             stmt.setString(1, idCuentaBancaria);
+            stmt.setString(2, idCuentaBancaria);
             ResultSet set = stmt.executeQuery();
             
             while (set.next()) {

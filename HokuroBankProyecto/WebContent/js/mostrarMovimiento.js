@@ -2,13 +2,13 @@
 Permite mostrar los movimientos que cumplen con el filtro
 */
 
-let movimientos = document.getElementsByClassName('Transacciones');
+let movimientos = document.getElementsByClassName('transaccion');
 
 let filtro = JSON.parse(sessionStorage.getItem('filtro'));
 
 let movimiento = null;
 
-for (let i = 0; i < movimientos.length; i++) {
+for (let i = 0; i < movimientos.length - 1; i++) {
 	movimiento = movimientos[i].getElementsByTagName('form')[0];
 
 	if (!mostrarMovimiento(movimiento)) {
@@ -22,6 +22,8 @@ for (let i = 0; i < movimientos.length; i++) {
 
 function mostrarMovimiento (movimiento) {
 	console.log(movimiento)
+	
+	console.log(movimiento.cantidad.value)
 	
 	if (filtro == null) {
 		return true;

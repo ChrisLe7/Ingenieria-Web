@@ -53,7 +53,7 @@ ListaTarjetas = infoTarjetas.getTarjetas();
 	Cuenta Bancaria Vinculada: <%=tarjeta.getIdCuenta()%><br/>
 
 	
-	<br/>
+	
 	 	<div class ="opcion">
 			<form method=post action="CancelarTarjeta">
 				<input type=text name="idtarjeta" class="hidden" value="<%=tarjeta.getNumTarjeta()%>">
