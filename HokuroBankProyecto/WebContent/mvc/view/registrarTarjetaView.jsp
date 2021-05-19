@@ -43,31 +43,35 @@
 	
 	<main class = "main">
 			
-	<form method="post" action="RegistrarTarjeta" class = "creartarjeta">	
+		<div>
+			<form class="formularioTransaccion" method="post" action="RegistrarTarjeta" class = "creartarjeta">	
 	
-		<label for="Pin">Pin: </label>
+				<label for="Pin">Pin: </label>
+				
+				<input type="password" name="pin" pattern="[0-9]{4}" required><br/>
+				
+				<label for="Tipo">Tipo de Tarjeta: </label>
+					<select class="select" name="tipoTarjeta" required>
+						<option value="Credito">Credito</option>
+						<option value="Debito">Debito</option>
+
+					</select>
+					<br/> 
+				<label for="Cuenta">Cuenta a la que enlazarla: </label> 
+				
+					<select class="select" name="idCuenta" required>
+						<%for(PropiedadCuenta cuenta : listaCuentas){ %>
+						 	 <option value="<%=cuenta.getIdCuentaBancaria()%>"><%=cuenta.getIdCuentaBancaria()%></option>
+						<%} %>
+					</select>
+						
+					<br/>
+				<br/><input type="submit" id="submitBtn" value="Crear Tarjeta">
+			</form>		
+				
 		
-		<input type="password" name="pin" pattern="[0-9]{4}" required><br/>
 		
-		<label for="Tipo">Tipo de Tarjeta: </label><br/>
-		
-			<label><input type="radio" name="tipoTarjeta" value = "Credito" required> Credito</label> <br/>
-			
-			<label><input type="radio" name="tipoTarjeta" value = "Debito" > Debito</label> <br/>
-		
-			<label><input type="radio" name="tipoTarjeta" value = "Prepago"> Prepago</label> <br/>	
-		
-		<label for="Cuenta">Cuenta a la que enlazarla: </label>
-		
-			<% 
-	
-			for(PropiedadCuenta cuenta : listaCuentas){%>
-			
-			<label><input type="radio" name="idCuenta" value = "<%=cuenta.getIdCuentaBancaria() %>"> Id: <%=cuenta.getIdCuentaBancaria() %></label> <br/>
-			
-			<%} %>
-		<input type="submit" id="submitBtn" value="Crear Tarjeta">
-	</form>
+		</div>
 
 
 

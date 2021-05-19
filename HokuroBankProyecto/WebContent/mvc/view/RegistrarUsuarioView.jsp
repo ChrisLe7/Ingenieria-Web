@@ -65,10 +65,13 @@
 					<input type="tel" name="telefono" pattern="[0-9]{9}"><br/>
 					
 					<label for="Rol">Rol: </label> <br/>
-					
-					<label> Cliente <input type="radio" name="rol" value = "Cliente"></label> <br/>
-					
-					<label>Administrador <input type="radio" name="rol" value = "Administrador"> </label> <br/>
+
+					<select class="select" name="rol" required>
+						<option value="Cliente">Cliente</option>
+						<option value="Administrador">Administrador</option>
+
+					</select>
+
 					
 					<label for="Password">Contraseña: </label> <br/>
 					

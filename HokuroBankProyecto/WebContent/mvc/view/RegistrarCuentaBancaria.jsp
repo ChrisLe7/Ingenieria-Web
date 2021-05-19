@@ -41,11 +41,13 @@ if (logged == false)  {
 			
 
 		<label for="Tipo">Tipo de Cuenta: </label><br/>
+		<select class="select" name="tipoCuenta" required>
+						<option value="<%=TipoCuentaBancaria.Ahorro%>">Ahorro</option>
+						<option value="<%=TipoCuentaBancaria.Corriente%>">Corriente</option>
+
+		</select>
 		
-			<label><input type="radio" name="tipoCuenta" value = "<%=TipoCuentaBancaria.Ahorro%>" required> Ahorro</label> <br/>
-			
-			<label><input type="radio" name="tipoCuenta" value = "<%=TipoCuentaBancaria.Corriente %>">Corriente</label> <br/>		
-			
+		
 		<%if(clienteBean.getRol().equals(RolUsuario.Administrador)){ 
 			
 	

@@ -53,47 +53,48 @@ ListaCuentas = infoCuentas.getCuentas();
 		%> No Activo <%	}%>
 	
 	<br/>
-	 
-	 <form method="post" action="ModificarCuenta">
-		<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<% if (cuenta.getEstadoBizum()) {%>
-			<input type="submit" value="Deshabilitar Bizum">
-		<% } else if (!cuenta.getEstadoBizum()) {%>
-			<input type="tel" name="telefono" pattern="[0-9]{9}" required>
-			<input type="submit" value="Habilitar Bizum">
-		<% } %>
-	</form>	
-	
-	 <form method="post" action="MisTransferencias">
-		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Mis Transferencias">
-	</form>	
-    <form method="post" action="MisPagosBizum">
-		<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-		<input type="submit" value="Mis Transferencias">
-	</form>	
-	 	
-	
-	 	
-	<%
-
-		if(clienteBean.getRol().equals(RolUsuario.Administrador)){
-%>
-		 <form method="post" action="ModificarCuenta">	
-		 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-			<input type="submit" value="Modificar Saldo">
-		 </form>	
-	
-		<form method=post action="CancelarCuentaBancaria">
-			<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-			<input type=submit value="Cancelar Cuenta Bancaria"> 
-		</form>
-
-		<form method=post action="GestionarTitulares">
-			<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
-			<input type=submit value="Gestionar Titulares"> 
-		</form>
-<% 		}%>
+	 	<div class ="opcion">
+			 <form method="post" action="ModificarCuenta">
+				<input type="text" name="modificar_bizum" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+				<% if (cuenta.getEstadoBizum()) {%>
+					<input type="submit" value="Deshabilitar Bizum">
+				<% } else if (!cuenta.getEstadoBizum()) {%>
+					<input type="tel" name="telefono" pattern="[0-9]{9}" required>
+					<input type="submit" value="Habilitar Bizum">
+				<% } %>
+			</form>	
+			
+			 <form method="post" action="MisTransferencias">
+				<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+				<input type="submit" value="Mis Transferencias">
+			</form>	
+		    <form method="post" action="MisPagosBizum">
+				<input type="text" name="idCuenta" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+				<input type="submit" value="Mis Pagos Bizum">
+			</form>	
+			 	
+			
+			 	
+			<%
+		
+				if(clienteBean.getRol().equals(RolUsuario.Administrador)){
+		%>
+				 <form method="post" action="ModificarCuenta">	
+				 	<input type="text" name="modificar_saldo" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+					<input type="submit" value="Modificar Saldo">
+				 </form>	
+			
+				<form method=post action="CancelarCuentaBancaria">
+					<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+					<input type=submit value="Cancelar Cuenta Bancaria"> 
+				</form>
+		
+				<form method=post action="GestionarTitulares">
+					<input type=text name="idCuenta" class="hidden" value="<%=cuenta.getIdCuentaBancaria()%>" style=display:none>
+					<input type=submit value="Gestionar Titulares"> 
+				</form>
+		<% 		}%>
+		</div>
 	</div>
 <%	}
 }%>
