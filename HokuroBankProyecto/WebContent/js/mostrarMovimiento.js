@@ -8,7 +8,7 @@ let filtro = JSON.parse(sessionStorage.getItem('filtro'));
 
 let movimiento = null;
 
-for (let i = 0; i < movimientos.length - 1; i++) {
+for (let i = 0; i < movimientos.length; i++) {
 	movimiento = movimientos[i].getElementsByTagName('form')[0];
 
 	if (!mostrarMovimiento(movimiento)) {
@@ -20,17 +20,11 @@ for (let i = 0; i < movimientos.length - 1; i++) {
 	}
 }
 
-function mostrarMovimiento (movimiento) {
-	console.log(movimiento)
-	
-	console.log(movimiento.cantidad.value)
-	
+function mostrarMovimiento (movimiento) {		
 	if (filtro == null) {
 		return true;
 	}
-	
-	console.log(filtro);
-	
+		
 	if (filtro.idTransaccion_ != undefined && filtro.idTransaccion_ != "" && movimiento.idTransaccion.value.indexOf(filtro.idTransaccion_) == -1) {
 		return false;
 	}
