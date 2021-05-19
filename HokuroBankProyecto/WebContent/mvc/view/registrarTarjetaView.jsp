@@ -57,7 +57,7 @@
 
 					</select>
 					<br/> 
-				<label for="Cuenta">Cuenta a la que enlazarla: </label> 
+				<label for="Cuenta">Cuenta a la que enlazarla: </label> <br/>
 				
 					<select class="select" name="idCuenta" required>
 						<%for(PropiedadCuenta cuenta : listaCuentas){ %>

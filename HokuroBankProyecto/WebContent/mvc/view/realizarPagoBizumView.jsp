@@ -52,12 +52,14 @@ if (clienteBean == null || clienteBean.getDni().equals(""))  {
 					
 				<input type="text" name="idTelefonoDestino" pattern="[0-9]{9}" required> <br/>
 				
-				<label for="idCuentaOrigen">Id de la cuenta Origen: </label> <br/>		
+				<label for="idCuentaOrigen">Id del telefono Origen: </label> <br/>		
 					
 				<select class="select" name="idCuentaOrigen" required>
-					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ %>
-					 	 <option value="<%=cuenta.getTelefonoBizum()%>"><%=cuenta.getTelefonoBizum()%></option>
-					<%} %>
+					<%for(CuentaBancariaDTO cuenta : ListaCuentas){ 
+						if (cuenta.getTelefonoBizum() != 0) {%>
+					 	 	<option value="<%=cuenta.getTelefonoBizum()%>"><%=cuenta.getTelefonoBizum()%></option>
+					<%	}
+					} %>
 				</select> <br/>
 				
 				<label for="Descripcion">Descripción: </label> <br/>		 
