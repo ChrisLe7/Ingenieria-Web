@@ -54,6 +54,16 @@
     <url-pattern>/GestionarTransferencias</url-pattern>    
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>PagosBizum</servlet-name>
+    <servlet-class>es.uco.iw.servlet.listarPagosBizumController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PagosBizum</servlet-name>
+    <url-pattern>/MisPagosBizum</url-pattern>
+    <url-pattern>/GestionarPagosBizum</url-pattern>    
+  </servlet-mapping>
+  
   
   <servlet>
     <servlet-name>RealizarTransferencia</servlet-name>
@@ -199,19 +209,24 @@
     <param-name>bdName</param-name>
     <param-value>IW</param-value>
   </context-param>
-
+  <!--
  <context-param>
     <param-name>server</param-name>
     <param-value>hokurobank.ddns.net</param-value>
   </context-param>
-
+ -->
     <!-- 
   <context-param>
     <param-name>server</param-name>
     <param-value>192.168.0.14</param-value>
   </context-param>
    -->
-
+    
+  <context-param>
+    <param-name>server</param-name>
+    <param-value>localhost</param-value>
+  </context-param>
+   
   <context-param>
     <param-name>port</param-name>
     <param-value>3306</param-value>
