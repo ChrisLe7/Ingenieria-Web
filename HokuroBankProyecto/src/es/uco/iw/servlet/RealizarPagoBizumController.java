@@ -16,15 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.BizumDAO;
 import es.uco.iw.datos.CuentaBancariaDAO;
-import es.uco.iw.datos.TransaccionDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
-import es.uco.iw.display.UsuarioInfoBean;
 import es.uco.iw.negocio.bizum.BizumDTO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
-import es.uco.iw.negocio.transaccion.TransaccionDTO;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 

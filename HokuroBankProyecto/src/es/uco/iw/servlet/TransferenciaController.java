@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.TransaccionDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoTransaccionesBean;
 import es.uco.iw.negocio.transaccion.TransaccionDTO;
@@ -55,11 +53,9 @@ public class TransferenciaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
 		TransaccionDAO transaccionDAO = new TransaccionDAO(dbURL, username_bd, password_bd, prop);
-		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage ="/mvc/view/loginView"; 
 		String mensajeNextPage = "";
 				

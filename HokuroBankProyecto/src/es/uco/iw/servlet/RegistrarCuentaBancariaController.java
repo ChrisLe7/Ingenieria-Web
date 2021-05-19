@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.UsuarioDAO;
-import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.ListadoClientesBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.cuentaBancaria.TipoCuentaBancaria;
@@ -42,7 +39,6 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		String port = request.getServletContext().getInitParameter("port");
 		String username_bd = request.getServletContext().getInitParameter("username");
 		String password_bd = request.getServletContext().getInitParameter("password");
@@ -58,11 +54,9 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 		java.util.Properties prop = new java.util.Properties();
 		prop.load(myIO);
 		
-		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		
-		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
 		String nextPage = null;
 		

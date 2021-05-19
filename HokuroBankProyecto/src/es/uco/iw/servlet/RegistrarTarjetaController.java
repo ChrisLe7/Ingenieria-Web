@@ -2,27 +2,21 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import es.uco.iw.datos.CuentaBancariaDAO;
 import es.uco.iw.datos.TarjetaDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
-import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.display.UsuarioInfoBean;
-import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.tarjeta.TarjetaDTO;
 import es.uco.iw.negocio.tarjeta.TipoTarjeta;
-import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
 import es.uco.iw.utilidades.GeneradorID;
 
@@ -66,7 +60,6 @@ public class RegistrarTarjetaController extends HttpServlet {
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
-		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage  = "";
 		RequestDispatcher disparador = null;
 		

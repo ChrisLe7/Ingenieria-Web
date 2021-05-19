@@ -14,13 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
-import es.uco.iw.datos.TarjetaDAO;
 import es.uco.iw.datos.TransaccionDAO;
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
-import es.uco.iw.negocio.tarjeta.TarjetaDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.negocio.transaccion.TransaccionDTO;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
@@ -67,7 +65,6 @@ public class CuentaController extends HttpServlet {
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
 		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
-		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
 		TransaccionDAO transaccionDAO = new TransaccionDAO(dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
@@ -117,7 +114,7 @@ public class CuentaController extends HttpServlet {
 					
 					
 					cuentaUserDAO.Delete(cuentaACancelar.getIdCuentaBancaria());
-	//				EnvioCorreo.EnviarCorreo(clienteInfo.getEmail(), asunto, mensaje);
+					EnvioCorreo.EnviarCorreo(clienteInfo.getEmail(), asunto, mensaje);
 					disparador = request.getRequestDispatcher("Home");
 					request.setAttribute("mensaje", mensaje);
 					session.removeAttribute("infoCuentas");

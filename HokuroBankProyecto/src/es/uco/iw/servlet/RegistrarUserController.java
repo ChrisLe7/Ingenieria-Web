@@ -2,7 +2,6 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.SecureRandom;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

@@ -15,8 +15,6 @@ import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.UsuarioInfoBean;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
-import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
-import es.uco.iw.utilidades.HashPassword;
 
 /**
  * Servlet implementation class PerfilUserController
@@ -69,7 +67,6 @@ public class PerfilUserController extends HttpServlet {
 				//Significa que tenemos cambios y venimos del formulario
 				String UserTelefono = request.getParameter("telefono");
 				String UserDireccion = request.getParameter("direccion");
-				String UserPassword = request.getParameter("password");
 				
 				
 				userDTO = userDAO.QueryByDni(cliente.getDni());

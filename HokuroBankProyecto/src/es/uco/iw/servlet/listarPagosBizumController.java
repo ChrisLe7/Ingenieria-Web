@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,14 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.BizumDAO;
 import es.uco.iw.datos.CuentaBancariaDAO;
-import es.uco.iw.datos.TransaccionDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoPagosBizumBean;
-import es.uco.iw.display.InfoTransaccionesBean;
 import es.uco.iw.negocio.bizum.BizumDTO;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
-import es.uco.iw.negocio.transaccion.TransaccionDTO;
 
 /**
  * Servlet implementation class listarPagosBizumController
@@ -61,7 +56,6 @@ public class listarPagosBizumController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador = null;
 		BizumDAO transaccionDAO = new BizumDAO(dbURL, username_bd, password_bd, prop);

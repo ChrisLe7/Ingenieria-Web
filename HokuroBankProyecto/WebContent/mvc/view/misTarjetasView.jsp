@@ -68,6 +68,6 @@ ListaTarjetas = infoTarjetas.getTarjetas();
 }%>
 </div>
 
-	
+</main>
 </body>
 </html>

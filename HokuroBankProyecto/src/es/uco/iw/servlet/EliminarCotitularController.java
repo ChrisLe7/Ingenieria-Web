@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.CuentaBancariaDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoCuentasBancariasBean;
 import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
@@ -57,7 +56,6 @@ public class EliminarCotitularController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		CuentaBancariaDAO cuentaUserDAO = new CuentaBancariaDAO (dbURL, username_bd, password_bd, prop);
 		String nextPage ="/mvc/view/loginView"; 
 		String mensajeNextPage = "";

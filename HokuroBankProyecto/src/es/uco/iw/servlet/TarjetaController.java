@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.TarjetaDAO;
-import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
 import es.uco.iw.display.InfoTarjetasBean;
 import es.uco.iw.negocio.tarjeta.TarjetaDTO;
-import es.uco.iw.negocio.usuario.UsuarioDTO;
 
 /**
  * Servlet implementation class TarjetaController
@@ -57,7 +55,6 @@ public class TarjetaController extends HttpServlet {
 		prop.load(myIO);
 		
 		ClienteBean cliente = (ClienteBean) session.getAttribute("clienteBean");
-		UsuarioDAO userDAO = new UsuarioDAO (dbURL, username_bd, password_bd, prop);
 		TarjetaDAO tarjetaDAO = new TarjetaDAO (dbURL, username_bd, password_bd, prop);
 		Boolean login = cliente != null && !cliente.getDni().equals("");
 		RequestDispatcher disparador;
@@ -66,7 +63,6 @@ public class TarjetaController extends HttpServlet {
 		if (login) {
 			//Se encuentra logueado el usuario deberemos de coger la información de sus tarjetas para mostrarlas.
 			
-			UsuarioDTO userDTO = userDAO.QueryByDni(cliente.getDni());
 			System.out.println("Compruebo que el usuario se encuentra logueado [TARJETACONTROLLER]");
 			String TarjetaCancelar = request.getParameter("idtarjeta");
 			System.out.println(TarjetaCancelar);

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
-import es.uco.iw.negocio.usuario.UsuarioDTO;
 import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
 import es.uco.iw.utilidades.HashPassword;
 

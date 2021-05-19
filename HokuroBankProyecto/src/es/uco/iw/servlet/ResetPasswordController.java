@@ -2,8 +2,6 @@ package es.uco.iw.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import es.uco.iw.datos.UsuarioDAO;
 import es.uco.iw.display.ClienteBean;
-import es.uco.iw.display.ListadoClientesBean;
-import es.uco.iw.negocio.usuario.UsuarioDTO;
 import es.uco.iw.negocio.usuario.UsuarioLoginDTO;
 import es.uco.iw.utilidades.EnvioCorreo;
 import es.uco.iw.utilidades.HashPassword;
