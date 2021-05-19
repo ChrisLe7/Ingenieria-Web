@@ -24,6 +24,7 @@ import es.uco.iw.negocio.cuentaBancaria.CuentaBancariaDTO;
 import es.uco.iw.negocio.transaccion.TipoOperacion;
 import es.uco.iw.negocio.usuario.PropiedadCuenta;
 import es.uco.iw.negocio.usuario.UsuarioDTO;
+import es.uco.iw.utilidades.GeneradorID;
 
 /**
  * Servlet implementation class RealizarPagoBizum
@@ -86,7 +87,7 @@ public class RealizarPagoBizumController extends HttpServlet {
 				String descripcion = request.getParameter("descripcion");
 				String cantidad = request.getParameter("cantidad");
 				String tipoOperacion = request.getParameter("tipoOperacion");
-				String idTransaccion = "";
+				String idTransaccion = GeneradorID.GenerarIdTransaccion();
 				BizumDTO transaccionBizum = new BizumDTO (idTransaccion, Float.valueOf(cantidad), TipoOperacion.valueOf(tipoOperacion), new Date(), descripcion, Integer.valueOf(idTelefonoOrigen), Integer.valueOf(idTelefonoDestino));
 	
 
