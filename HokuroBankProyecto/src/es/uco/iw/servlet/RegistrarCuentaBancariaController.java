@@ -100,7 +100,7 @@ public class RegistrarCuentaBancariaController extends HttpServlet {
 				ListadoClientesBean listadoClientes = new ListadoClientesBean ();
 				
 				// QUERY PARA OBTENER EL LISTADO DE USUARIOS COMO DTO's
-				ArrayList <UsuarioDTO> listadoUsuarios = userDAO.QueryUsuarios();
+				ArrayList <UsuarioDTO> listadoUsuarios = userDAO.QueryByCuentasBancarias();
 				listadoClientes.setUsuarios(listadoUsuarios);
 				
 				request.getSession().setAttribute("listadoClientes", listadoClientes);
