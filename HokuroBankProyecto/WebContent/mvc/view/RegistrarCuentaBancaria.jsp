@@ -40,7 +40,7 @@ if (logged == false)  {
 	<form class="formulario" method="post" action="RegistrarCuentaBancaria">
 			
 
-		<label for="Tipo">Tipo de Cuenta: </label><br/>
+		<label for="Tipo">Tipo de Cuenta: </label>
 		<select class="select" name="tipoCuenta" required>
 						<option value="<%=TipoCuentaBancaria.Ahorro%>">Ahorro</option>
 						<option value="<%=TipoCuentaBancaria.Corriente%>">Corriente</option>
@@ -59,7 +59,7 @@ if (logged == false)  {
 		 
 		 %>
 		
-		
+		<br>
 		<label>Titular: </label>
 			
 			<select id="idTitular" name="idTitular" required> 

@@ -50,7 +50,7 @@
 				
 				<input type="password" name="pin" pattern="[0-9]{4}" required><br/>
 				
-				<label for="Tipo">Tipo de Tarjeta: </label>
+				<label for="Tipo">Tipo de Tarjeta: </label><br/>
 					<select class="select" name="tipoTarjeta" required>
 						<option value="Credito">Credito</option>
 						<option value="Debito">Debito</option>

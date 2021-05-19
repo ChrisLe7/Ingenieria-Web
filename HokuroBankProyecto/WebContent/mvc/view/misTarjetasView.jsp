@@ -17,77 +17,57 @@
 
 <main class = "main">
 
+<%  
 
-	<% //Comprobar que se encuentra logeado.
-		System.out.println("Estoy en la vista de misTarjeta");
-		Boolean login = clienteBean != null && !clienteBean.getDni().equals("");
-		if (login){
-			%>
-			<table class="myadverts">
-			<tr>
-				<th>Número de Tarjeta</th>
-				<th>Tipo de Tarjeta</th>
-				<th>Propietario</th>
-				<th>Cuenta Bancaria Vinculada</th>
-			</tr>
-			<% 
-			if (infoTarjetas != null) {
-				System.out.println(infoTarjetas);
-				ArrayList<TarjetaDTO> misTarjetas = infoTarjetas.getTarjetas();
-				
-				if (misTarjetas != null && !misTarjetas.isEmpty()) {
-					System.out.println("Tenemos tarjetas para el usuario");
-					//Poseemos Tarjetas
-					for (int  i = 0; i < misTarjetas.size(); i++) {
-						%>
-						<tr class="tarjeta">
-								<td><%= misTarjetas.get(i).getNumTarjeta()%></td>	
-								<td><%= misTarjetas.get(i).getTipotarjeta()%></td>
-								
-								<td><%= misTarjetas.get(i).getIdCliente()%></td>
-								<td><%= misTarjetas.get(i).getIdCuenta()%></td>
-								<td class="BotonCancelar">
-									<form method=post action="CancelarTarjeta">
-										<input type=text name="idtarjeta" class="hidden" value="<%=misTarjetas.get(i).getNumTarjeta()%>">
-										<input type=submit value=Cancelar> 
-									</form>
-								</td>
-						</tr>
-						<% 
-							
-					}
-				}
-				else {
-					//No posee Tarjetas -> No se que mostrar
-					%> 
-					<tr>
-						<td class="ContratarTarjeta">
-									<form method=post action="ContratarTarjeta">
-										<input type=text name="cuenta" class="hidden" value="">
-										<input type=submit value="Contratar Tarjeta Nueva"> 
-									</form>
-								</td>
-					</tr>
-					<% 
-				}
-			}
-			%>
-			</table>
-	</main>
-			<%
-		}else {
-			//No esta logueado Direccionador al Login
-			nextPage = "Login";
-			mensajeNextPage = "No esta logueado, falta de permisos";
-			%>
-			<jsp:forward page="<%=nextPage%>">
-				<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-			</jsp:forward>
-			<%
-		}
+if (clienteBean == null || clienteBean.getDni().equals(""))  {
+	nextPage = "index.jsp";
+	mensajeNextPage = "Usted no está logueado";
+}else if(infoTarjetas.getTarjetas().isEmpty()){
 	
+%> 
+
+<p>
+	Aun no tienes tarjetas, porque no contratas una.
+</p>
+<form method=post action="ContratarTarjeta">
+	<input type=text name="cuenta" class="hidden" value="">
+	<input type=submit value="Contratar Tarjeta Nueva"> 
+</form>
+
+
+<% }else{ 
+ArrayList<TarjetaDTO> ListaTarjetas = new ArrayList<TarjetaDTO>();
+ListaTarjetas = infoTarjetas.getTarjetas();
+
+%>
+
+<div class="CuentasBancarias">
 	
+	<%
+	for(TarjetaDTO tarjeta : ListaTarjetas){
 	%>
+	<div class="Cuenta">
+	Numero de Tarjeta  <%=tarjeta.getNumTarjeta()%><br/>
+	Tipo Tarjeta: <%=tarjeta.getTipotarjeta()%><br/>
+	Id Cliente: <%=tarjeta.getIdCliente()%><br/>
+	Cuenta Bancaria Vinculada: <%=tarjeta.getIdCuenta()%><br/>
+
+	
+	<br/>
+	 	<div class ="opcion">
+			<form method=post action="CancelarTarjeta">
+				<input type=text name="idtarjeta" class="hidden" value="<%=tarjeta.getNumTarjeta()%>">
+				<input type=submit value=Cancelar> 
+			</form>
+			 	
+			
+		
+		</div>
+	</div>
+<%	}
+}%>
+</div>
+
 	
 </body>
 </html>
