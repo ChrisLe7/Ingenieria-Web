@@ -78,6 +78,8 @@ public class ResetPasswordController extends HttpServlet {
 				String newPassword = request.getParameter("prehashPassword");
 				String newPasswordHasheada = request.getParameter("password");
 				
+				System.out.println(newPassword);
+				
 				UsuarioLoginDTO userLoginDTO = userDAO.QueryByPassword(idUserCliente);
 				
 				if (userLoginDTO == null) {

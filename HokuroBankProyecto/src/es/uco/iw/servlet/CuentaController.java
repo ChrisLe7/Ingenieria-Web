@@ -103,7 +103,7 @@ public class CuentaController extends HttpServlet {
 						TransaccionDTO transaccion = new TransaccionDTO (idTransaccion, cuentaACancelar.getSaldo(), TipoOperacion.Pagar, new Date(), descripcion , cuentaACancelar.getIdCuentaBancaria(), cuentaDestino.getIdCuentaBancaria());
 					
 						transaccionDAO.Insert(transaccion);
-						mensaje = "Se le trazpaso el saldo ( " + cuentaACancelar.getSaldo() +  " ) de la cuenta con IBAN: " + cuentaACancelar.getIdCuentaBancaria() + " a la cuenta: " + cuentaDestino.getIdCuentaBancaria() ;
+						mensaje = "Se le traspaso el saldo ( " + cuentaACancelar.getSaldo() +  " ) de la cuenta con IBAN: " + cuentaACancelar.getIdCuentaBancaria() + " a la cuenta: " + cuentaDestino.getIdCuentaBancaria() ;
 					}
 					
 					else {
