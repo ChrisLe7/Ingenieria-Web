@@ -373,6 +373,11 @@ a.logo:hover {
 	height: 3em;
 }
 
+.formulario .select {
+	width: 25em;
+	height: 3em;
+}
+
 .creartarjeta{
 	
   padding-left: 2em;

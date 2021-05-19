@@ -70,7 +70,7 @@
 						<option value="Cliente">Cliente</option>
 						<option value="Administrador">Administrador</option>
 
-					</select>
+					</select><br/>
 
 					
 					<label for="Password">Contraseña: </label> <br/>
