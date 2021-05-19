@@ -95,7 +95,8 @@ public class ResetPasswordController extends HttpServlet {
 					//AHORA DEBERÍA DE ENVIAR EL CORREO 
 					String asunto = "Reseteo de Contraseña para el usuario" + idUserCliente ;
 					String mensaje = "Su contraseña se ha reseteado de forma correcta, su contraseña nueva será: " + newPassword;
-					EnvioCorreo.EnviarCorreo(UserEmail, asunto, mensaje);
+					//En local funciona pero desplegada da problemas
+					//EnvioCorreo.EnviarCorreo(UserEmail, asunto, mensaje);
 					nextPage = "Home";
 					mensajeNextPage = "La contraseña del usuario "+ idUserCliente +" se ha reseteado de forma correcta.";
 				}
