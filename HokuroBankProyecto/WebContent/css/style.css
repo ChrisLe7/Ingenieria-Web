@@ -18,14 +18,6 @@ p {
   margin-bottom: 1.6em; 
 }
 
-.opcion form{
-	display:inline;
-}
-
-input.inline{
-	display:inline;
-}
-
 .hidden {
   display:none;
 }
@@ -69,6 +61,12 @@ input.inline{
 .transaccion {
 	border : 0.2em inset #555;
 	margin-top: 1em;
+	padding: 1%;
+	background: #c1c1c1;
+	line-height: 1.5;
+}
+.popup {
+	border : 0.2em inset #555;
 	padding: 1%;
 	background: #c1c1c1;
 	line-height: 1.5;
@@ -369,11 +367,6 @@ a.logo:hover {
 }
 
 .formularioTransaccion .select {
-	width: 25em;
-	height: 3em;
-}
-
-.formulario .select {
 	width: 25em;
 	height: 3em;
 }
